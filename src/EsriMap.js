@@ -1,9 +1,10 @@
 import React from "react";
-
 import { loadMap } from "./utils/map";
 import { loadHome } from "./utils/home";
 import { loadLayer } from "./utils/layer";
 import { setGraphics } from "./utils/graphics";
+
+import "./EsriMap.css";
 
 // function themeToBasemap(theme) {
 //   return theme === "light" ? "gray" : "dark-gray";

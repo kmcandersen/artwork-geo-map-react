@@ -1,10 +1,13 @@
 import React from "react";
 import axios from "axios";
+
 import { query } from "./utils/query.js";
 import { places } from "./utils/places_list.js";
 import { compareValues } from "./utils/helpers.js";
 import { createFeatureArr } from "./utils/createFeatureArr.js";
+import ArtPanel from "./ArtPanel";
 import EsriMap from "./EsriMap";
+import "./App.css";
 
 class App extends React.Component {
   state = {
@@ -12,13 +15,13 @@ class App extends React.Component {
     initialSample: [],
     searchResults: [],
   };
-  //   switchTheme = (e) => {
+  // switchTheme = (e) => {
   //     console.log("clicked!");
   //     this.setState({ theme: e.target.dataset.theme });
-  //   };
+  // };
 
-  //componentDidMount() {
-  //   getArtwork = (query) => {
+  // componentDidMount() {
+  // getArtwork = (query) => {
   //     axios
   //       .post("https://aggregator-data.artic.edu/api/v1/search", query)
   //       .then((res) => {
@@ -26,7 +29,7 @@ class App extends React.Component {
   //         let featureArr = createFeatureArr(resOrdered, places);
   //         this.setState({ searchResults: featureArr });
   //       });
-  //   };
+  // };
 
   onSearchSubmit = () => {
     axios
@@ -41,14 +44,14 @@ class App extends React.Component {
       });
   };
 
-  //onSearchSubmit(getArtwork(1890, 1900));
-  //}
+  // onSearchSubmit(getArtwork(1890, 1900));
+  // }
   onMapLoad = () => {
     this.setState({ mapLoaded: true });
   };
   render() {
     return (
-      <div>
+      <div className="App">
         <div>
           <label>GET ART</label>
           <button
@@ -59,7 +62,9 @@ class App extends React.Component {
             Submit
           </button>
         </div>
+
         <EsriMap onLoad={this.onMapLoad} results={this.state.searchResults} />
+        <ArtPanel results={this.state.searchResults} />
       </div>
     );
   }
