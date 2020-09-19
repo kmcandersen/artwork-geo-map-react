@@ -21,17 +21,24 @@ img.gridListImg {
   background-color: #f8f8f8;
 } */
 
+.MuiGridListTileBar-titleWrap {
+  opacity: 0.95;
+}
+
 .GridListTileBar {
   text-align: left;
   z-index: 2;
 }
 
 .tile-subtitle {
-  font-size: 1.1rem;
+  font-size: 1rem;
   white-space: normal;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  font-family: "Nunito", sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.02em;
 }
 
 .tile-info {
@@ -39,23 +46,22 @@ img.gridListImg {
 }
 
 .tile-title {
-  font-size: 1.3em;
-  font-family: "Playfair Display", serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  font-style: italic;
   line-height: 1.2em;
   margin: 0;
 }
 
 .tile-details {
   margin: 8px 0;
-  letter-spacing: 0.01em;
+  /* letter-spacing: 0.02em; */
   line-height: 1.2em;
 }
 
-.tile-credit {
-  font-size: 0.8em;
-  font-style: oblique;
-  line-height: normal;
-  margin: 13px 0 0 0;
+p.tile-details:last-child {
+  letter-spacing: 0.07em;
+  font-weight: 400;
 }
 
 .tile-icons {
