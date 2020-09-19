@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { ExternalLink } from "react-external-link";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import LinkIcon from "@material-ui/icons/Link";
 import InfoIcon from "@material-ui/icons/Info";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import "./Gallery.css";
@@ -49,6 +51,14 @@ class Gallery extends Component {
                     <div className="tile-icons">
                       <IconButton style={{ color: "white" }}>
                         <FavoriteBorderIcon />
+                      </IconButton>
+                      <IconButton>
+                        <ExternalLink
+                          href={`https://www.artic.edu/artworks/${result.aic_id}`}
+                          style={{ color: "white" }}
+                        >
+                          <LinkIcon />
+                        </ExternalLink>
                       </IconButton>
                       <IconButton
                         aria-label={
