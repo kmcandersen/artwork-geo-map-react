@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { ExternalLink } from "react-external-link";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
@@ -24,62 +23,59 @@ class Gallery extends Component {
                 src={`${result.thumbnailUrl}/full/350,/0/default.jpg`}
                 alt={`${result.thumbnailUrl}. ${result.title}. ${result.date_start}. The Art Institute of Chicago.`}
               />
-              <GridListTileBar
-                className="GridListTileBar"
+              <div
+                className="gridListTile gridListTile-info-only"
                 data-place={result.place_of_origin}
-                style={{
-                  height: "100%",
-                }}
-                subtitle={
-                  <div className="tile-subtitle">
-                    <div className="tile-info">
-                      <p className="tile-details">
-                        {result.artist_title
-                          ? result.artist_title
-                          : "Unknown Artist"}
-                        <span style={{ padding: "0 10px" }}>|</span>
-                        {result.place_of_origin}
-                      </p>
-                      <p className="tile-title">{result.title}</p>
-                      <p className="tile-details">
-                        {capitalize(result.classification_title)}
-                        {result.style_title
-                          ? " | " + capitalize(result.style_title)
-                          : null}
-                      </p>
-                      <p className="tile-details">{result.date_start}</p>
-                    </div>
-                    <div className="tile-icons">
-                      <IconButton style={{ color: "white" }}>
-                        <FavoriteBorderIcon />
-                      </IconButton>
-                      <IconButton>
-                        <ExternalLink
-                          href={`https://www.artic.edu/artworks/${result.aic_id}`}
-                          style={{ color: "white" }}
-                        >
-                          <LinkIcon />
-                        </ExternalLink>
-                      </IconButton>
-                      <IconButton
-                        aria-label={
-                          this.props.displayInfo
-                            ? "hide tile details"
-                            : "show tile details"
-                        }
-                        style={{ color: "white" }}
-                        onClick={this.props.toggleInfo}
-                      >
-                        {this.props.displayInfo ? (
-                          <InfoIcon />
-                        ) : (
-                          <InfoOutlinedIcon />
-                        )}
-                      </IconButton>
-                    </div>
-                  </div>
-                }
-              ></GridListTileBar>
+              >
+                <div className="tile-info hidden">
+                  <p className="tile-details">
+                    {result.artist_title
+                      ? result.artist_title
+                      : "Unknown Artist"}
+                    <span style={{ padding: "0 10px" }}>|</span>
+                    {result.place_of_origin}
+                  </p>
+                  <p className="tile-title">{result.title}</p>
+                  <p className="tile-details">
+                    {capitalize(result.classification_title)}
+                    {result.style_title
+                      ? " | " + capitalize(result.style_title)
+                      : null}
+                  </p>
+                  <p className="tile-details">{result.date_start}</p>
+                </div>
+                <div className="tile-icons">
+                  <IconButton style={{ color: "white" }} className="hidden">
+                    <FavoriteBorderIcon />
+                  </IconButton>
+                  <IconButton className="hidden">
+                    <ExternalLink
+                      href={`https://www.artic.edu/artworks/${result.aic_id}`}
+                      style={{ color: "white" }}
+                    >
+                      <LinkIcon />
+                    </ExternalLink>
+                  </IconButton>
+
+                  <IconButton
+                    aria-label={
+                      this.props.displayInfo
+                        ? "hide tile details"
+                        : "show tile details"
+                    }
+                    style={{ color: "white" }}
+                    onClick={this.props.toggleInfo}
+                  >
+                    {this.props.displayInfo ? (
+                      <InfoIcon />
+                    ) : (
+                      <InfoOutlinedIcon />
+                    )}
+                  </IconButton>
+                </div>
+                {/* </div> */}
+                {/* </div> */}
+              </div>
             </GridListTile>
           ))}
         </GridList>
