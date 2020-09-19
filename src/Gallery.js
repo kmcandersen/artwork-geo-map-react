@@ -12,7 +12,20 @@ import "./Gallery.css";
 import { capitalize } from "./utils/helpers.js";
 
 class Gallery extends Component {
+  state = {
+    showTileDetails: false,
+  };
+
+  toggleTileDetails = () => {
+    console.log("this.state.showTileDetails");
+    this.setState({ showTileDetails: !this.state.showTileDetails });
+  };
+
   render() {
+    const showAllDetails =
+      // this.props.showAllDetails || this.state.showTileDetails ? null : "hidden";
+      this.props.showAllDetails ? "" : "hidden";
+
     return (
       <div className="Gallery">
         <GridList cellHeight={300} spacing={2} className="gridList">
@@ -24,10 +37,14 @@ class Gallery extends Component {
                 alt={`${result.thumbnailUrl}. ${result.title}. ${result.date_start}. The Art Institute of Chicago.`}
               />
               <div
-                className="gridListTile gridListTile-info-only"
+                className={`gridListTile ${
+                  this.props.showAllDetails
+                    ? "gridListTile-full"
+                    : "gridListTile-info-only"
+                }`}
                 data-place={result.place_of_origin}
               >
-                <div className="tile-info hidden">
+                <div className={`tile-info ${showAllDetails}`}>
                   <p className="tile-details">
                     {result.artist_title
                       ? result.artist_title
@@ -45,10 +62,13 @@ class Gallery extends Component {
                   <p className="tile-details">{result.date_start}</p>
                 </div>
                 <div className="tile-icons">
-                  <IconButton style={{ color: "white" }} className="hidden">
+                  <IconButton
+                    style={{ color: "white" }}
+                    className={showAllDetails}
+                  >
                     <FavoriteBorderIcon />
                   </IconButton>
-                  <IconButton className="hidden">
+                  <IconButton className={showAllDetails}>
                     <ExternalLink
                       href={`https://www.artic.edu/artworks/${result.aic_id}`}
                       style={{ color: "white" }}
@@ -64,7 +84,7 @@ class Gallery extends Component {
                         : "show tile details"
                     }
                     style={{ color: "white" }}
-                    onClick={this.props.toggleInfo}
+                    onClick={this.toggleTileDetails}
                   >
                     {this.props.displayInfo ? (
                       <InfoIcon />
@@ -73,8 +93,6 @@ class Gallery extends Component {
                     )}
                   </IconButton>
                 </div>
-                {/* </div> */}
-                {/* </div> */}
               </div>
             </GridListTile>
           ))}
