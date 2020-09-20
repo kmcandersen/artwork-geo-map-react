@@ -12,33 +12,7 @@ import "./Gallery.css";
 import { capitalize } from "./utils/helpers.js";
 
 class Gallery extends Component {
-  state = {
-    showTileDetails: [],
-  };
-
-  //would like to be able to hide details on indiv tiles when they were displayed by ALL icon
-  //toggleAllDetails method in ArtPanel adds/removes IDs from the same array as toggleTileDetails
-  //could simplify the className conditionals
-
-  toggleTileDetails = (id) => {
-    console.log(typeof id);
-    //if id in arr, remove it
-    //if id not in arr, add it
-    //presence of id checked for in various className conditionals
-    if (this.state.showTileDetails.includes(id)) {
-      let showing = this.state.showTileDetails || [];
-      let newShowing = showing.filter((t) => t !== id);
-      this.setState({ showTileDetails: newShowing });
-    } else if (!this.state.showTileDetails.includes(id)) {
-      let showing = this.state.showTileDetails || [];
-      showing.push(id);
-      this.setState({ showTileDetails: showing });
-    }
-  };
-
   render() {
-    // const showAllDetails = this.props.showAllDetails ? "" : "hidden";
-
     return (
       <div className="Gallery">
         <GridList cellHeight={300} spacing={2} className="gridList">
@@ -51,8 +25,7 @@ class Gallery extends Component {
               />
               <div
                 className={
-                  this.props.showAllDetails ||
-                  this.state.showTileDetails.includes(result.aic_id)
+                  this.props.detailItems.includes(result.aic_id)
                     ? "gridListTile gridListTile-full"
                     : "gridListTile gridListTile-info-only"
                 }
@@ -60,8 +33,7 @@ class Gallery extends Component {
               >
                 <div
                   className={
-                    this.props.showAllDetails ||
-                    this.state.showTileDetails.includes(result.aic_id)
+                    this.props.detailItems.includes(result.aic_id)
                       ? "tile-info"
                       : "tile-info hidden"
                   }
@@ -86,8 +58,7 @@ class Gallery extends Component {
                   <IconButton
                     style={{ color: "white" }}
                     className={
-                      this.props.showAllDetails ||
-                      this.state.showTileDetails.includes(result.aic_id)
+                      this.props.detailItems.includes(result.aic_id)
                         ? ""
                         : "hidden"
                     }
@@ -96,8 +67,7 @@ class Gallery extends Component {
                   </IconButton>
                   <IconButton
                     className={
-                      this.props.showAllDetails ||
-                      this.state.showTileDetails.includes(result.aic_id)
+                      this.props.detailItems.includes(result.aic_id)
                         ? ""
                         : "hidden"
                     }
@@ -111,20 +81,14 @@ class Gallery extends Component {
                   </IconButton>
 
                   <IconButton
-                    aria-label={
-                      this.props.displayInfo
-                        ? "hide tile details"
-                        : "show tile details"
-                    }
+                    aria-label="show/hide details"
                     style={{ color: "white" }}
                     onClick={() => {
-                      this.toggleTileDetails(result.aic_id);
+                      this.props.toggleTileDetails(result.aic_id);
                     }}
-                    disabled={this.props.showAllDetails}
                   >
-                    {this.props.showAllDetails ||
-                    this.state.showTileDetails.includes(result.aic_id) ? (
-                      <InfoIcon style={{ opacity: "40%" }} />
+                    {this.props.detailItems.includes(result.aic_id) ? (
+                      <InfoIcon />
                     ) : (
                       <InfoOutlinedIcon />
                     )}
