@@ -13,18 +13,31 @@ import { capitalize } from "./utils/helpers.js";
 
 class Gallery extends Component {
   state = {
-    showTileDetails: false,
+    showTileDetails: [],
   };
 
-  toggleTileDetails = () => {
-    console.log("this.state.showTileDetails");
-    this.setState({ showTileDetails: !this.state.showTileDetails });
+  //would like to be able to hide details on indiv tiles when they were displayed by ALL icon
+  //toggleAllDetails method in ArtPanel adds/removes IDs from the same array as toggleTileDetails
+  //could simplify the className conditionals
+
+  toggleTileDetails = (id) => {
+    console.log(typeof id);
+    //if id in arr, remove it
+    //if id not in arr, add it
+    //presence of id checked for in various className conditionals
+    if (this.state.showTileDetails.includes(id)) {
+      let showing = this.state.showTileDetails || [];
+      let newShowing = showing.filter((t) => t !== id);
+      this.setState({ showTileDetails: newShowing });
+    } else if (!this.state.showTileDetails.includes(id)) {
+      let showing = this.state.showTileDetails || [];
+      showing.push(id);
+      this.setState({ showTileDetails: showing });
+    }
   };
 
   render() {
-    const showAllDetails =
-      // this.props.showAllDetails || this.state.showTileDetails ? null : "hidden";
-      this.props.showAllDetails ? "" : "hidden";
+    // const showAllDetails = this.props.showAllDetails ? "" : "hidden";
 
     return (
       <div className="Gallery">
@@ -37,14 +50,22 @@ class Gallery extends Component {
                 alt={`${result.thumbnailUrl}. ${result.title}. ${result.date_start}. The Art Institute of Chicago.`}
               />
               <div
-                className={`gridListTile ${
-                  this.props.showAllDetails
-                    ? "gridListTile-full"
-                    : "gridListTile-info-only"
-                }`}
+                className={
+                  this.props.showAllDetails ||
+                  this.state.showTileDetails.includes(result.aic_id)
+                    ? "gridListTile gridListTile-full"
+                    : "gridListTile gridListTile-info-only"
+                }
                 data-place={result.place_of_origin}
               >
-                <div className={`tile-info ${showAllDetails}`}>
+                <div
+                  className={
+                    this.props.showAllDetails ||
+                    this.state.showTileDetails.includes(result.aic_id)
+                      ? "tile-info"
+                      : "tile-info hidden"
+                  }
+                >
                   <p className="tile-details">
                     {result.artist_title
                       ? result.artist_title
@@ -64,11 +85,23 @@ class Gallery extends Component {
                 <div className="tile-icons">
                   <IconButton
                     style={{ color: "white" }}
-                    className={showAllDetails}
+                    className={
+                      this.props.showAllDetails ||
+                      this.state.showTileDetails.includes(result.aic_id)
+                        ? ""
+                        : "hidden"
+                    }
                   >
                     <FavoriteBorderIcon />
                   </IconButton>
-                  <IconButton className={showAllDetails}>
+                  <IconButton
+                    className={
+                      this.props.showAllDetails ||
+                      this.state.showTileDetails.includes(result.aic_id)
+                        ? ""
+                        : "hidden"
+                    }
+                  >
                     <ExternalLink
                       href={`https://www.artic.edu/artworks/${result.aic_id}`}
                       style={{ color: "white" }}
@@ -84,10 +117,14 @@ class Gallery extends Component {
                         : "show tile details"
                     }
                     style={{ color: "white" }}
-                    onClick={this.toggleTileDetails}
+                    onClick={() => {
+                      this.toggleTileDetails(result.aic_id);
+                    }}
+                    disabled={this.props.showAllDetails}
                   >
-                    {this.props.displayInfo ? (
-                      <InfoIcon />
+                    {this.props.showAllDetails ||
+                    this.state.showTileDetails.includes(result.aic_id) ? (
+                      <InfoIcon style={{ opacity: "40%" }} />
                     ) : (
                       <InfoOutlinedIcon />
                     )}
