@@ -1,6 +1,8 @@
 import { getCoords } from "./helpers.js";
+import { capitalize } from "./helpers.js";
 
 export const createFeatureArr = (arr, placesArr) => {
+  console.log(arr);
   let features = [];
   let idCount = 0;
 
@@ -24,6 +26,7 @@ export const createFeatureArr = (arr, placesArr) => {
         style_title: "",
         api_link: "",
         is_public_domain: null,
+        coords: [],
         latitude: 0,
         longitude: 0,
       };
@@ -36,13 +39,19 @@ export const createFeatureArr = (arr, placesArr) => {
       feature.date_start = el.date_start;
       feature.date_display = el.date_display;
       feature.thumbnailUrl = el.thumbnail.url;
-      feature.classification_title = el.classification_title;
-      feature.style_title = el.style_title;
+      feature.classification_title =
+        el.classification_title.length && capitalize(el.classification_title);
+      feature.style_title = el.style_title && capitalize(el.style_title);
       feature.api_link = el.api_link;
       feature.is_public_domain = el.is_public_domain.toString();
-      feature.longitude = getCoords(placesArr, el.place_of_origin)[0];
-      feature.latitude = getCoords(placesArr, el.place_of_origin)[1];
-      features.push(feature);
+      //so setCoords only run 1x
+      feature.coords = getCoords(placesArr, el.place_of_origin) || [];
+      feature.longitude = feature.coords[0] || 0;
+      feature.latitude = feature.coords[1] || 0;
+      //only items with a matching place & identified coordinates in are held in state (& shown in list)
+      if (feature.coords.length) {
+        features.push(feature);
+      }
     }
   }
   return features;

@@ -103,6 +103,7 @@ export const places = [
   },
   { Corinth: { coords: [22.933333, 37.933333], code: "" } },
   { Cork: { coords: [-8.47, 51.897222], code: "ie" } },
+  { Corona: { coords: [-73.866667, 40.75], code: "us" } },
   { "Costa Rica": { coords: [-84.196318439, 9.97283717900007], code: "cr" } },
   { Crotone: { coords: [17.12292, 39.0812500000001], code: "it" } },
   { Cuzco: { coords: [-76.46667, -6.98332999999997], code: "pe" } },

@@ -1,15 +1,10 @@
 //arr = places places_list.js
 export const getCoords = (placesArr, name) => {
-  let nameCoords = [];
   for (let i = 0; i < placesArr.length; i++) {
     if (name in placesArr[i]) {
-      nameCoords = placesArr[i][name].coords;
+      return placesArr[i][name].coords;
     }
-    // else {
-    //   console.log(name);
-    // }
   }
-  return nameCoords;
 };
 
 export const getFlags = (name, placesArr) => {

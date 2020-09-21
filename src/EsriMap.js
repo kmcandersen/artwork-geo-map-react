@@ -46,6 +46,7 @@ class EsriMap extends React.Component {
     if (this.props.results !== prevProps.results) {
       if (this._view) {
         //result arr converted to graphics arr, graphics arr added to layer.source, layer added to map
+        this._view.map.removeAll();
         setGraphics(this.props.results).then((graphicsArr) => {
           const resultsLayer = loadLayer(graphicsArr);
           this._view.map.add(resultsLayer);

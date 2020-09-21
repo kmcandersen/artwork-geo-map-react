@@ -9,7 +9,6 @@ import LinkIcon from "@material-ui/icons/Link";
 import InfoIcon from "@material-ui/icons/Info";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import "./Gallery.css";
-import { capitalize } from "./utils/helpers.js";
 
 class Gallery extends Component {
   render() {
@@ -47,10 +46,8 @@ class Gallery extends Component {
                   </p>
                   <p className="tile-title">{result.title}</p>
                   <p className="tile-details">
-                    {capitalize(result.classification_title)}
-                    {result.style_title
-                      ? " | " + capitalize(result.style_title)
-                      : null}
+                    {result.classification_title}
+                    {result.style_title ? " | " + result.style_title : null}
                   </p>
                   <p className="tile-details">{result.date_start}</p>
                 </div>
