@@ -15,6 +15,7 @@ class App extends React.Component {
     mapLoaded: false,
     //on load: initial sample
     searchResults: sampleArtwork,
+    selectedPlace: "",
   };
   // switchTheme = (e) => {
   //     console.log("clicked!");
@@ -50,6 +51,11 @@ class App extends React.Component {
   onMapLoad = () => {
     this.setState({ mapLoaded: true });
   };
+
+  onSelectPlace = (place) => {
+    this.setState({ selectedPlace: place });
+  };
+
   render() {
     return (
       <div className="App">
@@ -64,7 +70,11 @@ class App extends React.Component {
           </button>
         </div>
 
-        <EsriMap onLoad={this.onMapLoad} results={this.state.searchResults} />
+        <EsriMap
+          onLoad={this.onMapLoad}
+          results={this.state.searchResults}
+          selectedPlace={this.onSelectPlace}
+        />
         <ArtPanel results={this.state.searchResults} />
       </div>
     );

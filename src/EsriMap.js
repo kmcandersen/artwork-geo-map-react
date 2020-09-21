@@ -3,7 +3,8 @@ import { loadMap } from "./utils/map";
 import { loadHome } from "./utils/home";
 import { loadLayer } from "./utils/layer";
 import { setGraphics } from "./utils/graphics";
-
+import { getFlags } from "./utils/helpers.js";
+import { places } from "./utils/places_list.js";
 import "./EsriMap.css";
 
 // function themeToBasemap(theme) {
@@ -29,6 +30,27 @@ class EsriMap extends React.Component {
       setGraphics(this.props.results).then((graphicsArr) => {
         const resultsLayer = loadLayer(graphicsArr);
         view.map.add(resultsLayer);
+      });
+      view.on("pointer-move", (event) => {
+        view.hitTest(event).then((response) => {
+          if (response.results.length) {
+            const feature = response.results[0].graphic;
+            let { latitude, longitude } = feature.attributes;
+            let selectedPlace = feature.attributes.place_of_origin;
+
+            view.popup.location = {
+              latitude: latitude,
+              longitude: longitude,
+            };
+            view.popup.title = getFlags(selectedPlace, places);
+            // Displays the popup (hidden by default)
+            view.popup.visible = true;
+
+            this.props.selectedPlace(selectedPlace);
+          } else {
+            view.popup.visible = false;
+          }
+        });
       });
     });
   }

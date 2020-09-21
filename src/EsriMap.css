@@ -4,3 +4,18 @@
   /* padding: 0;
   margin: 0; */
 }
+
+.esri-popup__main-container.esri-widget {
+  width: 160px !important;
+  max-height: 300px !important;
+}
+
+.esri-component.esri-popup {
+  text-align: center;
+}
+
+.flag-icon {
+  width: 1em !important;
+  padding-top: 2px;
+  margin-right: 3px;
+}
