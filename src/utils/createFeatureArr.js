@@ -2,7 +2,6 @@ import { getCoords } from "./helpers.js";
 import { capitalize } from "./helpers.js";
 
 export const createFeatureArr = (arr, placesArr) => {
-  console.log(arr);
   let features = [];
   let idCount = 0;
 
@@ -34,7 +33,7 @@ export const createFeatureArr = (arr, placesArr) => {
       feature.ObjectID = idCount;
       feature.aic_id = el.id;
       feature.title = el.title;
-      feature.artist_title = el.artist_title;
+      feature.artist_title = el.artist_title || "Unknown Artist";
       feature.place_of_origin = el.place_of_origin;
       feature.date_start = el.date_start;
       feature.date_display = el.date_display;
@@ -54,5 +53,6 @@ export const createFeatureArr = (arr, placesArr) => {
       }
     }
   }
+  console.log(features);
   return features;
 };

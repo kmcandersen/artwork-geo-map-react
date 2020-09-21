@@ -38,9 +38,7 @@ class Gallery extends Component {
                   }
                 >
                   <p className="tile-details">
-                    {result.artist_title
-                      ? result.artist_title
-                      : "Unknown Artist"}
+                    {result.artist_title}
                     <span style={{ padding: "0 10px" }}>|</span>
                     {result.place_of_origin}
                   </p>
