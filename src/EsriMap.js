@@ -25,6 +25,11 @@ class EsriMap extends React.Component {
       this._view = view; // hold on to the view for later
       onLoad && onLoad();
       loadHome(view);
+      //loads sampleArtwork on initial load
+      setGraphics(this.props.results).then((graphicsArr) => {
+        const resultsLayer = loadLayer(graphicsArr);
+        view.map.add(resultsLayer);
+      });
     });
   }
 
