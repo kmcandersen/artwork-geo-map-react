@@ -5,6 +5,7 @@ import { query } from "./utils/query.js";
 import { places } from "./utils/places_list.js";
 import { compareValues } from "./utils/helpers.js";
 import { createFeatureArr } from "./utils/createFeatureArr.js";
+import { sampleArtwork } from "./utils/sampleArtwork.js";
 import ArtPanel from "./ArtPanel";
 import EsriMap from "./EsriMap";
 import "./App.css";
@@ -12,8 +13,8 @@ import "./App.css";
 class App extends React.Component {
   state = {
     mapLoaded: false,
-    initialSample: [],
-    searchResults: [],
+    //on load: initial sample
+    searchResults: sampleArtwork,
   };
   // switchTheme = (e) => {
   //     console.log("clicked!");

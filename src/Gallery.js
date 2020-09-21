@@ -20,8 +20,8 @@ class Gallery extends Component {
             <GridListTile key={result.aic_id} cols={2}>
               <img
                 className="gridListImg"
-                src={`${result.thumbnailUrl}/full/350,/0/default.jpg`}
-                alt={`${result.thumbnailUrl}. ${result.title}. ${result.date_start}. The Art Institute of Chicago.`}
+                src={`${result.thumbnailUrl}/square/350,/0/default.jpg`}
+                alt={`${result.artist_title}. ${result.title}. ${result.date_start}. The Art Institute of Chicago.`}
               />
               <div
                 className={
