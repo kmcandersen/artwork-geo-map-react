@@ -22,38 +22,79 @@ class EsriMap extends React.Component {
     // use the ref as a container
     const container = this.mapDiv.current;
     // const basemap = themeToBasemap(theme);
+
     loadMap(container).then((view) => {
       this._view = view; // hold on to the view for later
       onLoad && onLoad();
       loadHome(view);
+      let resultsLayer = "";
       //loads sampleArtwork on initial load
-      setGraphics(this.props.results).then((graphicsArr) => {
-        const resultsLayer = loadLayer(graphicsArr);
-        view.map.add(resultsLayer);
-      });
-      view.on("pointer-move", (event) => {
-        view.hitTest(event).then((response) => {
-          if (response.results.length) {
-            const feature = response.results[0].graphic;
-            let { latitude, longitude } = feature.attributes;
-            let selectedPlace = feature.attributes.place_of_origin;
+      setGraphics(this.props.results)
+        .then((graphicsArr) => {
+          return (resultsLayer = loadLayer(graphicsArr));
+        })
+        .then((resultsLayer) => {
+          view.map.add(resultsLayer);
+          view.whenLayerView(resultsLayer).then(
+            (resultsLayerView) => {
+              console.log("we have the layer view.");
 
-            view.popup.location = {
-              latitude: latitude,
-              longitude: longitude,
-            };
-            view.popup.title = getFlags(selectedPlace, places);
-            // Displays the popup (hidden by default)
-            view.popup.visible = true;
+              view.on("pointer-move", (event) => {
+                view.hitTest(event).then((response) => {
+                  if (response.results.length) {
+                    const feature = response.results[0].graphic;
+                    let { latitude, longitude } = feature.attributes;
+                    let selectedPlace = feature.attributes.place_of_origin;
 
-            this.props.onSelectPlace(selectedPlace);
-          } else {
-            view.popup.visible = false;
-            this.props.onSelectPlace(null);
-          }
+                    view.popup.location = {
+                      latitude: latitude,
+                      longitude: longitude,
+                    };
+                    view.popup.title = getFlags(selectedPlace, places);
+                    view.popup.visible = true;
+                  } else {
+                    view.popup.visible = false;
+                  }
+                });
+              });
+              let highlight;
+              let feature;
+              view.on("click", (event) => {
+                if (highlight) {
+                  highlight.remove();
+                }
+                view.hitTest(event).then((response) => {
+                  if (response.results.length) {
+                    feature = response.results[0].graphic;
+                    let { latitude, longitude } = feature.attributes;
+                    let selectedPlace = feature.attributes.place_of_origin;
+
+                    view.popup.location = {
+                      latitude: latitude,
+                      longitude: longitude,
+                    };
+                    view.popup.title = getFlags(selectedPlace, places);
+                    view.popup.visible = true;
+
+                    this.props.onSelectPlace(selectedPlace);
+
+                    highlight = resultsLayerView.highlight(feature);
+                  } else {
+                    view.popup.visible = false;
+                    this.props.onSelectPlace(null);
+                  }
+                });
+              });
+              //end on click
+            },
+            (error) => {
+              console.log("we dont have the layer view: ", error);
+            }
+            //end resultsLayer
+          );
         });
-      });
     });
+    //end loadMap
   }
 
   // componentDidUpdate(prevProps) {
