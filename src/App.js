@@ -73,9 +73,12 @@ class App extends React.Component {
         <EsriMap
           onLoad={this.onMapLoad}
           results={this.state.searchResults}
-          selectedPlace={this.onSelectPlace}
+          onSelectPlace={this.onSelectPlace}
         />
-        <ArtPanel results={this.state.searchResults} />
+        <ArtPanel
+          results={this.state.searchResults}
+          selectedPlace={this.state.selectedPlace}
+        />
       </div>
     );
   }

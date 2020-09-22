@@ -61,6 +61,7 @@ class ArtPanel extends Component {
           showAllDetails={this.state.showAllDetails}
           detailItems={this.state.detailItems}
           toggleTileDetails={this.toggleTileDetails}
+          selectedPlace={this.props.selectedPlace}
         />
       </div>
     );

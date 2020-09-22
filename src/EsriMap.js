@@ -46,9 +46,10 @@ class EsriMap extends React.Component {
             // Displays the popup (hidden by default)
             view.popup.visible = true;
 
-            this.props.selectedPlace(selectedPlace);
+            this.props.onSelectPlace(selectedPlace);
           } else {
             view.popup.visible = false;
+            this.props.onSelectPlace(null);
           }
         });
       });

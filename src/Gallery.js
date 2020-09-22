@@ -3,6 +3,8 @@ import { ExternalLink } from "react-external-link";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import IconButton from "@material-ui/core/IconButton";
+import RoomIcon from "@material-ui/icons/Room";
+import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import LinkIcon from "@material-ui/icons/Link";
@@ -50,6 +52,13 @@ class Gallery extends Component {
                   <p className="tile-details">{result.date_start}</p>
                 </div>
                 <div className="tile-icons">
+                  <IconButton>
+                    {result.place_of_origin === this.props.selectedPlace ? (
+                      <RoomIcon style={{ color: "yellow" }} />
+                    ) : (
+                      <RoomOutlinedIcon style={{ color: "white" }} />
+                    )}
+                  </IconButton>
                   <IconButton
                     style={{ color: "white" }}
                     className={

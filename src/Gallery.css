@@ -54,6 +54,10 @@ img.gridListImg {
   justify-content: flex-end;
 }
 
+svg.MuiSvgIcon-root {
+  font-size: 1.3em;
+}
+
 /* .tile-info, favorite & link icons when details hidden (.gridListTile-info-only active) */
 .hidden {
   visibility: hidden;
