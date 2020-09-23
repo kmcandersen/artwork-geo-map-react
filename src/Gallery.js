@@ -13,12 +13,44 @@ import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import "./Gallery.css";
 
 class Gallery extends Component {
+  constructor(props) {
+    super(props);
+    this.placeRef = React.createRef();
+  }
+
+  componentDidUpdate() {
+    let tiles = this.placeRef.current.childNodes;
+
+    for (let i = 0; i < tiles.length; i++) {
+      if (
+        tiles[i].attributes["data-place"].value === this.props.selectedPlace
+      ) {
+        tiles[i].scrollIntoView({
+          alignToTop: true,
+          // behavior: "smooth",
+          block: "center",
+        });
+        //find first match only
+        break;
+      }
+    }
+  }
+
   render() {
     return (
       <div className="Gallery">
-        <GridList cellHeight={300} spacing={2} className="gridList">
+        <GridList
+          cellHeight={300}
+          spacing={2}
+          className="gridList"
+          ref={this.placeRef}
+        >
           {this.props.results.map((result) => (
-            <GridListTile key={result.aic_id} cols={2}>
+            <GridListTile
+              key={result.aic_id}
+              cols={2}
+              data-place={result.place_of_origin}
+            >
               <img
                 className="gridListImg"
                 src={`${result.thumbnailUrl}/square/350,/0/default.jpg`}
@@ -30,7 +62,6 @@ class Gallery extends Component {
                     ? "gridListTile gridListTile-full"
                     : "gridListTile gridListTile-info-only"
                 }
-                data-place={result.place_of_origin}
               >
                 <div
                   className={
