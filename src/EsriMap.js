@@ -65,12 +65,14 @@ class EsriMap extends React.Component {
   //   }
   // }
 
+  //MUST ADD query to highlight selectedPlace when the tile map icon is clicked
+
   componentDidUpdate(prevProps) {
     if (this.props.results !== prevProps.results) {
       if (this._view) {
         //result arr converted to graphics arr, graphics arr added to layer.source, layer added to map
         this._view.map.removeAll();
-        this.props.selectedPlace && this.props.onSelectPlace(null);
+        this.props.selectedPlace && this.props.removeSelectedPlace();
         let resultsLayer = "";
         setGraphics(this.props.results)
           .then((graphicsArr) => {
@@ -104,16 +106,19 @@ class EsriMap extends React.Component {
                     }
                   });
                 });
+
                 let highlight;
                 let feature;
                 this._view.on("click", (event) => {
-                  console.log("point click");
+                  //console.log("point click");
+                  //so multiple points not highlighted at once; if toggle off when clicking on a selected/highlighted point worked, could move this to "if (response.results.length)" else
                   if (highlight) {
                     highlight.remove();
                   }
                   this._view.hitTest(event).then((response) => {
-                    console.log("point hitTest");
+                    //console.log("point hitTest");
                     if (response.results.length) {
+                      // console.log("response.resultz:", response.results);
                       feature = response.results[0].graphic;
                       let { latitude, longitude } = feature.attributes;
                       let mapSelectedPlace = feature.attributes.place_of_origin;
@@ -128,15 +133,28 @@ class EsriMap extends React.Component {
                       );
                       this._view.popup.visible = true;
 
-                      this.props.onSelectPlace(mapSelectedPlace);
+                      //this section correctly toggles highlight & selected place  on/off when the same point is clicked. But because click & hitTest each run 2x for API results, always finds a match on the second run & removes highlight & selected place.
+                      // if (this.props.selectedPlace === mapSelectedPlace) {
+                      //   console.log("MATCH");
+                      //   if (highlight) {
+                      //     highlight.remove();
+                      //   }
+                      //   this.props.removeSelectedPlace();
+                      // } else if (
+                      //   this.props.selectedPlace !== mapSelectedPlace
+                      // ) {
+                      //   this.props.selectPlace(mapSelectedPlace);
+                      //   highlight = resultsLayerView.highlight(feature);
+                      // }
 
+                      this.props.selectPlace(mapSelectedPlace);
                       highlight = resultsLayerView.highlight(feature);
                     } else {
                       if (this._view.popup.visible) {
                         this._view.popup.visible = false;
                       }
                       if (this.props.selectedPlace !== "") {
-                        this.props.onSelectPlace(null);
+                        this.props.removeSelectedPlace();
                       }
                     }
                     //end hitTest

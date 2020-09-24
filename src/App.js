@@ -14,6 +14,7 @@ class App extends React.Component {
     mapLoaded: false,
     searchResults: [],
     selectedPlace: "",
+    highlightedPointFromTile: "",
   };
   // switchTheme = (e) => {
   //     console.log("clicked!");
@@ -54,10 +55,30 @@ class App extends React.Component {
     this.setState({ searchResults: sampleArtwork });
   };
 
-  onSelectPlace = (place) => {
+  selectPlace = (place) => {
     console.log("onSelectPlace");
     this.setState({ selectedPlace: place });
   };
+
+  removeSelectedPlace = () => {
+    this.setState({ selectedPlace: null });
+  };
+
+  // togglehighlightPointFromTile = (place) => {
+  //   if (this.state.highlightedPointFromTile) {
+  //     this.setState({ highlightedPointFromTile: null });
+  //   } else {
+  //     this.setState({ highlightedPointFromTile: place });
+  //   }
+  // };
+
+  // togglePlace = (place) => {
+  //   if (this.state.selectedPlace === "") {
+  //     this.setState({ selectedPlace: place });
+  //   } else {
+  //     this.setState({ selectedPlace: null });
+  //   }
+  // };
 
   render() {
     return (
@@ -77,11 +98,17 @@ class App extends React.Component {
           onLoad={this.onMapLoad}
           setSampleArtwork={this.setSampleArtwork}
           results={this.state.searchResults}
-          onSelectPlace={this.onSelectPlace}
+          selectPlace={this.selectPlace}
+          selectedPlace={this.state.selectedPlace}
+          removeSelectedPlace={this.removeSelectedPlace}
+          // highlightedPointFromTile={this.state.highlightPointFromTile}
         />
         <ArtPanel
           results={this.state.searchResults}
+          selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
+          removeSelectedPlace={this.removeSelectedPlace}
+          // togglehighlightPointFromTile={this.togglehighlightPointFromTile}
         />
       </div>
     );

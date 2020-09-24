@@ -83,7 +83,17 @@ class Gallery extends Component {
                   <p className="tile-details">{result.date_start}</p>
                 </div>
                 <div className="tile-icons">
-                  <IconButton>
+                  <IconButton
+                    onClick={
+                      () =>
+                        this.props.selectedPlace === "true"
+                          ? this.props.removeSelectedPlace()
+                          : this.props.selectPlace(result.place_of_origin)
+                      // this.props.togglehighlightPointFromTile(
+                      //   result.place_of_origin
+                      // )
+                    }
+                  >
                     {result.place_of_origin === this.props.selectedPlace ? (
                       <RoomIcon style={{ color: "yellow" }} />
                     ) : (
