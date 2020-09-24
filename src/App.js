@@ -5,7 +5,6 @@ import { query } from "./utils/query.js";
 import { places } from "./utils/places_list.js";
 import { compareValues } from "./utils/helpers.js";
 import { createFeatureArr } from "./utils/createFeatureArr.js";
-import { sampleArtwork } from "./utils/sampleArtwork.js";
 import ArtPanel from "./ArtPanel";
 import EsriMap from "./EsriMap";
 import "./App.css";
@@ -13,8 +12,7 @@ import "./App.css";
 class App extends React.Component {
   state = {
     mapLoaded: false,
-    //on load: initial sample
-    searchResults: sampleArtwork,
+    searchResults: [],
     selectedPlace: "",
   };
   // switchTheme = (e) => {
@@ -52,7 +50,12 @@ class App extends React.Component {
     this.setState({ mapLoaded: true });
   };
 
+  setSampleArtwork = (sampleArtwork) => {
+    this.setState({ searchResults: sampleArtwork });
+  };
+
   onSelectPlace = (place) => {
+    console.log("onSelectPlace");
     this.setState({ selectedPlace: place });
   };
 
@@ -72,6 +75,7 @@ class App extends React.Component {
 
         <EsriMap
           onLoad={this.onMapLoad}
+          setSampleArtwork={this.setSampleArtwork}
           results={this.state.searchResults}
           onSelectPlace={this.onSelectPlace}
         />

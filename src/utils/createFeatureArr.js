@@ -53,6 +53,5 @@ export const createFeatureArr = (arr, placesArr) => {
       }
     }
   }
-  console.log(features);
   return features;
 };
