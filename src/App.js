@@ -14,7 +14,7 @@ class App extends React.Component {
     mapLoaded: false,
     searchResults: [],
     selectedPlace: "",
-    highlightedPointFromTile: "",
+    tilePointOn: false,
   };
   // switchTheme = (e) => {
   //     console.log("clicked!");
@@ -56,12 +56,28 @@ class App extends React.Component {
   };
 
   selectPlace = (place) => {
-    console.log("onSelectPlace");
+    //console.log("onSelectPlace");
     this.setState({ selectedPlace: place });
   };
 
   removeSelectedPlace = () => {
     this.setState({ selectedPlace: null });
+  };
+
+  //created for tile map point click
+  toggleSelectedPlace = (place) => {
+    if (this.state.tilePointOn) {
+      if (this.state.selectedPlace !== place) {
+        this.selectPlace(place);
+        this.setState({ tilePointOn: true });
+      } else {
+        this.removeSelectedPlace();
+        this.setState({ tilePointOn: false });
+      }
+    } else {
+      this.selectPlace(place);
+      this.setState({ tilePointOn: true });
+    }
   };
 
   // togglehighlightPointFromTile = (place) => {
@@ -101,6 +117,7 @@ class App extends React.Component {
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
+
           // highlightedPointFromTile={this.state.highlightPointFromTile}
         />
         <ArtPanel
@@ -108,6 +125,7 @@ class App extends React.Component {
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
+          toggleSelectedPlace={this.toggleSelectedPlace}
           // togglehighlightPointFromTile={this.togglehighlightPointFromTile}
         />
       </div>

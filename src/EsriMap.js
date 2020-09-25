@@ -85,6 +85,30 @@ class EsriMap extends React.Component {
               (resultsLayerView) => {
                 console.log("we have the layer view.");
 
+                const highlightPoint = (place, layer, layerView) => {
+                  console.log("in highlightPoint");
+                  let query = layer.createQuery();
+                  let queryString = "place_of_origin = " + "'" + place + "'";
+                  query.where = queryString;
+                  layer.queryFeatures(query).then((result) => {
+                    if (highlight) {
+                      highlight.remove();
+                    }
+                    highlight = layerView.highlight(result.features);
+                  });
+                };
+
+                //not changing state--click on Tile is doing that
+                //click on tile > if point is highlighted, unhighlight / if point is not highlighted, highlight
+                //this func needs to get Place from Tile (multiple Tiles have same Place)
+                // if (this.props.selectedPlace !== prevProps.selectedPlace) {
+                highlightPoint(
+                  this.props.selectedPlace,
+                  resultsLayer,
+                  resultsLayerView
+                );
+                //}
+
                 this._view.on("pointer-move", (event) => {
                   this._view.hitTest(event).then((response) => {
                     if (response.results.length) {
@@ -111,7 +135,7 @@ class EsriMap extends React.Component {
                 let feature;
                 this._view.on("click", (event) => {
                   //console.log("point click");
-                  //so multiple points not highlighted at once; if toggle off when clicking on a selected/highlighted point worked, could move this to "if (response.results.length)" else
+                  //so multiple points not highlighted at once; if the ability to toggle off when clicking on a selected/highlighted point worked, could move this to "if (response.results.length)" else
                   if (highlight) {
                     highlight.remove();
                   }

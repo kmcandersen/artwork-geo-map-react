@@ -64,6 +64,7 @@ class ArtPanel extends Component {
           selectPlace={this.props.selectPlace}
           selectedPlace={this.props.selectedPlace}
           removeSelectedPlace={this.props.removeSelectedPlace}
+          toggleSelectedPlace={this.props.toggleSelectedPlace}
           // togglehighlightPointFromTile={this.props.togglehighlightPointFromTile}
         />
       </div>

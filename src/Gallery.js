@@ -86,14 +86,16 @@ class Gallery extends Component {
                   <IconButton
                     onClick={
                       () =>
-                        this.props.selectedPlace === "true"
-                          ? this.props.removeSelectedPlace()
-                          : this.props.selectPlace(result.place_of_origin)
+                        this.props.toggleSelectedPlace(result.place_of_origin)
+                      // this.props.selectedPlace === "true"
+                      //   ? this.props.removeSelectedPlace()
+                      //   : this.props.selectPlace(result.place_of_origin)
                       // this.props.togglehighlightPointFromTile(
                       //   result.place_of_origin
                       // )
                     }
                   >
+                    {/* condition doesn't allow for toggle on/off of icon */}
                     {result.place_of_origin === this.props.selectedPlace ? (
                       <RoomIcon style={{ color: "yellow" }} />
                     ) : (
