@@ -8,6 +8,7 @@ import { createFeatureArr } from "./utils/createFeatureArr.js";
 import ArtPanel from "./ArtPanel";
 import EsriMap from "./EsriMap";
 import "./App.css";
+import { sampleArtwork } from "./utils/sampleArtwork.js";
 
 class App extends React.Component {
   state = {
@@ -56,12 +57,11 @@ class App extends React.Component {
   };
 
   selectPlace = (place) => {
-    //console.log("onSelectPlace");
     this.setState({ selectedPlace: place });
   };
 
   removeSelectedPlace = () => {
-    this.setState({ selectedPlace: null });
+    this.setState({ selectedPlace: "" });
   };
 
   //created for tile map point click
@@ -79,22 +79,6 @@ class App extends React.Component {
       this.setState({ tilePointOn: true });
     }
   };
-
-  // togglehighlightPointFromTile = (place) => {
-  //   if (this.state.highlightedPointFromTile) {
-  //     this.setState({ highlightedPointFromTile: null });
-  //   } else {
-  //     this.setState({ highlightedPointFromTile: place });
-  //   }
-  // };
-
-  // togglePlace = (place) => {
-  //   if (this.state.selectedPlace === "") {
-  //     this.setState({ selectedPlace: place });
-  //   } else {
-  //     this.setState({ selectedPlace: null });
-  //   }
-  // };
 
   render() {
     return (
@@ -117,8 +101,6 @@ class App extends React.Component {
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
-
-          // highlightedPointFromTile={this.state.highlightPointFromTile}
         />
         <ArtPanel
           results={this.state.searchResults}
@@ -126,7 +108,6 @@ class App extends React.Component {
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
           toggleSelectedPlace={this.toggleSelectedPlace}
-          // togglehighlightPointFromTile={this.togglehighlightPointFromTile}
         />
       </div>
     );
