@@ -27,11 +27,11 @@ export const query = (startYear, endYear) => {
                   is_public_domain: true,
                 },
               },
-              {
-                match: {
-                  place_of_origin: "Japan",
-                },
-              },
+              // {
+              //   match: {
+              //     place_of_origin: "China",
+              //   },
+              // },
               {
                 range: {
                   date_start: {

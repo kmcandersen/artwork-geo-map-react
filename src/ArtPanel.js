@@ -61,6 +61,11 @@ class ArtPanel extends Component {
           showAllDetails={this.state.showAllDetails}
           detailItems={this.state.detailItems}
           toggleTileDetails={this.toggleTileDetails}
+          selectPlace={this.props.selectPlace}
+          selectedPlace={this.props.selectedPlace}
+          removeSelectedPlace={this.props.removeSelectedPlace}
+          toggleSelectedPlace={this.props.toggleSelectedPlace}
+          // togglehighlightPointFromTile={this.props.togglehighlightPointFromTile}
         />
       </div>
     );

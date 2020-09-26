@@ -5,16 +5,17 @@ import { query } from "./utils/query.js";
 import { places } from "./utils/places_list.js";
 import { compareValues } from "./utils/helpers.js";
 import { createFeatureArr } from "./utils/createFeatureArr.js";
-import { sampleArtwork } from "./utils/sampleArtwork.js";
 import ArtPanel from "./ArtPanel";
 import EsriMap from "./EsriMap";
 import "./App.css";
+import { sampleArtwork } from "./utils/sampleArtwork.js";
 
 class App extends React.Component {
   state = {
     mapLoaded: false,
-    //on load: initial sample
-    searchResults: sampleArtwork,
+    searchResults: [],
+    selectedPlace: "",
+    tilePointOn: false,
   };
   // switchTheme = (e) => {
   //     console.log("clicked!");
@@ -50,6 +51,35 @@ class App extends React.Component {
   onMapLoad = () => {
     this.setState({ mapLoaded: true });
   };
+
+  setSampleArtwork = (sampleArtwork) => {
+    this.setState({ searchResults: sampleArtwork });
+  };
+
+  selectPlace = (place) => {
+    this.setState({ selectedPlace: place });
+  };
+
+  removeSelectedPlace = () => {
+    this.setState({ selectedPlace: "" });
+  };
+
+  //created for tile map point click
+  toggleSelectedPlace = (place) => {
+    if (this.state.tilePointOn) {
+      if (this.state.selectedPlace !== place) {
+        this.selectPlace(place);
+        this.setState({ tilePointOn: true });
+      } else {
+        this.removeSelectedPlace();
+        this.setState({ tilePointOn: false });
+      }
+    } else {
+      this.selectPlace(place);
+      this.setState({ tilePointOn: true });
+    }
+  };
+
   render() {
     return (
       <div className="App">
@@ -64,8 +94,21 @@ class App extends React.Component {
           </button>
         </div>
 
-        <EsriMap onLoad={this.onMapLoad} results={this.state.searchResults} />
-        <ArtPanel results={this.state.searchResults} />
+        <EsriMap
+          onLoad={this.onMapLoad}
+          setSampleArtwork={this.setSampleArtwork}
+          results={this.state.searchResults}
+          selectPlace={this.selectPlace}
+          selectedPlace={this.state.selectedPlace}
+          removeSelectedPlace={this.removeSelectedPlace}
+        />
+        <ArtPanel
+          results={this.state.searchResults}
+          selectPlace={this.selectPlace}
+          selectedPlace={this.state.selectedPlace}
+          removeSelectedPlace={this.removeSelectedPlace}
+          toggleSelectedPlace={this.toggleSelectedPlace}
+        />
       </div>
     );
   }
