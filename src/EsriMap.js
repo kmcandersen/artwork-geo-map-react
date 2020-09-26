@@ -6,7 +6,6 @@ import { setGraphics } from "./utils/graphics";
 import { getFlags } from "./utils/helpers.js";
 import { places } from "./utils/places_list.js";
 import "./EsriMap.css";
-//import { sampleArtwork } from "./utils/sampleArtwork.js";
 
 // function themeToBasemap(theme) {
 //   return theme === "light" ? "gray" : "dark-gray";
@@ -90,7 +89,6 @@ class EsriMap extends React.Component {
                   this._view.popup.visible = true;
 
                   if (this.props.selectedPlace === mapSelectedPlace) {
-                    //console.log("MATCH");
                     if (highlight) {
                       highlight.remove();
                     }
@@ -122,9 +120,8 @@ class EsriMap extends React.Component {
       if (this._view) {
         const layer = this._view.map.layers.getItemAt(0);
         this._view.whenLayerView(layer).then((layerView) => {
-          console.log("layer - CDU");
+          //console.log("layer - CDU");
 
-          //let feature;
           let query = layer.createQuery();
           let queryString = `place_of_origin = '${this.props.selectedPlace}'`;
           query.where = queryString;
@@ -164,28 +161,6 @@ class EsriMap extends React.Component {
     }
     //CDU
   }
-
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.theme !== prevProps.theme) {
-  //     if (this._view) {
-  //       const basemap = themeToBasemap(this.props.theme);
-  //       this._view.map.basemap = basemap;
-  //     }
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.results !== prevProps.results) {
-  //     if (this._view) {
-  //       //result arr converted to graphics arr, graphics arr added to layer.source, layer added to map
-  //       this._view.map.removeAll();
-  //       setGraphics(this.props.results).then((graphicsArr) => {
-  //         const resultsLayer = loadLayer(graphicsArr);
-  //         this._view.map.add(resultsLayer);
-  //       });
-  //     }
-  //   }
-  // }
 
   componentWillUnmount() {
     if (this._view) {

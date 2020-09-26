@@ -8,7 +8,6 @@ import { createFeatureArr } from "./utils/createFeatureArr.js";
 import ArtPanel from "./ArtPanel";
 import EsriMap from "./EsriMap";
 import "./App.css";
-import { sampleArtwork } from "./utils/sampleArtwork.js";
 
 class App extends React.Component {
   state = {
@@ -52,10 +51,6 @@ class App extends React.Component {
     this.setState({ mapLoaded: true });
   };
 
-  setSampleArtwork = (sampleArtwork) => {
-    this.setState({ searchResults: sampleArtwork });
-  };
-
   selectPlace = (place) => {
     this.setState({ selectedPlace: place });
   };
@@ -96,7 +91,6 @@ class App extends React.Component {
 
         <EsriMap
           onLoad={this.onMapLoad}
-          setSampleArtwork={this.setSampleArtwork}
           results={this.state.searchResults}
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
