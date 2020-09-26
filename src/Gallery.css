@@ -1,5 +1,6 @@
 .Gallery {
   width: 350px;
+  /* will need to be 100vh - height of logo, nav, input */
   height: 100vh;
   overflow: scroll;
   /* currently disables scroll; try in future:

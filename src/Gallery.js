@@ -25,11 +25,12 @@ class Gallery extends Component {
       if (
         tiles[i].attributes["data-place"].value === this.props.selectedPlace
       ) {
-        tiles[i].scrollIntoView({
-          alignToTop: true,
-          // behavior: "smooth",
-          block: "center",
-        });
+        tiles[i].scrollIntoView(true);
+        // tiles[i].scrollIntoView({
+        //   alignToTop: true,
+        //   // behavior: "smooth",
+        //   //block: "center",
+        // });
         //find first match only
         break;
       }
@@ -102,7 +103,7 @@ class Gallery extends Component {
                       <RoomOutlinedIcon style={{ color: "white" }} />
                     )}
                   </IconButton>
-                  <IconButton
+                  {/* <IconButton
                     style={{ color: "white" }}
                     className={
                       this.props.detailItems.includes(result.aic_id)
@@ -111,7 +112,7 @@ class Gallery extends Component {
                     }
                   >
                     <FavoriteBorderIcon />
-                  </IconButton>
+                  </IconButton> */}
                   <IconButton
                     className={
                       this.props.detailItems.includes(result.aic_id)

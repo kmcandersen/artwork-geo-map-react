@@ -78,17 +78,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div>
-          <label>GET ART</label>
-          <button
-            onClick={this.onSearchSubmit}
-            // data-theme="dark"
-            disabled={!this.state.mapLoaded}
-          >
-            Submit
-          </button>
-        </div>
-
         <EsriMap
           onLoad={this.onMapLoad}
           results={this.state.searchResults}
@@ -98,6 +87,8 @@ class App extends React.Component {
         />
         <ArtPanel
           results={this.state.searchResults}
+          mapLoaded={this.state.mapLoaded}
+          onSearchSubmit={this.onSearchSubmit}
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
