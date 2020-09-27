@@ -12,6 +12,7 @@ import "./App.css";
 class App extends React.Component {
   state = {
     mapLoaded: false,
+    mapResultsLoaded: false,
     searchResults: [],
     selectedPlace: "",
     tilePointOn: false,
@@ -33,6 +34,7 @@ class App extends React.Component {
   // };
 
   onSearchSubmit = async (startYear, endYear) => {
+    this.setMapResultsLoad(false);
     if (startYear && endYear && startYear <= endYear) {
       await axios
         .post(
@@ -49,6 +51,10 @@ class App extends React.Component {
 
   onMapLoad = () => {
     this.setState({ mapLoaded: true });
+  };
+
+  setMapResultsLoad = (boolean) => {
+    this.setState({ mapResultsLoaded: boolean });
   };
 
   selectPlace = (place) => {
@@ -80,6 +86,7 @@ class App extends React.Component {
       <div className="App">
         <EsriMap
           onLoad={this.onMapLoad}
+          setMapResultsLoad={this.setMapResultsLoad}
           results={this.state.searchResults}
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
@@ -87,7 +94,7 @@ class App extends React.Component {
         />
         <ArtPanel
           results={this.state.searchResults}
-          mapLoaded={this.state.mapLoaded}
+          mapResultsLoaded={this.state.mapResultsLoaded}
           onSearchSubmit={this.onSearchSubmit}
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}

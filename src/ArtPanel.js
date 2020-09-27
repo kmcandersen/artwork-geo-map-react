@@ -23,7 +23,7 @@ class ArtPanel extends Component {
   onFormSubmit(e) {
     e.preventDefault();
     this.props.onSearchSubmit(this.state.startYear, this.state.endYear);
-    this.setState({ searchMade: true });
+    this.setState({ showAllDetails: false, detailItems: [], searchMade: true });
   }
 
   toggleAllDetails = () => {
@@ -172,7 +172,7 @@ class ArtPanel extends Component {
             removeSelectedPlace={this.props.removeSelectedPlace}
             toggleSelectedPlace={this.props.toggleSelectedPlace}
           />
-        ) : this.state.searchMade ? (
+        ) : this.state.searchMade && this.props.mapResultsLoaded ? (
           <div>
             No results.
             <div className="noresults-msg">

@@ -39,7 +39,9 @@ class EsriMap extends React.Component {
       this.props.selectedPlace && this.props.removeSelectedPlace();
 
       if (this._view) {
-        //existing map points removed if no results for the next search
+        //to delay no results msg in ArtPanel from loading, until it's known if there are actually no results
+        this.props.setMapResultsLoad(true);
+        //existing map points removed if next search = no results
         if (!this.props.results.length) {
           const layer = this._view.map.layers.getItemAt(0);
           if (layer) {
@@ -55,7 +57,6 @@ class EsriMap extends React.Component {
               this._view.map.add(layer);
               this._view.whenLayerView(layer).then((layerView) => {
                 //console.log("we have the layer view.");
-
                 let feature;
                 this._view.on("pointer-move", (event) => {
                   this._view.hitTest(event).then((response) => {
