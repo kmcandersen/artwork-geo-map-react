@@ -30,4 +30,6 @@ Tile bad.css
 EsriMap orig.js
 EsriMap v1.js
 EsriMap v2.js
+EsriMap v3.js
 EsriMap TileToggleMap.js
+mapclick_bad.js

@@ -37,103 +37,64 @@ class EsriMap extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.results !== prevProps.results) {
       this.props.selectedPlace && this.props.removeSelectedPlace();
-
       if (this._view) {
         //to delay no results msg in ArtPanel from loading, until it's known if there are actually no results
         this.props.setMapResultsLoad(true);
         //existing map points removed if next search = no results
-        if (!this.props.results.length) {
-          const layer = this._view.map.layers.getItemAt(0);
-          if (layer) {
-            this._view.map.remove(layer);
-          }
-        } else {
-          let layer = "";
-          setGraphics(this.props.results)
-            .then((graphicsArr) => {
-              return (layer = loadLayer(graphicsArr));
-            })
-            .then((layer) => {
-              this._view.map.add(layer);
-              this._view.whenLayerView(layer).then((layerView) => {
-                //console.log("we have the layer view.");
-                let feature;
-                this._view.on("pointer-move", (event) => {
-                  this._view.hitTest(event).then((response) => {
-                    if (response.results.length) {
-                      const feature = response.results[0].graphic;
-                      let { latitude, longitude } = feature.attributes;
-                      let mapSelectedPlace = feature.attributes.place_of_origin;
+        //if (!this.props.results.length) {
+        let layer = "";
+        layer = this._view.map.layers.getItemAt(0);
+        // console.log(
+        //   "CDU results lyr b remove",
+        //   this._view.map.layers.items.length
+        // );
+        if (layer) {
+          this._view.map.remove(layer);
+          //layer = "";
+        }
+        // console.log(
+        //   "CDU results lyr a remove",
+        //   this._view.map.layers.items.length
+        // );
+        //} else {
+        //let layer = "";
+        setGraphics(this.props.results)
+          .then((graphicsArr) => {
+            return (layer = loadLayer(graphicsArr));
+          })
+          .then((layer) => {
+            this._view.map.add(layer);
+            // console.log(
+            //   "CDU results lyr a add",
+            //   this._view.map.layers.items.length
+            // );
+            this._view.whenLayerView(layer).then((layerView) => {
+              //console.log("we have the layer view.");
+              //let feature;
+              this._view.on("pointer-move", (event) => {
+                this._view.hitTest(event).then((response) => {
+                  if (response.results.length) {
+                    const feature = response.results[0].graphic;
+                    let { latitude, longitude } = feature.attributes;
+                    let mapSelectedPlace = feature.attributes.place_of_origin;
 
-                      this._view.popup.location = {
-                        latitude: latitude,
-                        longitude: longitude,
-                      };
-                      this._view.popup.title = getFlags(
-                        mapSelectedPlace,
-                        places
-                      );
-                      this._view.popup.visible = true;
-                    } else {
-                      this._view.popup.visible = false;
-                    }
-                  });
-                });
-
-                this._view.on("click", (event) => {
-                  console.log("point click");
-                  //so multiple points not highlighted at once
-                  if (highlight) {
-                    highlight.remove();
+                    this._view.popup.location = {
+                      latitude: latitude,
+                      longitude: longitude,
+                    };
+                    this._view.popup.title = getFlags(mapSelectedPlace, places);
+                    this._view.popup.visible = true;
+                  } else {
+                    this._view.popup.visible = false;
                   }
-
-                  this._view.hitTest(event).then((response) => {
-                    console.log("point hitTest");
-                    if (response.results.length) {
-                      feature = response.results[0].graphic;
-                      let { latitude, longitude } = feature.attributes;
-                      let mapSelectedPlace = feature.attributes.place_of_origin;
-
-                      this._view.popup.location = {
-                        latitude: latitude,
-                        longitude: longitude,
-                      };
-                      this._view.popup.title = getFlags(
-                        mapSelectedPlace,
-                        places
-                      );
-                      this._view.popup.visible = true;
-
-                      if (this.props.selectedPlace === mapSelectedPlace) {
-                        if (highlight) {
-                          highlight.remove();
-                        }
-                        this.props.removeSelectedPlace();
-                      } else if (
-                        this.props.selectedPlace !== mapSelectedPlace
-                      ) {
-                        this.props.selectPlace(mapSelectedPlace);
-                        highlight = layerView.highlight(feature);
-                      }
-                    } else {
-                      if (this._view.popup.visible) {
-                        this._view.popup.visible = false;
-                      }
-                      if (this.props.selectedPlace !== "") {
-                        this.props.removeSelectedPlace();
-                      }
-                    }
-                    //end hitTest
-                  });
-
-                  //end on click
                 });
               });
-
-              //end prevProps.results
             });
-          //end no results else
-        }
+
+            //end prevProps.results
+          });
+        //end no results else
+        //}
         //end this._view
       }
     }
@@ -191,7 +152,7 @@ class EsriMap extends React.Component {
     }
   }
   render() {
-    console.log("render");
+    //console.log("render");
     return <div className="esri-map" ref={this.mapDiv} />;
   }
 }
