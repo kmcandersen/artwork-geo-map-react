@@ -89,6 +89,46 @@ class EsriMap extends React.Component {
                   }
                 });
               });
+
+              // this._view.on("click", (event) => {
+              //   console.log("point click");
+              //   if (highlight) {
+              //     highlight.remove();
+              //   }
+
+              //   this._view.hitTest(event).then((response) => {
+              //     console.log("point hitTest");
+              //     if (response.results.length) {
+              //       const feature = response.results[0].graphic;
+              //       let { latitude, longitude } = feature.attributes;
+              //       let mapSelectedPlace = feature.attributes.place_of_origin;
+
+              //       this._view.popup.location = {
+              //         latitude: latitude,
+              //         longitude: longitude,
+              //       };
+              //       this._view.popup.title = getFlags(mapSelectedPlace, places);
+              //       this._view.popup.visible = true;
+
+              //       if (this.props.selectedPlace === mapSelectedPlace) {
+              //         if (highlight) {
+              //           highlight.remove();
+              //         }
+              //         this.props.removeSelectedPlace();
+              //       } else if (this.props.selectedPlace !== mapSelectedPlace) {
+              //         this.props.selectPlace(mapSelectedPlace);
+              //         highlight = layerView.highlight(feature);
+              //       }
+              //     } else {
+              //       if (this._view.popup.visible) {
+              //         this._view.popup.visible = false;
+              //       }
+              //       if (this.props.selectedPlace !== "") {
+              //         this.props.removeSelectedPlace();
+              //       }
+              //     }
+              //   });
+              // });
             });
 
             //end prevProps.results
