@@ -32,21 +32,21 @@ class App extends React.Component {
   //       });
   // };
 
-  onSearchSubmit = () => {
-    axios
-      .post(
-        "https://aggregator-data.artic.edu/api/v1/search",
-        query(1890, 1900)
-      )
-      .then((res) => {
-        let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
-        let featureArr = createFeatureArr(resOrdered, places);
-        this.setState({ searchResults: featureArr });
-      });
+  onSearchSubmit = async (startYear, endYear) => {
+    if (startYear && endYear && startYear <= endYear) {
+      await axios
+        .post(
+          "https://aggregator-data.artic.edu/api/v1/search",
+          query(startYear, endYear)
+        )
+        .then((res) => {
+          let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
+          let featureArr = createFeatureArr(resOrdered, places);
+          this.setState({ searchResults: featureArr });
+        });
+    }
   };
 
-  // onSearchSubmit(getArtwork(1890, 1900));
-  // }
   onMapLoad = () => {
     this.setState({ mapLoaded: true });
   };
