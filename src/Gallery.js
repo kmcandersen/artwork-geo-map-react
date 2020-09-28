@@ -39,7 +39,11 @@ class Gallery extends Component {
 
   render() {
     return (
-      <div className="Gallery">
+      <div
+        className={`Gallery ${
+          this.props.searchIsOpen ? "searchOpen" : "searchClosed"
+        }`}
+      >
         <GridList
           cellHeight={300}
           spacing={2}
@@ -85,15 +89,9 @@ class Gallery extends Component {
                 </div>
                 <div className="tile-icons">
                   <IconButton
-                    onClick={
-                      () =>
-                        this.props.toggleSelectedPlace(result.place_of_origin)
-                      // this.props.selectedPlace === "true"
-                      //   ? this.props.removeSelectedPlace()
-                      //   : this.props.selectPlace(result.place_of_origin)
-                      // this.props.togglehighlightPointFromTile(
-                      //   result.place_of_origin
-                      // )
+                    title="Highlight Place"
+                    onClick={() =>
+                      this.props.toggleSelectedPlace(result.place_of_origin)
                     }
                   >
                     {/* condition doesn't allow for toggle on/off of icon */}
@@ -104,6 +102,7 @@ class Gallery extends Component {
                     )}
                   </IconButton>
                   {/* <IconButton
+                  title="Add/Remove Favorite"
                     style={{ color: "white" }}
                     className={
                       this.props.detailItems.includes(result.aic_id)
@@ -114,6 +113,7 @@ class Gallery extends Component {
                     <FavoriteBorderIcon />
                   </IconButton> */}
                   <IconButton
+                    title="AIC Webpage"
                     className={
                       this.props.detailItems.includes(result.aic_id)
                         ? ""
@@ -129,7 +129,8 @@ class Gallery extends Component {
                   </IconButton>
 
                   <IconButton
-                    aria-label="show/hide details"
+                    aria-label="Show/Hide Details"
+                    title="Show/Hide Details"
                     style={{ color: "white" }}
                     onClick={() => {
                       this.props.toggleTileDetails(result.aic_id);

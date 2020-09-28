@@ -1,10 +1,16 @@
 .Gallery {
-  width: 350px;
-  /* will need to be 100vh - height of logo, nav, input */
-  height: 100vh;
+  max-width: 100%;
   overflow: scroll;
   /* currently disables scroll; try in future:
   scroll-behavior: smooth; */
+}
+
+.searchClosed {
+  height: calc(100vh - 223px);
+}
+
+.searchOpen {
+  height: calc(100vh - 337px);
 }
 
 .gridList {
@@ -14,10 +20,6 @@
 img.gridListImg {
   z-index: 0;
 }
-
-/* .list-item-unHighlight {
-    background: rgba(0, 0, 0, 0.5);
-  } */
 
 .gridListTile {
   display: flex;

@@ -11,13 +11,31 @@ import Gallery from "./Gallery";
 import "./ArtPanel.css";
 
 class ArtPanel extends Component {
-  state = {
-    showAllDetails: false,
-    detailItems: [],
-    showSearch: true,
-    searchMade: false,
-    startYear: "",
-    endYear: "",
+  constructor(props) {
+    super(props);
+    this.panelHeaderRef = React.createRef();
+    this.state = {
+      showAllDetails: false,
+      detailItems: [],
+      showSearch: true,
+      searchMade: false,
+      startYear: "",
+      endYear: "",
+      panelHeaderHeight: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.setPanelHeaderHeight();
+  }
+
+  setPanelHeaderHeight = () => {
+    //wo setTimeout, except for CDM, height is 1 toggle behind
+    setTimeout(() => {
+      this.setState({
+        panelHeaderHeight: this.panelHeaderRef.current.clientHeight,
+      });
+    }, 0);
   };
 
   onFormSubmit(e) {
@@ -58,12 +76,13 @@ class ArtPanel extends Component {
 
   toggleSearch = () => {
     this.setState({ showSearch: !this.state.showSearch });
+    this.setPanelHeaderHeight();
   };
 
   render() {
     return (
       <div className="ArtPanel">
-        <div className="ArtPanel-header">
+        <div className="ArtPanel-header" ref={this.panelHeaderRef}>
           <div className="logo-wrapper">
             <div className="logo-text">
               ART<span className="gray-text">IMELINE</span>
@@ -78,18 +97,27 @@ class ArtPanel extends Component {
             >
               <div className="form-info">
                 <label htmlFor="standard-basic">Search</label>
-                <IconButton
-                  aria-label={
-                    this.state.showSearch ? "hide Search" : "show Search"
-                  }
-                  onClick={this.toggleSearch}
-                >
-                  {this.state.showSearch ? (
-                    <ExpandLessIcon />
-                  ) : (
-                    <ExpandMoreIcon />
-                  )}
-                </IconButton>
+                {this.state.searchMade && (
+                  <IconButton
+                    aria-label={
+                      this.state.showSearch
+                        ? "Collapse Search"
+                        : "Expand Search"
+                    }
+                    title={
+                      this.state.showSearch
+                        ? "Collapse Search"
+                        : "Expand Search"
+                    }
+                    onClick={this.toggleSearch}
+                  >
+                    {this.state.showSearch ? (
+                      <ExpandLessIcon />
+                    ) : (
+                      <ExpandMoreIcon />
+                    )}
+                  </IconButton>
+                )}
               </div>
               {this.state.showSearch && (
                 <div className="input-content">
@@ -163,6 +191,7 @@ class ArtPanel extends Component {
 
         {this.props.results.length ? (
           <Gallery
+            searchIsOpen={this.state.showSearch}
             results={this.props.results}
             showAllDetails={this.state.showAllDetails}
             detailItems={this.state.detailItems}
@@ -180,7 +209,20 @@ class ArtPanel extends Component {
             </div>
           </div>
         ) : (
-          <div>Intro text</div>
+          !this.state.searchMade && (
+            <div className="gallery-msg">
+              <p>
+                Enter a year range and see the location and details of a
+                selection of random artwork. Place familiar works and artists in
+                their historical context, and see art and styles from around the
+                world that you might not be familiar with.
+              </p>
+              <p>
+                All artwork is in the collection of the{" "}
+                <a href="https://www.artic.edu/">Art Institute of Chicago</a>.
+              </p>
+            </div>
+          )
         )}
       </div>
     );

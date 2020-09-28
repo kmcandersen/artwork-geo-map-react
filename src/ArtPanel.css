@@ -1,5 +1,7 @@
 .ArtPanel {
-  width: 350px;
+  /* box-sizing: border-box; */
+  /* width: 350px; */
+  width: calc(100vw - 73vw);
   height: 100vh;
   margin-left: 5px;
   font-family: "Nunito", sans-serif;
@@ -94,15 +96,15 @@ input[type="number"] {
   color: #000000;
 }
 
+.gallery-msg {
+  padding: 16px 20px;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  line-height: 1.15rem;
+  text-align: left;
+}
+
 .noresults-msg {
-  /* font-style: oblique; */
   margin-top: 5px;
   font-size: 0.8rem;
 }
-
-/* root: {
-  "& > *": {
-    margin: theme.spacing(1),
-    width: "25ch",
-  },
-}, */
