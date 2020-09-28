@@ -212,13 +212,13 @@ class ArtPanel extends Component {
           !this.state.searchMade && (
             <div className="gallery-msg">
               <p>
-                Enter a year range and see the location and details of a
+                Enter a year range to see the location and details of a
                 selection of random artwork. Place familiar works and artists in
                 their historical context, and see art and styles from around the
                 world that you might not be familiar with.
               </p>
               <p>
-                All artwork is in the collection of the{" "}
+                All artwork is from the collection of the{" "}
                 <a href="https://www.artic.edu/">Art Institute of Chicago</a>.
               </p>
             </div>

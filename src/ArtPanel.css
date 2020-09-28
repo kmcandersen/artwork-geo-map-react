@@ -1,5 +1,4 @@
 .ArtPanel {
-  /* box-sizing: border-box; */
   /* width: 350px; */
   width: calc(100vw - 73vw);
   height: 100vh;
