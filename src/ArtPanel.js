@@ -17,8 +17,8 @@ class ArtPanel extends Component {
       detailItems: [],
       showSearch: true,
       searchMade: false,
-      startYear: "",
-      endYear: "",
+      startYear: 1890,
+      endYear: 1900,
       panelHeaderHeight: 0,
     };
   }
@@ -95,27 +95,21 @@ class ArtPanel extends Component {
             >
               <div className="form-info">
                 <label htmlFor="standard-basic">Search</label>
-                {this.state.searchMade && (
-                  <IconButton
-                    aria-label={
-                      this.state.showSearch
-                        ? "Collapse Search"
-                        : "Expand Search"
-                    }
-                    title={
-                      this.state.showSearch
-                        ? "Collapse Search"
-                        : "Expand Search"
-                    }
-                    onClick={this.toggleSearch}
-                  >
-                    {this.state.showSearch ? (
-                      <ExpandLessIcon />
-                    ) : (
-                      <ExpandMoreIcon />
-                    )}
-                  </IconButton>
-                )}
+                <IconButton
+                  aria-label={
+                    this.state.showSearch ? "Collapse Search" : "Expand Search"
+                  }
+                  title={
+                    this.state.showSearch ? "Collapse Search" : "Expand Search"
+                  }
+                  onClick={this.toggleSearch}
+                >
+                  {this.state.showSearch ? (
+                    <ExpandLessIcon />
+                  ) : (
+                    <ExpandMoreIcon />
+                  )}
+                </IconButton>
               </div>
               {this.state.showSearch && (
                 <div className="input-content">
@@ -130,7 +124,9 @@ class ArtPanel extends Component {
                         label="start year"
                         value={this.state.startYear}
                         onChange={(e) =>
-                          this.setState({ startYear: parseInt(e.target.value) })
+                          this.setState({
+                            startYear: parseInt(e.target.value),
+                          })
                         }
                       />
                     </div>
@@ -199,26 +195,14 @@ class ArtPanel extends Component {
             removeSelectedPlace={this.props.removeSelectedPlace}
             toggleSelectedPlace={this.props.toggleSelectedPlace}
           />
-        ) : this.state.searchMade && this.props.mapResultsLoaded ? (
-          <div>
-            No results.
-            <div className="noresults-msg">
-              Psst! Try changing or widening the year range.
-            </div>
-          </div>
         ) : (
-          !this.state.searchMade && (
-            <div className="gallery-msg">
-              <p>
-                Enter a year range to see the location and details of a
-                selection of random artwork. Place familiar works and artists in
-                their historical context, and see art and styles from around the
-                world that you might not be familiar with.
-              </p>
-              <p>
-                All artwork is from the collection of the{" "}
-                <a href="https://www.artic.edu/">Art Institute of Chicago</a>.
-              </p>
+          this.state.searchMade &&
+          this.props.mapResultsLoaded && (
+            <div>
+              No results.
+              <div className="noresults-msg">
+                Psst! Try changing or widening the year range.
+              </div>
             </div>
           )
         )}

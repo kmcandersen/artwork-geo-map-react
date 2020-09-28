@@ -81,6 +81,11 @@ class App extends React.Component {
     }
   };
 
+  //to change searchResults from [] to sampleArtwork arr during EsriMap CDM, triggering CDU
+  setSampleArtwork = (arr) => {
+    this.setState({ searchResults: arr });
+  };
+
   render() {
     return (
       <div className="App">
@@ -91,6 +96,7 @@ class App extends React.Component {
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
+          setSampleArtwork={this.setSampleArtwork}
         />
         <ArtPanel
           results={this.state.searchResults}
