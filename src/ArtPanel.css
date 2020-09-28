@@ -1,3 +1,109 @@
 .ArtPanel {
-  width: 350px;
+  /* width: 350px; */
+  width: calc(100vw - 73vw);
+  height: 100vh;
+  margin-left: 5px;
+  font-family: "Nunito", sans-serif;
+}
+
+.ArtPanel-header {
+  padding: 16px;
+}
+
+.logo-wrapper {
+  width: 100%;
+}
+
+.logo-text {
+  font-family: "Bebas Neue", cursive;
+  color: #b50938;
+  font-size: 4rem;
+  border-bottom: 8px solid #b50938;
+  letter-spacing: 0.02em;
+  text-align: left;
+}
+
+.gray-text {
+  color: #b0b0b0;
+}
+
+.input-form {
+  padding: 16px 0;
+}
+
+.form-info,
+.toggle-all-details {
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.form-info,
+.input-fields,
+.input-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-info {
+  margin-bottom: 5px;
+}
+
+/* no arrows in input boxes */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.left-input {
+  margin-right: 10px;
+}
+
+.right-input {
+  margin-left: 10px;
+}
+
+.submit-button {
+  display: flex;
+  justify-content: flex-end;
+  margin: 15px 10px;
+}
+
+.input-footer {
+  padding: 16px 0;
+  letter-spacing: 0.02em;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.toggle-all-details {
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: color 1s ease;
+}
+
+.toggle-all-details:hover {
+  color: #000000;
+}
+
+.gallery-msg {
+  padding: 16px 20px;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  line-height: 1.15rem;
+  text-align: left;
+}
+
+.noresults-msg {
+  margin-top: 5px;
+  font-size: 0.8rem;
 }

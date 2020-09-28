@@ -12,6 +12,7 @@ import "./App.css";
 class App extends React.Component {
   state = {
     mapLoaded: false,
+    mapResultsLoaded: false,
     searchResults: [],
     selectedPlace: "",
     tilePointOn: false,
@@ -32,23 +33,28 @@ class App extends React.Component {
   //       });
   // };
 
-  onSearchSubmit = () => {
-    axios
-      .post(
-        "https://aggregator-data.artic.edu/api/v1/search",
-        query(1890, 1900)
-      )
-      .then((res) => {
-        let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
-        let featureArr = createFeatureArr(resOrdered, places);
-        this.setState({ searchResults: featureArr });
-      });
+  onSearchSubmit = async (startYear, endYear) => {
+    this.setMapResultsLoad(false);
+    if (startYear && endYear && startYear <= endYear) {
+      await axios
+        .post(
+          "https://aggregator-data.artic.edu/api/v1/search",
+          query(startYear, endYear)
+        )
+        .then((res) => {
+          let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
+          let featureArr = createFeatureArr(resOrdered, places);
+          this.setState({ searchResults: featureArr });
+        });
+    }
   };
 
-  // onSearchSubmit(getArtwork(1890, 1900));
-  // }
   onMapLoad = () => {
     this.setState({ mapLoaded: true });
+  };
+
+  setMapResultsLoad = (boolean) => {
+    this.setState({ mapResultsLoaded: boolean });
   };
 
   selectPlace = (place) => {
@@ -78,19 +84,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div>
-          <label>GET ART</label>
-          <button
-            onClick={this.onSearchSubmit}
-            // data-theme="dark"
-            disabled={!this.state.mapLoaded}
-          >
-            Submit
-          </button>
-        </div>
-
         <EsriMap
           onLoad={this.onMapLoad}
+          setMapResultsLoad={this.setMapResultsLoad}
           results={this.state.searchResults}
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
@@ -98,6 +94,8 @@ class App extends React.Component {
         />
         <ArtPanel
           results={this.state.searchResults}
+          mapResultsLoaded={this.state.mapResultsLoaded}
+          onSearchSubmit={this.onSearchSubmit}
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
