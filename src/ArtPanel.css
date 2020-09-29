@@ -95,14 +95,6 @@ input[type="number"] {
   color: #000000;
 }
 
-.gallery-msg {
-  padding: 16px 20px;
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
-  line-height: 1.15rem;
-  text-align: left;
-}
-
 .noresults-msg {
   margin-top: 5px;
   font-size: 0.8rem;

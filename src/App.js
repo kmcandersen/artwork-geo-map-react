@@ -7,6 +7,7 @@ import { compareValues } from "./utils/helpers.js";
 import { createFeatureArr } from "./utils/createFeatureArr.js";
 import ArtPanel from "./ArtPanel";
 import EsriMap from "./EsriMap";
+import IntroModal from "./IntroModal";
 import "./App.css";
 
 class App extends React.Component {
@@ -16,6 +17,7 @@ class App extends React.Component {
     searchResults: [],
     selectedPlace: "",
     tilePointOn: false,
+    modalOpen: true,
   };
   // switchTheme = (e) => {
   //     console.log("clicked!");
@@ -86,6 +88,10 @@ class App extends React.Component {
     this.setState({ searchResults: arr });
   };
 
+  closeModal = () => {
+    this.setState({ modalOpen: false });
+  };
+
   render() {
     return (
       <div className="App">
@@ -107,6 +113,7 @@ class App extends React.Component {
           removeSelectedPlace={this.removeSelectedPlace}
           toggleSelectedPlace={this.toggleSelectedPlace}
         />
+        {this.state.modalOpen && <IntroModal closeModal={this.closeModal} />}
       </div>
     );
   }
