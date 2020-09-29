@@ -190,7 +190,12 @@ class EsriMap extends React.Component {
   }
   render() {
     //console.log("render");
-    return <div className="esri-map" ref={this.mapDiv} />;
+    return (
+      <div
+        className={`esri-map ${this.props.isModalOpen && "dimmed"}`}
+        ref={this.mapDiv}
+      />
+    );
   }
 }
 

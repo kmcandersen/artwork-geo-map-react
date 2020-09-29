@@ -79,7 +79,7 @@ class ArtPanel extends Component {
 
   render() {
     return (
-      <div className="ArtPanel">
+      <div className={`ArtPanel ${this.props.isModalOpen && "dimmed"}`}>
         <div className="ArtPanel-header" ref={this.panelHeaderRef}>
           <div className="logo-wrapper">
             <div className="logo-text">

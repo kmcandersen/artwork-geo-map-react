@@ -103,6 +103,7 @@ class App extends React.Component {
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
           setSampleArtwork={this.setSampleArtwork}
+          isModalOpen={this.state.modalOpen}
         />
         <ArtPanel
           results={this.state.searchResults}
@@ -112,7 +113,9 @@ class App extends React.Component {
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
           toggleSelectedPlace={this.toggleSelectedPlace}
+          isModalOpen={this.state.modalOpen}
         />
+
         {this.state.modalOpen && <IntroModal closeModal={this.closeModal} />}
       </div>
     );
