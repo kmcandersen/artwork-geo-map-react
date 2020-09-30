@@ -18,6 +18,23 @@ export const sampleArtwork = [
   },
   {
     ObjectID: 2,
+    aic_id: 656,
+    title: "Lion (One of a Pair, South Pedestal)",
+    artist_title: "Edward Kemeys",
+    place_of_origin: "Chicago",
+    date_start: 1893,
+    date_display: "1893",
+    thumbnailUrl:
+      "https://www.artic.edu/iiif/2/c2550f00-20d6-6a95-b798-f395c1ff02eb",
+    classification_title: "Sculpture",
+    style_title: null,
+    api_link: "https://api.artic.edu/api/v1/artworks/656",
+    is_public_domain: "false",
+    latitude: 41.881832,
+    longitude: -87.623177,
+  },
+  {
+    ObjectID: 3,
     aic_id: 217685,
     title:
       "Landscape and Figure, from an album of Landscapes and Calligraphy for Liu Songfu",
@@ -35,7 +52,7 @@ export const sampleArtwork = [
     longitude: 104.1953964,
   },
   {
-    ObjectID: 3,
+    ObjectID: 4,
     aic_id: 16907,
     title: "La Samaritaine",
     artist_title: "Alphonse Marie Mucha",
@@ -52,7 +69,7 @@ export const sampleArtwork = [
     longitude: 15.33177012,
   },
   {
-    ObjectID: 4,
+    ObjectID: 5,
     aic_id: 113265,
     title: "Merganser",
     artist_title: "John Ruskin",
@@ -69,7 +86,7 @@ export const sampleArtwork = [
     longitude: -1.17432,
   },
   {
-    ObjectID: 5,
+    ObjectID: 6,
     aic_id: 215581,
     title: "Ely Cathedral: South Aisle to East, from Southwest Transept",
     artist_title: "Frederick H. Evans",
@@ -86,7 +103,7 @@ export const sampleArtwork = [
     longitude: -1.17432,
   },
   {
-    ObjectID: 6,
+    ObjectID: 7,
     aic_id: 42634,
     title: "Woman with Elaborate Coiffure",
     artist_title: "Imitator of Aubrey Vincent Beardsley",
@@ -103,7 +120,7 @@ export const sampleArtwork = [
     longitude: -1.17432,
   },
   {
-    ObjectID: 7,
+    ObjectID: 8,
     aic_id: 41036,
     title:
       "Study for How a Devil in Woman's Likeness Would Have Tempted Sir Bors",
@@ -121,7 +138,7 @@ export const sampleArtwork = [
     longitude: -1.17432,
   },
   {
-    ObjectID: 8,
+    ObjectID: 9,
     aic_id: 55814,
     title: "At the Moulin Rouge, La Goulue and Her Sister",
     artist_title: "Henri de Toulouse-Lautrec",
@@ -138,7 +155,7 @@ export const sampleArtwork = [
     longitude: 2.213749,
   },
   {
-    ObjectID: 9,
+    ObjectID: 10,
     aic_id: 106626,
     title: "Light",
     artist_title: "Odilon Redon",
@@ -155,7 +172,7 @@ export const sampleArtwork = [
     longitude: 2.213749,
   },
   {
-    ObjectID: 10,
+    ObjectID: 11,
     aic_id: 159089,
     title: "Tahitian Idol—the Goddess Hina",
     artist_title: "Paul Gauguin",
@@ -172,7 +189,7 @@ export const sampleArtwork = [
     longitude: 2.213749,
   },
   {
-    ObjectID: 11,
+    ObjectID: 12,
     aic_id: 49863,
     title: "La Nuit",
     artist_title: "Théophile-Alexandre Pierre Steinlen",
@@ -189,7 +206,7 @@ export const sampleArtwork = [
     longitude: 2.213749,
   },
   {
-    ObjectID: 12,
+    ObjectID: 13,
     aic_id: 241924,
     title: "Head of a Bearded Man in Half-Profile",
     artist_title: "Adolph Friedrich Erdmann von Menzel",
@@ -206,7 +223,24 @@ export const sampleArtwork = [
     longitude: 10.451526,
   },
   {
-    ObjectID: 13,
+    ObjectID: 14,
+    aic_id: 46181,
+    title: "Two carved wooden transoms (ramma) panels from the Hooden",
+    artist_title: "Takamura Kôun",
+    place_of_origin: "Japan",
+    date_start: 1893,
+    date_display: "1893",
+    thumbnailUrl:
+      "https://www.artic.edu/iiif/2/fda5f63b-a20a-962a-bacf-02d1f8e7c106",
+    classification_title: "Wood",
+    style_title: "Japanese (Culture Or Style)",
+    api_link: "https://api.artic.edu/api/v1/artworks/46181",
+    is_public_domain: "true",
+    latitude: 36.6552269980001,
+    longitude: 139.271495,
+  },
+  {
+    ObjectID: 15,
     aic_id: 154963,
     title:
       'Takasago, from the series "Pictures of No Performances (Nogaku Zue)"',
@@ -223,8 +257,9 @@ export const sampleArtwork = [
     latitude: 36.6552269980001,
     longitude: 139.271495,
   },
+
   {
-    ObjectID: 14,
+    ObjectID: 16,
     aic_id: 37733,
     title: "Garden rug",
     artist_title: null,
@@ -241,7 +276,7 @@ export const sampleArtwork = [
     longitude: 71.433333,
   },
   {
-    ObjectID: 15,
+    ObjectID: 17,
     aic_id: 49639,
     title: "Pachuquenian Calavera",
     artist_title: "José Guadalupe Posada",
@@ -258,7 +293,7 @@ export const sampleArtwork = [
     longitude: -102.548353419,
   },
   {
-    ObjectID: 16,
+    ObjectID: 18,
     aic_id: 17226,
     title: "Summernight. The Voice",
     artist_title: "Edvard Munch",
@@ -275,7 +310,7 @@ export const sampleArtwork = [
     longitude: 8.468946,
   },
   {
-    ObjectID: 17,
+    ObjectID: 19,
     aic_id: 41293,
     title: "The Gargoyles, Stirling Castle",
     artist_title: "David Young Cameron",
@@ -292,7 +327,7 @@ export const sampleArtwork = [
     longitude: -4.2026458,
   },
   {
-    ObjectID: 18,
+    ObjectID: 20,
     aic_id: 16473,
     title: "Cigar Making in Seville",
     artist_title: "Ricardo Canals y Llambí",
@@ -309,7 +344,7 @@ export const sampleArtwork = [
     longitude: -6.00195999999994,
   },
   {
-    ObjectID: 19,
+    ObjectID: 21,
     aic_id: 73443,
     title: "Flower Pot with Stand",
     artist_title: "Artist unknown",
@@ -326,7 +361,7 @@ export const sampleArtwork = [
     longitude: 7.73642000000007,
   },
   {
-    ObjectID: 20,
+    ObjectID: 22,
     aic_id: 41834,
     title: "Grover Cleveland II",
     artist_title: "Anders Zorn",
@@ -343,7 +378,7 @@ export const sampleArtwork = [
     longitude: 16.325556,
   },
   {
-    ObjectID: 21,
+    ObjectID: 23,
     aic_id: 48117,
     title: "Handkerchief",
     artist_title: null,
@@ -360,7 +395,7 @@ export const sampleArtwork = [
     longitude: 8.24502409600007,
   },
   {
-    ObjectID: 22,
+    ObjectID: 25,
     aic_id: 103545,
     title: "Spinning",
     artist_title: "Emilie V. Clarkson",
@@ -377,7 +412,7 @@ export const sampleArtwork = [
     longitude: -95.712891,
   },
   {
-    ObjectID: 23,
+    ObjectID: 25,
     aic_id: 158244,
     title: "The Vow of Vengeance",
     artist_title: "Hermon Atkins MacNeil",

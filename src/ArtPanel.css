@@ -1,3 +1,10 @@
+/* also applies to EsriMap */
+.dimmed {
+  opacity: 0.4;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
 .ArtPanel {
   /* width: 350px; */
   width: calc(100vw - 73vw);
@@ -10,6 +17,7 @@
   padding: 16px;
 }
 
+/* logo styles also apply to IntroModal */
 .logo-wrapper {
   width: 100%;
 }
@@ -93,14 +101,6 @@ input[type="number"] {
 
 .toggle-all-details:hover {
   color: #000000;
-}
-
-.gallery-msg {
-  padding: 16px 20px;
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
-  line-height: 1.15rem;
-  text-align: left;
 }
 
 .noresults-msg {

@@ -7,6 +7,7 @@ import { compareValues } from "./utils/helpers.js";
 import { createFeatureArr } from "./utils/createFeatureArr.js";
 import ArtPanel from "./ArtPanel";
 import EsriMap from "./EsriMap";
+import IntroModal from "./IntroModal";
 import "./App.css";
 
 class App extends React.Component {
@@ -16,6 +17,7 @@ class App extends React.Component {
     searchResults: [],
     selectedPlace: "",
     tilePointOn: false,
+    modalOpen: true,
   };
   // switchTheme = (e) => {
   //     console.log("clicked!");
@@ -81,6 +83,15 @@ class App extends React.Component {
     }
   };
 
+  //to change searchResults from [] to sampleArtwork arr during EsriMap CDM, triggering CDU
+  setSampleArtwork = (arr) => {
+    this.setState({ searchResults: arr });
+  };
+
+  closeModal = () => {
+    this.setState({ modalOpen: false });
+  };
+
   render() {
     return (
       <div className="App">
@@ -91,6 +102,8 @@ class App extends React.Component {
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
+          setSampleArtwork={this.setSampleArtwork}
+          isModalOpen={this.state.modalOpen}
         />
         <ArtPanel
           results={this.state.searchResults}
@@ -100,7 +113,10 @@ class App extends React.Component {
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
           toggleSelectedPlace={this.toggleSelectedPlace}
+          isModalOpen={this.state.modalOpen}
         />
+
+        {this.state.modalOpen && <IntroModal closeModal={this.closeModal} />}
       </div>
     );
   }

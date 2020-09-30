@@ -6,6 +6,7 @@ import { setGraphics } from "./utils/graphics";
 import { getFlags } from "./utils/helpers.js";
 import { places } from "./utils/places_list.js";
 import "./EsriMap.css";
+import { sampleArtwork } from "./utils/sampleArtwork";
 
 // function themeToBasemap(theme) {
 //   return theme === "light" ? "gray" : "dark-gray";
@@ -14,6 +15,7 @@ import "./EsriMap.css";
 //inside CDU, were getting overwritten each update. Elsewhere, weren't accessible
 let highlight;
 let mapClickListener;
+let mapMoveListener;
 
 class EsriMap extends React.Component {
   constructor(props) {
@@ -30,6 +32,7 @@ class EsriMap extends React.Component {
       this._view = view; // hold on to the view for later
       onLoad && onLoad();
       loadHome(view);
+      this.props.setSampleArtwork(sampleArtwork);
     });
   }
 
@@ -39,15 +42,14 @@ class EsriMap extends React.Component {
 
       //so click listeners don't accumulate with ea Update & run multiple times
       if (mapClickListener) {
-        console.log("mapClickListener found");
         mapClickListener.remove();
       }
 
       if (this._view) {
-        //to delay no results msg in ArtPanel from loading, until it's known if there are actually no results
+        //to delay no results msg in ArtPanel from loading, until it's known if there are actually no results (no flash)
         this.props.setMapResultsLoad(true);
 
-        //existing map points removed, if next search has results or not
+        //existing map points removed, whether next search has results or not
         let layer = "";
         layer = this._view.map.layers.getItemAt(0);
         if (layer) {
@@ -63,7 +65,8 @@ class EsriMap extends React.Component {
 
             this._view.whenLayerView(layer).then((layerView) => {
               //console.log("we have the layer view.");
-              this._view.on("pointer-move", (event) => {
+
+              const mapMoveHandler = (event) => {
                 this._view.hitTest(event).then((response) => {
                   if (response.results.length) {
                     const feature = response.results[0].graphic;
@@ -80,10 +83,10 @@ class EsriMap extends React.Component {
                     this._view.popup.visible = false;
                   }
                 });
-              });
+              };
 
               const mapClickHandler = (event) => {
-                //console.log("point click");
+                console.log("point click");
                 if (highlight) {
                   highlight.remove();
                 }
@@ -122,7 +125,8 @@ class EsriMap extends React.Component {
                 // can't remove mapClickListener inside this func, bc disables toggle
               };
 
-              //works; how to remove?
+              mapMoveListener = this._view.on("pointer-move", mapMoveHandler);
+
               mapClickListener = this._view.on(
                 "immediate-click",
                 mapClickHandler
@@ -186,7 +190,12 @@ class EsriMap extends React.Component {
   }
   render() {
     //console.log("render");
-    return <div className="esri-map" ref={this.mapDiv} />;
+    return (
+      <div
+        className={`esri-map ${this.props.isModalOpen && "dimmed"}`}
+        ref={this.mapDiv}
+      />
+    );
   }
 }
 
