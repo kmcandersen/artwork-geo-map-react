@@ -9,7 +9,7 @@ export const sampleArtwork = [
     date_display: "c. 1895",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/ea9cc3de-371c-e372-f720-996df6d20f1c",
-    classification_title: "etching",
+    classification_title: "Etching",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/49409",
     is_public_domain: "true",
@@ -44,7 +44,7 @@ export const sampleArtwork = [
     date_display: "Qing dynasty (1644–1911), 1895/96",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/314a5c9e-f7f7-cd43-2255-b0d69f96931e",
-    classification_title: "painting",
+    classification_title: "Painting",
     style_title: "Chinese (culture or style)",
     api_link: "https://api.artic.edu/api/v1/artworks/217685",
     is_public_domain: "true",
@@ -61,7 +61,7 @@ export const sampleArtwork = [
     date_display: "1897",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/aa775469-fb0d-6c1f-72ba-938ca54f44f3",
-    classification_title: "poster",
+    classification_title: "Poster",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/16907",
     is_public_domain: null,
@@ -78,7 +78,7 @@ export const sampleArtwork = [
     date_display: "February 29, 1890",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/43c6fc44-6dc8-f053-41d8-df3057eb6857",
-    classification_title: "watercolor",
+    classification_title: "Watercolor",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/113265",
     is_public_domain: "true",
@@ -95,7 +95,7 @@ export const sampleArtwork = [
     date_display: "1891",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/bde84445-a636-0c76-8c0b-e7b384ca7aff",
-    classification_title: "photograph",
+    classification_title: "Photograph",
     style_title: "Pictorialism",
     api_link: "https://api.artic.edu/api/v1/artworks/215581",
     is_public_domain: "true",
@@ -112,7 +112,7 @@ export const sampleArtwork = [
     date_display: "1892/98",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/c2873c48-4d38-9f4b-a249-43dfe6f85b7e",
-    classification_title: "pen and ink drawings",
+    classification_title: "Pen and ink drawings",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/42634",
     is_public_domain: "true",
@@ -130,7 +130,7 @@ export const sampleArtwork = [
     date_display: "1893",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/654adc3f-18b1-6197-5996-5828e7b186d8",
-    classification_title: "pen and ink drawings",
+    classification_title: "Pen and ink drawings",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/41036",
     is_public_domain: "true",
@@ -147,7 +147,7 @@ export const sampleArtwork = [
     date_display: "1892",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/084ad823-ab84-23c2-672a-51fb1a2809ce",
-    classification_title: "lithograph",
+    classification_title: "Lithograph",
     style_title: "Post-Impressionism",
     api_link: "https://api.artic.edu/api/v1/artworks/55814",
     is_public_domain: "true",
@@ -164,7 +164,7 @@ export const sampleArtwork = [
     date_display: "1893",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/32d0ffa0-460e-ff57-f978-353e4d472075",
-    classification_title: "lithograph",
+    classification_title: "Lithograph",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/106626",
     is_public_domain: "true",
@@ -181,7 +181,7 @@ export const sampleArtwork = [
     date_display: "1894/95",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/d64e058a-3124-5947-0635-7a759f3b500b",
-    classification_title: "woodcut",
+    classification_title: "Woodcut",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/159089",
     is_public_domain: "true",
@@ -198,7 +198,7 @@ export const sampleArtwork = [
     date_display: "published November 17, 1895",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/26ea12d7-3d84-83f3-22da-fcedc44d4159",
-    classification_title: "photorelief",
+    classification_title: "Photorelief",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/49863",
     is_public_domain: "true",
@@ -215,7 +215,7 @@ export const sampleArtwork = [
     date_display: "1894",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/d82af8ff-2f1b-1dfb-c956-d6f91e0a11c9",
-    classification_title: "graphite",
+    classification_title: "Graphite",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/241924",
     is_public_domain: "true",
@@ -250,7 +250,7 @@ export const sampleArtwork = [
     date_display: "1898",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/41400931-6afb-a123-6916-c4c13843fad4",
-    classification_title: "woodblock print",
+    classification_title: "Woodblock print",
     style_title: "Japanese (culture or style)",
     api_link: "https://api.artic.edu/api/v1/artworks/154963",
     is_public_domain: "true",
@@ -262,13 +262,13 @@ export const sampleArtwork = [
     ObjectID: 16,
     aic_id: 37733,
     title: "Garden rug",
-    artist_title: null,
+    artist_title: "Unknown Artist",
     place_of_origin: "Kazakhstan",
     date_start: 1890,
     date_display: "1890",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/45faff9c-479c-3219-ec6f-20eb5dcfd324",
-    classification_title: "textile",
+    classification_title: "Textile",
     style_title: "kazak",
     api_link: "https://api.artic.edu/api/v1/artworks/37733",
     is_public_domain: "true",
@@ -285,7 +285,7 @@ export const sampleArtwork = [
     date_display: "1894",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/d0257899-fab3-7b7f-ea0f-832fd6bb29d8",
-    classification_title: "lithograph",
+    classification_title: "Lithograph",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/49639",
     is_public_domain: null,
@@ -302,7 +302,7 @@ export const sampleArtwork = [
     date_display: "1894",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/b3203fef-8b36-50b6-9769-8d1262064f11",
-    classification_title: "aquatint",
+    classification_title: "Aquatint",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/17226",
     is_public_domain: null,
@@ -319,7 +319,7 @@ export const sampleArtwork = [
     date_display: "1898",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/4eca1704-310f-1c56-7b5d-8f7b959b88bc",
-    classification_title: "etching",
+    classification_title: "Etching",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/41293",
     is_public_domain: "true",
@@ -336,7 +336,7 @@ export const sampleArtwork = [
     date_display: "1899",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/3d232049-27d2-a048-413a-2f01ab0b0fc8",
-    classification_title: "painting",
+    classification_title: "Painting",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/16473",
     is_public_domain: "true",
@@ -347,13 +347,13 @@ export const sampleArtwork = [
     ObjectID: 21,
     aic_id: 73443,
     title: "Flower Pot with Stand",
-    artist_title: "Artist unknown",
+    artist_title: "Unknown Artist",
     place_of_origin: "Strasburg",
     date_start: 1890,
     date_display: "1890/1900",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/e5c34743-e72c-ade7-0021-afdcd2f7f201",
-    classification_title: "cachepot",
+    classification_title: "Cachepot",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/73443",
     is_public_domain: "true",
@@ -370,7 +370,7 @@ export const sampleArtwork = [
     date_display: "1899",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/a14fe0a6-9e6a-37da-2564-326ccaa972eb",
-    classification_title: "etching",
+    classification_title: "Etching",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/41834",
     is_public_domain: "true",
@@ -381,13 +381,13 @@ export const sampleArtwork = [
     ObjectID: 23,
     aic_id: 48117,
     title: "Handkerchief",
-    artist_title: null,
+    artist_title: "Unknown Artist",
     place_of_origin: "Switzerland",
     date_start: 1892,
     date_display: "1892/1900",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/8013a29e-cc2e-0dd2-8ca9-6d9d94ab1496",
-    classification_title: "textile",
+    classification_title: "Textile",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/48117",
     is_public_domain: null,
@@ -404,7 +404,7 @@ export const sampleArtwork = [
     date_display: "c. 1898",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/e735d4ba-f01f-fdfb-f9de-05807513b54f",
-    classification_title: "photogravure",
+    classification_title: "Photogravure",
     style_title: "19th century",
     api_link: "https://api.artic.edu/api/v1/artworks/103545",
     is_public_domain: "true",
@@ -421,7 +421,7 @@ export const sampleArtwork = [
     date_display: "1894",
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/1eb7de13-7418-6785-e9a9-2116288454a5",
-    classification_title: "sculpture",
+    classification_title: "Sculpture",
     style_title: null,
     api_link: "https://api.artic.edu/api/v1/artworks/158244",
     is_public_domain: "true",

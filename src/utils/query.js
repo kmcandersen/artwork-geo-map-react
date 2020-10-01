@@ -30,6 +30,7 @@ export const query = (startYear, endYear) => {
               // {
               //   match: {
               //     place_of_origin: "China",
+              //     classification_title: "photo*",
               //   },
               // },
               {
