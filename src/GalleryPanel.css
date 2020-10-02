@@ -1,8 +1,15 @@
 .GalleryPanel {
-  /* height: 25vh; */
-  height: 55vh;
   display: flex;
   width: 100%;
+}
+
+.tall-grid {
+  height: 55vh;
+}
+
+.short-grid {
+  height: 25vh;
+  display: flex;
 }
 
 .hidden {
@@ -19,10 +26,23 @@
   color: #000000;
 }
 
-.noresults-msg {
-  margin-top: 5px;
-  font-size: 0.8rem;
+.noresults-msg-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: center;
+  text-transform: uppercase;
+  /* margin-top: 5px;
+  font-size: 0.8rem; */
 }
+
+.noresults-sugg {
+  text-transform: none;
+}
+
+/* .noresults-msg:last-child {
+  text-transform: none;
+} */
 
 .input-footer {
   padding: 16px 0;

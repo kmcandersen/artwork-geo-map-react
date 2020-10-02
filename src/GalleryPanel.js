@@ -47,30 +47,39 @@ class GalleryPanel extends Component {
 
   render() {
     return (
-      <div className="GalleryPanel" ref={this.galleryPanelRef}>
-        <div className="toggle-all-details">
-          <IconButton
-            aria-label={
-              this.props.showAllDetails
-                ? "Hide all details"
-                : "Show all details"
-            }
-            title={
-              this.props.showAllDetails
-                ? "Hide all details"
-                : "Show all details"
-            }
-            className="infoAllBtn"
-            style={{ padding: "10px" }}
-            onClick={this.toggleAllDetails}
-          >
-            {this.props.showAllDetails ? (
-              <InfoIcon className="infoIcon" />
-            ) : (
-              <InfoOutlinedIcon className="infoIcon" />
-            )}
-          </IconButton>
-        </div>
+      <div
+        className={`GalleryPanel ${
+          this.props.results.length > 5 ? "tall-grid" : "short-grid"
+        }`}
+        ref={this.galleryPanelRef}
+      >
+        {this.props.results.length ? (
+          <div className="toggle-all-details">
+            <IconButton
+              aria-label={
+                this.props.showAllDetails
+                  ? "Hide all details"
+                  : "Show all details"
+              }
+              title={
+                this.props.showAllDetails
+                  ? "Hide all details"
+                  : "Show all details"
+              }
+              className="infoAllBtn"
+              style={{ padding: "10px" }}
+              onClick={this.toggleAllDetails}
+            >
+              {this.props.showAllDetails ? (
+                <InfoIcon className="infoIcon" />
+              ) : (
+                <InfoOutlinedIcon className="infoIcon" />
+              )}
+            </IconButton>
+          </div>
+        ) : (
+          ""
+        )}
 
         {this.props.results.length ? (
           <Gallery
@@ -86,10 +95,12 @@ class GalleryPanel extends Component {
         ) : (
           this.props.searchMade &&
           this.props.mapResultsLoaded && (
-            <div>
-              No results.
-              <div className="noresults-msg">
-                Psst! Try changing or widening the year range.
+            <div className="noresults-msg-wrapper">
+              <div>
+                <p>No results.</p>
+                <p className="noresults-sugg">
+                  Psst! Try changing or widening the year range.
+                </p>
               </div>
             </div>
           )

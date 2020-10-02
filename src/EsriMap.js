@@ -188,10 +188,11 @@ class EsriMap extends Component {
     }
   }
   render() {
-    //console.log("render");
+    const mapHeight = this.props.results.length > 5 ? "45vh" : "75vh";
     return (
       <div
-        className={`esri-map ${this.props.isModalOpen && "dimmed"}`}
+        className={`esri-map`}
+        style={{ height: `${mapHeight}` }}
         ref={this.mapDiv}
       />
     );

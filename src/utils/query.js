@@ -16,7 +16,7 @@ export const query = (startYear, endYear) => {
       "api_link",
     ],
     boost: false,
-    limit: 25,
+    limit: 5,
     query: {
       function_score: {
         query: {
@@ -27,12 +27,12 @@ export const query = (startYear, endYear) => {
                   is_public_domain: true,
                 },
               },
-              {
-                match: {
-                  place_of_origin: "Cuzco",
-                  // classification_title: "*painting",
-                },
-              },
+              // {
+              //   match: {
+              //     place_of_origin: "Chicago",
+              //     classification_title: "Architecture",
+              //   },
+              // },
               {
                 range: {
                   date_start: {

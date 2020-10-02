@@ -50,7 +50,7 @@ class Gallery extends Component {
   };
 
   findColWidth = (width) => {
-    if (width < 550) {
+    if (width < 540) {
       return 2;
     } else if (width < 800) {
       return 1;
@@ -58,32 +58,78 @@ class Gallery extends Component {
       return 0.666;
     } else if (width < 1200) {
       return 0.5;
+    } else {
+      return 0.4;
     }
-    return 0.4;
   };
+
+  tallGrid = {
+    flexWrap: "wrap",
+    overflowY: "scroll",
+    height: "100%",
+    width: "100%",
+  };
+  shortGrid = {
+    flexWrap: "nowrap",
+    overflowX: "scroll",
+    height: "100%",
+    width: "100%",
+  };
+
+  findGridHeight = () => {
+    let results = this.props.results;
+    let width = this.state.width;
+
+    if (width < 540) {
+      return this.tallGrid;
+    } else if (width < 800) {
+      if (results.length > 2) {
+        return this.tallGrid;
+      } else {
+        return this.shortGrid;
+      }
+    } else if (width < 1020) {
+      if (results.length > 3) {
+        return this.tallGrid;
+      } else {
+        return this.shortGrid;
+      }
+    } else {
+      return this.shortGrid;
+    }
+  };
+
+  //narrow tile widths (just above a breakpoint) hide style OR reduce font-size
+  //photos blurry at smallest window width, bc largest image width
 
   render() {
     const cols = this.findColWidth(this.state.width);
+    const tileHeight = this.props.results.length > 5 ? "250px" : "100%";
+
+    const gridStyle =
+      this.props.results.length > 5 ? this.tallGrid : this.findGridHeight();
+
     return (
       <div>
         <GridList
           ref={this.placeRef}
           className="gridList"
-          style={{
-            // flexWrap: "nowrap",
-            // overflowX: "scroll",
-            flexWrap: "wrap",
-            overflowY: "scroll",
-            height: "100%",
-            width: "100%",
-          }}
+          style={gridStyle}
+          // style={{
+          //   flexWrap: "nowrap",
+          //   overflowX: "scroll",
+          //   flexWrap: "wrap",
+          //   overflowY: "scroll",
+          //   height: "100%",
+          //   width: "100%",
+          // }}
         >
           {this.props.results.map((result) => (
             <GridListTile
               key={result.aic_id}
-              // style={{ height: "100%" }}
-              style={{ height: "250px" }}
+              style={{ height: `${tileHeight}` }}
               cols={cols}
+              // cols={0.5}
               data-place={result.place_of_origin}
             >
               <img
