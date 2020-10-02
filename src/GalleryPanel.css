@@ -1,0 +1,30 @@
+.GalleryPanel {
+  /* height: 25vh; */
+  height: 55vh;
+  display: flex;
+  width: 100%;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.toggle-all-details {
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: color 1s ease;
+}
+
+.toggle-all-details:hover {
+  color: #000000;
+}
+
+.noresults-msg {
+  margin-top: 5px;
+  font-size: 0.8rem;
+}
+
+.input-footer {
+  padding: 16px 0;
+  letter-spacing: 0.02em;
+}

@@ -7,8 +7,9 @@ import { compareValues } from "./utils/helpers.js";
 import { createFeatureArr } from "./utils/createFeatureArr.js";
 import ArtPanel from "./ArtPanel";
 import EsriMap from "./EsriMap";
-import IntroModal from "./IntroModal";
+//import IntroModal from "./IntroModal";
 import "./App.css";
+import GalleryPanel from "./GalleryPanel.js";
 
 class App extends React.Component {
   state = {
@@ -18,6 +19,10 @@ class App extends React.Component {
     selectedPlace: "",
     tilePointOn: false,
     modalOpen: true,
+    searchMade: false,
+    //held here bc needs to be accessed by onSearchSubmit
+    showAllDetails: false,
+    //width: 0,
   };
   // switchTheme = (e) => {
   //     console.log("clicked!");
@@ -35,6 +40,15 @@ class App extends React.Component {
   //       });
   // };
 
+  // componentDidMount() {
+  //   this.updateGalleryWidth();
+  //   window.addEventListener("resize", this.updateGalleryWidth);
+  // }
+
+  // updateGalleryWidth = () => {
+  //   this.setState({ width: window.innerWidth });
+  // };
+
   onSearchSubmit = async (startYear, endYear) => {
     this.setMapResultsLoad(false);
     if (startYear && endYear && startYear <= endYear) {
@@ -46,7 +60,11 @@ class App extends React.Component {
         .then((res) => {
           let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
           let featureArr = createFeatureArr(resOrdered, places);
-          this.setState({ searchResults: featureArr });
+          this.setState({
+            searchResults: featureArr,
+            searchMade: true,
+            showAllDetails: false,
+          });
         });
     }
   };
@@ -83,6 +101,10 @@ class App extends React.Component {
     }
   };
 
+  toggleAllDetailsState = () => {
+    this.setState({ showAllDetails: !this.state.showAllDetails });
+  };
+
   //to change searchResults from [] to sampleArtwork arr during EsriMap CDM, triggering CDU
   setSampleArtwork = (arr) => {
     this.setState({ searchResults: arr });
@@ -106,17 +128,22 @@ class App extends React.Component {
           isModalOpen={this.state.modalOpen}
         />
         <ArtPanel
-          results={this.state.searchResults}
-          mapResultsLoaded={this.state.mapResultsLoaded}
           onSearchSubmit={this.onSearchSubmit}
+          isModalOpen={this.state.modalOpen}
+        />
+        <GalleryPanel
+          mapResultsLoaded={this.state.mapResultsLoaded}
+          results={this.state.searchResults}
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
           toggleSelectedPlace={this.toggleSelectedPlace}
-          isModalOpen={this.state.modalOpen}
+          showAllDetails={this.state.showAllDetails}
+          toggleAllDetailsState={this.toggleAllDetailsState}
+          searchMade={this.state.searchMade}
         />
 
-        {this.state.modalOpen && <IntroModal closeModal={this.closeModal} />}
+        {/* {this.state.modalOpen && <IntroModal closeModal={this.closeModal} />} */}
       </div>
     );
   }

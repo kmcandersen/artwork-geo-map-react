@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import { ExternalLink } from "react-external-link";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -15,7 +15,15 @@ import "./Gallery.css";
 class Gallery extends Component {
   constructor(props) {
     super(props);
-    this.placeRef = React.createRef();
+    this.placeRef = createRef();
+    this.state = {
+      width: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.updateWindowWidth();
+    window.addEventListener("resize", this.updateWindowWidth);
   }
 
   componentDidUpdate() {
@@ -37,28 +45,50 @@ class Gallery extends Component {
     }
   }
 
+  updateWindowWidth = () => {
+    this.setState({ width: window.innerWidth });
+  };
+
+  findColWidth = (width) => {
+    if (width < 550) {
+      return 2;
+    } else if (width < 800) {
+      return 1;
+    } else if (width < 1020) {
+      return 0.666;
+    } else if (width < 1200) {
+      return 0.5;
+    }
+    return 0.4;
+  };
+
   render() {
+    const cols = this.findColWidth(this.state.width);
     return (
-      <div
-        className={`Gallery ${
-          this.props.searchIsOpen ? "searchOpen" : "searchClosed"
-        }`}
-      >
+      <div>
         <GridList
-          cellHeight={300}
-          spacing={2}
-          className="gridList"
           ref={this.placeRef}
+          className="gridList"
+          style={{
+            // flexWrap: "nowrap",
+            // overflowX: "scroll",
+            flexWrap: "wrap",
+            overflowY: "scroll",
+            height: "100%",
+            width: "100%",
+          }}
         >
           {this.props.results.map((result) => (
             <GridListTile
               key={result.aic_id}
-              cols={2}
+              // style={{ height: "100%" }}
+              style={{ height: "250px" }}
+              cols={cols}
               data-place={result.place_of_origin}
             >
               <img
                 className="gridListImg"
-                src={`${result.thumbnailUrl}/square/350,/0/default.jpg`}
+                src={`${result.thumbnailUrl}/square/325,/0/default.jpg`}
                 alt={`${result.artist_title}. ${result.title}. ${result.date_start}. The Art Institute of Chicago.`}
               />
               <div
@@ -102,16 +132,16 @@ class Gallery extends Component {
                     )}
                   </IconButton>
                   {/* <IconButton
-                  title="Add/Remove Favorite"
-                    style={{ color: "white" }}
-                    className={
-                      this.props.detailItems.includes(result.aic_id)
-                        ? ""
-                        : "hidden"
-                    }
-                  >
-                    <FavoriteBorderIcon />
-                  </IconButton> */}
+                    title="Add/Remove Favorite"
+                      style={{ color: "white" }}
+                      className={
+                        this.props.detailItems.includes(result.aic_id)
+                          ? ""
+                          : "hidden"
+                      }
+                    >
+                      <FavoriteBorderIcon />
+                    </IconButton> */}
                   <IconButton
                     title="AIC Webpage"
                     className={

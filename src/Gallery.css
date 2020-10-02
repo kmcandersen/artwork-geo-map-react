@@ -1,21 +1,20 @@
 .Gallery {
-  max-width: 100%;
+  width: 100%;
   overflow: scroll;
   /* currently disables scroll; try in future:
   scroll-behavior: smooth; */
+  display: flex;
+  flex-wrap: no-wrap;
+  justify-content: space-around;
 }
-
+/* 
 .searchClosed {
   height: calc(100vh - 223px);
 }
 
 .searchOpen {
   height: calc(100vh - 337px);
-}
-
-.gridList {
-  width: 100%;
-}
+} */
 
 img.gridListImg {
   z-index: 0;
@@ -27,7 +26,7 @@ img.gridListImg {
   position: absolute;
   left: 0;
   width: 100%;
-  padding: 16px;
+  padding: 10px;
 }
 
 .gridListTile-full {
@@ -38,7 +37,6 @@ img.gridListImg {
   background: rgba(0, 0, 0, 0.5);
   white-space: normal;
   text-align: left;
-  font-size: 1rem;
   font-weight: 200;
   color: rgba(255, 255, 255, 0.9);
   letter-spacing: 0.02em;
@@ -60,6 +58,19 @@ img.gridListImg {
 }
 
 svg.MuiSvgIcon-root {
+  /* font-size: 1.3em; */
+}
+
+/* padding on inline style */
+button.infoAllBtn {
+  color: #3f51b5;
+}
+
+button.infoAllBtn:hover {
+  color: #303f9f;
+}
+
+svg.infoIcon {
   font-size: 1.3em;
 }
 
@@ -69,7 +80,7 @@ svg.MuiSvgIcon-root {
 }
 
 .tile-title {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 400;
   font-style: italic;
   line-height: 1.2em;
@@ -78,8 +89,11 @@ svg.MuiSvgIcon-root {
 
 .tile-details {
   margin: 8px 0;
-  /* letter-spacing: 0.02em; */
   line-height: 1.2em;
+}
+
+p.tile-details:nth-child(3) {
+  font-size: 0.9rem;
 }
 
 p.tile-details:last-child {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, createRef } from "react";
 import { loadMap } from "./utils/map";
 import { loadHome } from "./utils/home";
 import { loadLayer } from "./utils/layer";
@@ -17,10 +17,10 @@ let highlight;
 let mapClickListener;
 let mapMoveListener;
 
-class EsriMap extends React.Component {
+class EsriMap extends Component {
   constructor(props) {
     super(props);
-    this.mapDiv = React.createRef();
+    this.mapDiv = createRef();
   }
 
   componentDidMount() {
@@ -86,7 +86,6 @@ class EsriMap extends React.Component {
               };
 
               const mapClickHandler = (event) => {
-                console.log("point click");
                 if (highlight) {
                   highlight.remove();
                 }

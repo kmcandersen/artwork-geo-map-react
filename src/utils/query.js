@@ -27,12 +27,12 @@ export const query = (startYear, endYear) => {
                   is_public_domain: true,
                 },
               },
-              // {
-              //   match: {
-              //     place_of_origin: "China",
-              //     classification_title: "photo*",
-              //   },
-              // },
+              {
+                match: {
+                  place_of_origin: "Cuzco",
+                  // classification_title: "*painting",
+                },
+              },
               {
                 range: {
                   date_start: {

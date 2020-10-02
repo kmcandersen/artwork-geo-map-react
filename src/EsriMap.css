@@ -1,8 +1,8 @@
 .esri-map {
-  height: 100%;
-  width: 73vw;
-  /* padding: 0;
-  margin: 0; */
+  /* height: 75vh; */
+  height: 45vh;
+  width: 100%;
+  background: #d0cfd4;
 }
 
 .esri-popup__main-container.esri-widget {
