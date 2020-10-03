@@ -14,15 +14,17 @@ import GalleryPanel from "./GalleryPanel.js";
 class App extends React.Component {
   state = {
     mapLoaded: false,
+    //so No Results msg doesn't flash before results actually returned; runs with CDU: prevProps.results in EsriMap.js
     mapResultsLoaded: false,
     searchResults: [],
     selectedPlace: "",
     tilePointOn: false,
     modalOpen: true,
+    //used with mapResultsLoaded in GalleryPanel to ensure that No Results only shown when it's legit. Still nec, now that sampleArtwork loads first?
     searchMade: false,
     //held here bc needs to be accessed by onSearchSubmit
     showAllDetails: false,
-    //width: 0,
+    gridType: "tall",
   };
   // switchTheme = (e) => {
   //     console.log("clicked!");
@@ -114,6 +116,33 @@ class App extends React.Component {
     this.setState({ modalOpen: false });
   };
 
+  //breakpoints set on width of Window, or GalleryPanel?
+  setGridType = (width) => {
+    console.log("GPWidth App", width);
+    let results = this.props.results;
+    let gridType = "";
+
+    if (width < 540) {
+      gridType = "tall";
+    } else if (width < 800) {
+      if (results.length > 2) {
+        gridType = "tall";
+      } else {
+        gridType = "short";
+      }
+    } else if (width < 1020) {
+      if (results.length > 3) {
+        gridType = "tall";
+      } else {
+        gridType = "short";
+      }
+    } else {
+      gridType = "short";
+    }
+    this.setState({ gridType: gridType });
+    console.log("setGridType App", this.state.gridType);
+  };
+
   render() {
     return (
       <div className="App">
@@ -126,6 +155,7 @@ class App extends React.Component {
           removeSelectedPlace={this.removeSelectedPlace}
           setSampleArtwork={this.setSampleArtwork}
           isModalOpen={this.state.modalOpen}
+          gridType={this.state.gridType}
         />
         <ArtPanel
           onSearchSubmit={this.onSearchSubmit}
@@ -141,6 +171,8 @@ class App extends React.Component {
           showAllDetails={this.state.showAllDetails}
           toggleAllDetailsState={this.toggleAllDetailsState}
           searchMade={this.state.searchMade}
+          gridType={this.state.gridType}
+          setGridType={this.setGridType}
         />
 
         {/* {this.state.modalOpen && <IntroModal closeModal={this.closeModal} />} */}

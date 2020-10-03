@@ -188,7 +188,7 @@ class EsriMap extends Component {
     }
   }
   render() {
-    const mapHeight = this.props.results.length > 5 ? "45vh" : "75vh";
+    const mapHeight = this.props.gridType === "tall" ? "45vh" : "75vh";
     return (
       <div
         className={`esri-map`}

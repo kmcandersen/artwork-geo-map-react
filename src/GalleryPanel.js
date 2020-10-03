@@ -14,6 +14,16 @@ class GalleryPanel extends Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.results !== prevProps.results) {
+      this.props.setGridType(this.galleryPanelRef.current.clientWidth);
+      console.log(
+        "galleryPanelWidth GP",
+        this.galleryPanelRef.current.clientWidth
+      );
+    }
+  }
+
   toggleAllDetails = () => {
     //if showAllDetails = false, = true & loop thru all results & put them in state.detailItem arr
     //if showAllDetails = true, = false & remove all items from arr
@@ -48,8 +58,9 @@ class GalleryPanel extends Component {
   render() {
     return (
       <div
+        //
         className={`GalleryPanel ${
-          this.props.results.length > 5 ? "tall-grid" : "short-grid"
+          this.props.gridType === "tall" ? "tall-grid" : "short-grid"
         }`}
         ref={this.galleryPanelRef}
       >
@@ -91,6 +102,8 @@ class GalleryPanel extends Component {
             selectedPlace={this.props.selectedPlace}
             removeSelectedPlace={this.props.removeSelectedPlace}
             toggleSelectedPlace={this.props.toggleSelectedPlace}
+            gridType={this.props.gridType}
+            // setGridType={this.props.setGridType}
           />
         ) : (
           this.props.searchMade &&

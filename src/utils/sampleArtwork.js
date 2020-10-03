@@ -269,7 +269,7 @@ export const sampleArtwork = [
     thumbnailUrl:
       "https://www.artic.edu/iiif/2/45faff9c-479c-3219-ec6f-20eb5dcfd324",
     classification_title: "Textile",
-    style_title: "kazak",
+    style_title: "Kazak",
     api_link: "https://api.artic.edu/api/v1/artworks/37733",
     is_public_domain: "true",
     latitude: 51.166667,

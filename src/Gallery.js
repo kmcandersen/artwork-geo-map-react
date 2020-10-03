@@ -16,8 +16,10 @@ class Gallery extends Component {
   constructor(props) {
     super(props);
     this.placeRef = createRef();
+    this.tileRef = createRef();
     this.state = {
       width: 0,
+      //tileWidth: 0,
     };
   }
 
@@ -26,7 +28,7 @@ class Gallery extends Component {
     window.addEventListener("resize", this.updateWindowWidth);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     let tiles = this.placeRef.current.childNodes;
 
     for (let i = 0; i < tiles.length; i++) {
@@ -46,10 +48,17 @@ class Gallery extends Component {
   }
 
   updateWindowWidth = () => {
-    this.setState({ width: window.innerWidth });
+    this.setState({
+      width: window.innerWidth,
+    });
+    //this.getTileWidth();
   };
 
-  findColWidth = (width) => {
+  // getTileWidth = () => {
+  //   this.setState({ tileWidth: this.tileRef.current.clientWidth });
+  // };
+
+  setColWidth = (width) => {
     if (width < 540) {
       return 2;
     } else if (width < 800) {
@@ -71,66 +80,73 @@ class Gallery extends Component {
   };
   shortGrid = {
     flexWrap: "nowrap",
-    overflowX: "scroll",
+    // overflowX: "scroll",
     height: "100%",
     width: "100%",
   };
 
-  findGridHeight = () => {
-    let results = this.props.results;
-    let width = this.state.width;
+  //revise: if will be more than 1 row, sb tall
 
-    if (width < 540) {
-      return this.tallGrid;
-    } else if (width < 800) {
-      if (results.length > 2) {
-        return this.tallGrid;
-      } else {
-        return this.shortGrid;
-      }
-    } else if (width < 1020) {
-      if (results.length > 3) {
-        return this.tallGrid;
-      } else {
-        return this.shortGrid;
-      }
-    } else {
-      return this.shortGrid;
-    }
-  };
+  //unsure this is needed; outcome of setGridHeight needs to go to App.js to send to GalleryPanel && EsriMap to det those heights
+  // setTileHeight = () => {
+  //   let results = this.props.results;
+  //   let width = this.state.width;
+  //   if (width < 540) {
+  //     return "100%";
+  //   } else if (width < 800) {
+  //     if (results.length > 2) {
+  //       return "100%";
+  //     } else {
+  //       return "250px";
+  //     }
+  //   } else if (width < 1020) {
+  //     if (results.length > 3) {
+  //       return "100%";
+  //     } else {
+  //       return "250px";
+  //     }
+  //   } else {
+  //     return "250px";
+  //   }
+  // };
 
   //narrow tile widths (just above a breakpoint) hide style OR reduce font-size
   //photos blurry at smallest window width, bc largest image width
+  //all stacked gallery cb tallgrid
+  //revisit eliminating style conditional--replace with long title slice func
+
+  //in App, state.gridType incorrectly listed as "tall" when 5 results on wide screen
+  //this.props.setGridType running onLoad (why set as tall) but not being updated with new search. In CDU = error in EsriMap
+  //map won't rerender if state.gridType changes?
+  //if not fully re-rendered, 5 images not filling full screen--not getting cols?
+  //if
 
   render() {
-    const cols = this.findColWidth(this.state.width);
-    const tileHeight = this.props.results.length > 5 ? "250px" : "100%";
+    const cols = this.setColWidth(this.state.width);
+
+    //const tileHeight = this.props.results.length > 5 ? "250px" : "100%";
+    const tileHeight = this.props.gridType === "tall" ? "250px" : "100%";
+
+    // const gridStyle =
+    //   this.props.results.length > 5 ? this.tallGrid : this.setGridHeight();
 
     const gridStyle =
-      this.props.results.length > 5 ? this.tallGrid : this.findGridHeight();
+      this.props.gridType === "tall" ? this.tallGrid : this.shortGrid;
 
     return (
       <div>
-        <GridList
-          ref={this.placeRef}
-          className="gridList"
-          style={gridStyle}
-          // style={{
-          //   flexWrap: "nowrap",
-          //   overflowX: "scroll",
-          //   flexWrap: "wrap",
-          //   overflowY: "scroll",
-          //   height: "100%",
-          //   width: "100%",
-          // }}
-        >
+        <GridList ref={this.placeRef} className="gridList" style={gridStyle}>
           {this.props.results.map((result) => (
             <GridListTile
               key={result.aic_id}
               style={{ height: `${tileHeight}` }}
               cols={cols}
-              // cols={0.5}
               data-place={result.place_of_origin}
+              ref={this.tileRef}
+              //onLoad={this.getTileWidth}
+              // onLoad={() =>
+              //   this.props.setGridType(this.tileRef.current.clientWidth)
+              // }
             >
               <img
                 className="gridListImg"
@@ -159,7 +175,9 @@ class Gallery extends Component {
                   <p className="tile-title">{result.title}</p>
                   <p className="tile-details">
                     {result.classification_title}
-                    {result.style_title ? " | " + result.style_title : null}
+                    {result.style_title && this.state.tileWidth > 270
+                      ? " | " + result.style_title
+                      : null}
                   </p>
                   <p className="tile-details">{result.date_start}</p>
                 </div>
