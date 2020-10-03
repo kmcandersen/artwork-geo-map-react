@@ -28,7 +28,7 @@ class Gallery extends Component {
     window.addEventListener("resize", this.updateWindowWidth);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     let tiles = this.placeRef.current.childNodes;
 
     for (let i = 0; i < tiles.length; i++) {
@@ -85,51 +85,9 @@ class Gallery extends Component {
     width: "100%",
   };
 
-  //revise: if will be more than 1 row, sb tall
-
-  //unsure this is needed; outcome of setGridHeight needs to go to App.js to send to GalleryPanel && EsriMap to det those heights
-  // setTileHeight = () => {
-  //   let results = this.props.results;
-  //   let width = this.state.width;
-  //   if (width < 540) {
-  //     return "100%";
-  //   } else if (width < 800) {
-  //     if (results.length > 2) {
-  //       return "100%";
-  //     } else {
-  //       return "250px";
-  //     }
-  //   } else if (width < 1020) {
-  //     if (results.length > 3) {
-  //       return "100%";
-  //     } else {
-  //       return "250px";
-  //     }
-  //   } else {
-  //     return "250px";
-  //   }
-  // };
-
-  //narrow tile widths (just above a breakpoint) hide style OR reduce font-size
-  //photos blurry at smallest window width, bc largest image width
-  //all stacked gallery cb tallgrid
-  //revisit eliminating style conditional--replace with long title slice func
-
-  //in App, state.gridType incorrectly listed as "tall" when 5 results on wide screen
-  //this.props.setGridType running onLoad (why set as tall) but not being updated with new search. In CDU = error in EsriMap
-  //map won't rerender if state.gridType changes?
-  //if not fully re-rendered, 5 images not filling full screen--not getting cols?
-  //if
-
   render() {
     const cols = this.setColWidth(this.state.width);
-
-    //const tileHeight = this.props.results.length > 5 ? "250px" : "100%";
     const tileHeight = this.props.gridType === "tall" ? "250px" : "100%";
-
-    // const gridStyle =
-    //   this.props.results.length > 5 ? this.tallGrid : this.setGridHeight();
-
     const gridStyle =
       this.props.gridType === "tall" ? this.tallGrid : this.shortGrid;
 
@@ -239,6 +197,7 @@ class Gallery extends Component {
                 </div>
               </div>
             </GridListTile>
+            //end .map
           ))}
         </GridList>
       </div>

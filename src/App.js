@@ -24,7 +24,7 @@ class App extends React.Component {
     searchMade: false,
     //held here bc needs to be accessed by onSearchSubmit
     showAllDetails: false,
-    gridType: "tall",
+    gridType: "",
   };
   // switchTheme = (e) => {
   //     console.log("clicked!");
@@ -117,9 +117,9 @@ class App extends React.Component {
   };
 
   //breakpoints set on width of Window, or GalleryPanel?
+  //App & EsriMap ea render 2x before this func runs
   setGridType = (width) => {
-    console.log("GPWidth App", width);
-    let results = this.props.results;
+    let results = this.state.searchResults;
     let gridType = "";
 
     if (width < 540) {
@@ -136,14 +136,20 @@ class App extends React.Component {
       } else {
         gridType = "short";
       }
-    } else {
-      gridType = "short";
+    } else if (width >= 1020) {
+      if (results.length > 5) {
+        gridType = "tall";
+      } else {
+        gridType = "short";
+      }
     }
+
     this.setState({ gridType: gridType });
     console.log("setGridType App", this.state.gridType);
   };
 
   render() {
+    console.log("render App", this.state.gridType);
     return (
       <div className="App">
         <EsriMap
@@ -174,7 +180,6 @@ class App extends React.Component {
           gridType={this.state.gridType}
           setGridType={this.setGridType}
         />
-
         {/* {this.state.modalOpen && <IntroModal closeModal={this.closeModal} />} */}
       </div>
     );

@@ -95,6 +95,7 @@ class GalleryPanel extends Component {
         {this.props.results.length ? (
           <Gallery
             results={this.props.results}
+            mapResultsLoaded={this.props.mapResultsLoaded}
             showAllDetails={this.props.showAllDetails}
             detailItems={this.state.detailItems}
             toggleTileDetails={this.toggleTileDetails}

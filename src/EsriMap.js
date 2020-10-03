@@ -46,7 +46,7 @@ class EsriMap extends Component {
       }
 
       if (this._view) {
-        //to delay no results msg in ArtPanel from loading, until it's known if there are actually no results (no flash)
+        //to delay no results msg in ArtPanel from loading, until it's known if there are actually no results (no flash). Trying to condition Gallery loading on setMapResultsLoad === true, not sure if working
         this.props.setMapResultsLoad(true);
 
         //existing map points removed, whether next search has results or not
@@ -188,6 +188,7 @@ class EsriMap extends Component {
     }
   }
   render() {
+    console.log("EsriMap", this.props.gridType);
     const mapHeight = this.props.gridType === "tall" ? "45vh" : "75vh";
     return (
       <div
