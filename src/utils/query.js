@@ -16,7 +16,7 @@ export const query = (startYear, endYear) => {
       "api_link",
     ],
     boost: false,
-    limit: 5,
+    limit: 4,
     query: {
       function_score: {
         query: {
@@ -27,12 +27,12 @@ export const query = (startYear, endYear) => {
                   is_public_domain: true,
                 },
               },
-              // {
-              //   match: {
-              //     place_of_origin: "Chicago",
-              //     classification_title: "Architecture",
-              //   },
-              // },
+              {
+                match: {
+                  place_of_origin: "(Chicago) OR (China)",
+                  //     classification_title: "Architecture",
+                },
+              },
               {
                 range: {
                   date_start: {

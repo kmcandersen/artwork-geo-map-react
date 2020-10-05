@@ -19,7 +19,6 @@ class ArtPanel extends Component {
   onFormSubmit(e) {
     e.preventDefault();
     this.props.onSearchSubmit(this.state.startYear, this.state.endYear);
-    this.setState({ detailItems: [] });
   }
 
   toggleSearch = () => {

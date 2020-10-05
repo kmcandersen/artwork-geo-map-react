@@ -136,7 +136,13 @@ class App extends React.Component {
       } else {
         gridType = "short";
       }
-    } else if (width >= 1020) {
+    } else if (width < 1200) {
+      if (results.length > 4) {
+        gridType = "tall";
+      } else {
+        gridType = "short";
+      }
+    } else if (width >= 1200) {
       if (results.length > 5) {
         gridType = "tall";
       } else {

@@ -19,9 +19,16 @@ class Gallery extends Component {
     this.tileRef = createRef();
     this.state = {
       width: 0,
+      didLoad: false,
       //tileWidth: 0,
     };
   }
+
+  onLoad = () => {
+    this.setState({
+      didLoad: true,
+    });
+  };
 
   componentDidMount() {
     this.updateWindowWidth();
@@ -58,7 +65,7 @@ class Gallery extends Component {
   //   this.setState({ tileWidth: this.tileRef.current.clientWidth });
   // };
 
-  setColWidth = (width) => {
+  calcColWidth = (width) => {
     if (width < 540) {
       return 2;
     } else if (width < 800) {
@@ -86,10 +93,11 @@ class Gallery extends Component {
   };
 
   render() {
-    const cols = this.setColWidth(this.state.width);
+    const cols = this.calcColWidth(this.state.width);
     const tileHeight = this.props.gridType === "tall" ? "250px" : "100%";
     const gridStyle =
       this.props.gridType === "tall" ? this.tallGrid : this.shortGrid;
+    const showImage = this.state.didLoad ? {} : { visibility: "hidden" };
 
     return (
       <div>
@@ -110,6 +118,8 @@ class Gallery extends Component {
                 className="gridListImg"
                 src={`${result.thumbnailUrl}/square/325,/0/default.jpg`}
                 alt={`${result.artist_title}. ${result.title}. ${result.date_start}. The Art Institute of Chicago.`}
+                style={showImage}
+                onLoad={this.onLoad}
               />
               <div
                 className={
