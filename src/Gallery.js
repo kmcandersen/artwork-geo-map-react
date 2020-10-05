@@ -30,10 +30,10 @@ class Gallery extends Component {
     });
   };
 
-  componentDidMount() {
-    this.updateWindowWidth();
-    window.addEventListener("resize", this.updateWindowWidth);
-  }
+  // componentDidMount() {
+  //   this.updateWindowWidth();
+  //   window.addEventListener("resize", this.updateWindowWidth);
+  // }
 
   componentDidUpdate() {
     let tiles = this.placeRef.current.childNodes;
@@ -54,12 +54,11 @@ class Gallery extends Component {
     }
   }
 
-  updateWindowWidth = () => {
-    this.setState({
-      width: window.innerWidth,
-    });
-    //this.getTileWidth();
-  };
+  // updateWindowWidth = () => {
+  //   this.setState({
+  //     width: window.innerWidth,
+  //   });
+  // };
 
   // getTileWidth = () => {
   //   this.setState({ tileWidth: this.tileRef.current.clientWidth });
@@ -93,7 +92,7 @@ class Gallery extends Component {
   };
 
   render() {
-    const cols = this.calcColWidth(this.state.width);
+    const cols = this.calcColWidth(this.props.windowWidth);
     const tileHeight = this.props.gridType === "tall" ? "250px" : "100%";
     const gridStyle =
       this.props.gridType === "tall" ? this.tallGrid : this.shortGrid;

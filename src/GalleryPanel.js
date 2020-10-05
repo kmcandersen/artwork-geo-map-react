@@ -8,20 +8,9 @@ import "./GalleryPanel.css";
 class GalleryPanel extends Component {
   constructor(props) {
     super(props);
-    this.galleryPanelRef = createRef();
     this.state = {
       detailItems: [],
     };
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.results !== prevProps.results) {
-      this.props.setGridType(this.galleryPanelRef.current.clientWidth);
-      console.log(
-        "galleryPanelWidth GP",
-        this.galleryPanelRef.current.clientWidth
-      );
-    }
   }
 
   toggleAllDetails = () => {
@@ -62,7 +51,6 @@ class GalleryPanel extends Component {
         className={`GalleryPanel ${
           this.props.gridType === "tall" ? "tall-grid" : "short-grid"
         }`}
-        ref={this.galleryPanelRef}
       >
         {this.props.results.length ? (
           <div className="toggle-all-details">
@@ -104,6 +92,7 @@ class GalleryPanel extends Component {
             removeSelectedPlace={this.props.removeSelectedPlace}
             toggleSelectedPlace={this.props.toggleSelectedPlace}
             gridType={this.props.gridType}
+            windowWidth={this.props.windowWidth}
             // setGridType={this.props.setGridType}
           />
         ) : (

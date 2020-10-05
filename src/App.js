@@ -24,6 +24,7 @@ class App extends React.Component {
     searchMade: false,
     //held here bc needs to be accessed by onSearchSubmit
     showAllDetails: false,
+    windowWidth: 0,
     gridType: "",
   };
   // switchTheme = (e) => {
@@ -51,6 +52,24 @@ class App extends React.Component {
   //   this.setState({ width: window.innerWidth });
   // };
 
+  componentDidMount = () => {
+    this.getGridInfo(25);
+    // this runs wo a resize; state.searchResults.length = 0, turning gridType from tall to short
+    // window.addEventListener(
+    //   "resize",
+    //   this.getGridInfo(this.state.searchResults.length)
+    // );
+  };
+
+  getGridInfo = (resultsLength) => {
+    let windowWidth = window.innerWidth;
+    let gridType = this.setGridType(windowWidth, resultsLength);
+    this.setState({
+      windowWidth: windowWidth,
+      gridType: gridType,
+    });
+  };
+
   onSearchSubmit = async (startYear, endYear) => {
     this.setMapResultsLoad(false);
     if (startYear && endYear && startYear <= endYear) {
@@ -67,6 +86,7 @@ class App extends React.Component {
             searchMade: true,
             showAllDetails: false,
           });
+          this.getGridInfo(featureArr.length);
         });
     }
   };
@@ -116,46 +136,46 @@ class App extends React.Component {
     this.setState({ modalOpen: false });
   };
 
-  //breakpoints set on width of Window, or GalleryPanel?
-  //App & EsriMap ea render 2x before this func runs
-  setGridType = (width) => {
-    let results = this.state.searchResults;
+  setGridType = (width, resultsLength) => {
     let gridType = "";
 
     if (width < 540) {
       gridType = "tall";
     } else if (width < 800) {
-      if (results.length > 2) {
+      if (resultsLength > 2) {
         gridType = "tall";
       } else {
         gridType = "short";
       }
     } else if (width < 1020) {
-      if (results.length > 3) {
+      if (resultsLength > 3) {
         gridType = "tall";
       } else {
         gridType = "short";
       }
     } else if (width < 1200) {
-      if (results.length > 4) {
+      if (resultsLength > 4) {
         gridType = "tall";
       } else {
         gridType = "short";
       }
     } else if (width >= 1200) {
-      if (results.length > 5) {
+      if (resultsLength > 5) {
         gridType = "tall";
       } else {
         gridType = "short";
       }
     }
-
-    this.setState({ gridType: gridType });
-    console.log("setGridType App", this.state.gridType);
+    return gridType;
   };
 
   render() {
-    console.log("render App", this.state.gridType);
+    // console.log(
+    //   "render App",
+    //   this.state.gridType,
+    //   this.state.windowWidth,
+    //   this.state.searchResults.length
+    // );
     return (
       <div className="App">
         <EsriMap
@@ -168,6 +188,7 @@ class App extends React.Component {
           setSampleArtwork={this.setSampleArtwork}
           isModalOpen={this.state.modalOpen}
           gridType={this.state.gridType}
+          windowWidth={this.state.windowWidth}
         />
         <ArtPanel
           onSearchSubmit={this.onSearchSubmit}
@@ -184,7 +205,7 @@ class App extends React.Component {
           toggleAllDetailsState={this.toggleAllDetailsState}
           searchMade={this.state.searchMade}
           gridType={this.state.gridType}
-          setGridType={this.setGridType}
+          windowWidth={this.state.windowWidth}
         />
         {/* {this.state.modalOpen && <IntroModal closeModal={this.closeModal} />} */}
       </div>
