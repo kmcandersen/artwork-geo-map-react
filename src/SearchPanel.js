@@ -113,6 +113,7 @@ class SearchPanel extends Component {
                         color="primary"
                         // data-theme="dark"
                         disabled={
+                          !this.props.mapLoaded ||
                           this.state.endYear === "" ||
                           this.state.endYear < this.state.startYear
                             ? true

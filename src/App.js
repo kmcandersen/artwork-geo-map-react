@@ -59,6 +59,7 @@ class App extends React.Component {
   };
 
   onSearchSubmit = async (startYear, endYear) => {
+    this.onMapLoad(false);
     this.setMapResultsLoad(false);
     if (startYear && endYear && startYear <= endYear) {
       await axios
@@ -79,8 +80,8 @@ class App extends React.Component {
     }
   };
 
-  onMapLoad = () => {
-    this.setState({ mapLoaded: true });
+  onMapLoad = (boolean) => {
+    this.setState({ mapLoaded: boolean });
   };
 
   setMapResultsLoad = (boolean) => {
@@ -157,7 +158,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <EsriMap
-          onLoad={this.onMapLoad}
+          onMapLoad={this.onMapLoad}
+          mapLoaded={this.state.mapLoaded}
           setMapResultsLoad={this.setMapResultsLoad}
           results={this.state.searchResults}
           selectPlace={this.selectPlace}
@@ -166,7 +168,10 @@ class App extends React.Component {
           setSampleArtwork={this.setSampleArtwork}
           gridType={this.state.gridType}
         />
-        <SearchPanel onSearchSubmit={this.onSearchSubmit} />
+        <SearchPanel
+          onSearchSubmit={this.onSearchSubmit}
+          mapLoaded={this.state.mapLoaded}
+        />
         <GalleryPanel
           mapResultsLoaded={this.state.mapResultsLoaded}
           results={this.state.searchResults}
