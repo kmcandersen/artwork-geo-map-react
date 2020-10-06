@@ -1,0 +1,36 @@
+.intro-content {
+  font-family: "Nunito", sans-serif;
+  padding: 10px;
+}
+
+.intro-msg > p {
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  line-height: 1.35rem;
+  text-align: left;
+}
+
+.intro-dismiss {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.intro-dismiss-text {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+/* p:last-child {
+  margin-bottom: 0;
+} */
+button.startBtn {
+  color: #3f51b5;
+  width: 35px;
+  height: 35px;
+}
+
+button.startBtn:hover {
+  color: #303f9f;
+}

@@ -7,7 +7,6 @@ import { compareValues } from "./utils/helpers.js";
 import { createFeatureArr } from "./utils/createFeatureArr.js";
 import SearchPanel from "./SearchPanel";
 import EsriMap from "./EsriMap";
-//import IntroModal from "./IntroModal";
 import "./App.css";
 import GalleryPanel from "./GalleryPanel.js";
 
@@ -19,7 +18,6 @@ class App extends React.Component {
     searchResults: [],
     selectedPlace: "",
     tilePointOn: false,
-    modalOpen: true,
     //used with mapResultsLoaded in GalleryPanel to ensure that No Results only shown when it's legit. Still nec, now that sampleArtwork loads first?
     searchMade: false,
     //held here bc needs to be accessed by onSearchSubmit
@@ -122,10 +120,6 @@ class App extends React.Component {
     this.setState({ searchResults: arr });
   };
 
-  closeModal = () => {
-    this.setState({ modalOpen: false });
-  };
-
   setGridType = (width, resultsLength) => {
     let gridType = "";
 
@@ -170,14 +164,9 @@ class App extends React.Component {
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
           setSampleArtwork={this.setSampleArtwork}
-          isModalOpen={this.state.modalOpen}
           gridType={this.state.gridType}
-          windowWidth={this.state.windowWidth}
         />
-        <SearchPanel
-          onSearchSubmit={this.onSearchSubmit}
-          isModalOpen={this.state.modalOpen}
-        />
+        <SearchPanel onSearchSubmit={this.onSearchSubmit} />
         <GalleryPanel
           mapResultsLoaded={this.state.mapResultsLoaded}
           results={this.state.searchResults}
@@ -191,7 +180,6 @@ class App extends React.Component {
           gridType={this.state.gridType}
           windowWidth={this.state.windowWidth}
         />
-        {/* {this.state.modalOpen && <IntroModal closeModal={this.closeModal} />} */}
       </div>
     );
   }

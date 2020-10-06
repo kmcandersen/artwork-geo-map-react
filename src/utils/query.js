@@ -27,12 +27,12 @@ export const query = (startYear, endYear) => {
                   is_public_domain: true,
                 },
               },
-              {
-                match: {
-                  place_of_origin: "(Chicago) OR (China)",
-                  //     classification_title: "Architecture",
-                },
-              },
+              // {
+              //   match: {
+              //     place_of_origin: "(Chicago) OR (China)",
+              //          classification_title: "Architecture",
+              //   },
+              // },
               {
                 range: {
                   date_start: {
