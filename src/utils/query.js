@@ -16,7 +16,7 @@ export const query = (startYear, endYear) => {
       "api_link",
     ],
     boost: false,
-    limit: 20,
+    limit: 5,
     query: {
       function_score: {
         query: {

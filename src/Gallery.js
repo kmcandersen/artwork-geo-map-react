@@ -109,9 +109,6 @@ class Gallery extends Component {
               data-place={result.place_of_origin}
               ref={this.tileRef}
               //onLoad={this.getTileWidth}
-              // onLoad={() =>
-              //   this.props.setGridType(this.tileRef.current.clientWidth)
-              // }
             >
               <img
                 className="gridListImg"

@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React, { Component } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
@@ -93,7 +93,6 @@ class GalleryPanel extends Component {
             toggleSelectedPlace={this.props.toggleSelectedPlace}
             gridType={this.props.gridType}
             windowWidth={this.props.windowWidth}
-            // setGridType={this.props.setGridType}
           />
         ) : (
           this.props.searchMade &&

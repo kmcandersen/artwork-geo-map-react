@@ -43,22 +43,12 @@ class App extends React.Component {
   //       });
   // };
 
-  // componentDidMount() {
-  //   this.updateGalleryWidth();
-  //   window.addEventListener("resize", this.updateGalleryWidth);
-  // }
-
-  // updateGalleryWidth = () => {
-  //   this.setState({ width: window.innerWidth });
-  // };
-
   componentDidMount = () => {
+    //25 = sampleArtwork.length
     this.getGridInfo(25);
-    // this runs wo a resize; state.searchResults.length = 0, turning gridType from tall to short
-    // window.addEventListener(
-    //   "resize",
-    //   this.getGridInfo(this.state.searchResults.length)
-    // );
+    window.addEventListener("resize", () => {
+      this.getGridInfo(this.state.searchResults.length);
+    });
   };
 
   getGridInfo = (resultsLength) => {
@@ -170,12 +160,6 @@ class App extends React.Component {
   };
 
   render() {
-    // console.log(
-    //   "render App",
-    //   this.state.gridType,
-    //   this.state.windowWidth,
-    //   this.state.searchResults.length
-    // );
     return (
       <div className="App">
         <EsriMap
