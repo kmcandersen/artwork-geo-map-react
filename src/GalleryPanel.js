@@ -83,7 +83,6 @@ class GalleryPanel extends Component {
         {this.props.results.length ? (
           <Gallery
             results={this.props.results}
-            mapResultsLoaded={this.props.mapResultsLoaded}
             showAllDetails={this.props.showAllDetails}
             detailItems={this.state.detailItems}
             toggleTileDetails={this.toggleTileDetails}
@@ -96,7 +95,7 @@ class GalleryPanel extends Component {
           />
         ) : (
           this.props.searchMade &&
-          this.props.mapResultsLoaded && (
+          this.props.mapLoaded && (
             <div className="noresults-msg-wrapper">
               <div>
                 <p>No results.</p>

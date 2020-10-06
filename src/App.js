@@ -13,12 +13,10 @@ import GalleryPanel from "./GalleryPanel.js";
 class App extends React.Component {
   state = {
     mapLoaded: false,
-    //so No Results msg doesn't flash before results actually returned; runs with CDU: prevProps.results in EsriMap.js
-    mapResultsLoaded: false,
     searchResults: [],
     selectedPlace: "",
     tilePointOn: false,
-    //used with mapResultsLoaded in GalleryPanel to ensure that No Results only shown when it's legit. Still nec, now that sampleArtwork loads first?
+    //used with mapLoaded in GalleryPanel to ensure that No Results only shown when it's legit. Still nec, now that sampleArtwork loads first?
     searchMade: false,
     //held here bc needs to be accessed by onSearchSubmit
     showAllDetails: false,
@@ -60,7 +58,6 @@ class App extends React.Component {
 
   onSearchSubmit = async (startYear, endYear) => {
     this.onMapLoad(false);
-    this.setMapResultsLoad(false);
     if (startYear && endYear && startYear <= endYear) {
       await axios
         .post(
@@ -82,10 +79,6 @@ class App extends React.Component {
 
   onMapLoad = (boolean) => {
     this.setState({ mapLoaded: boolean });
-  };
-
-  setMapResultsLoad = (boolean) => {
-    this.setState({ mapResultsLoaded: boolean });
   };
 
   selectPlace = (place) => {
@@ -160,7 +153,6 @@ class App extends React.Component {
         <EsriMap
           onMapLoad={this.onMapLoad}
           mapLoaded={this.state.mapLoaded}
-          setMapResultsLoad={this.setMapResultsLoad}
           results={this.state.searchResults}
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
@@ -173,7 +165,7 @@ class App extends React.Component {
           mapLoaded={this.state.mapLoaded}
         />
         <GalleryPanel
-          mapResultsLoaded={this.state.mapResultsLoaded}
+          mapLoaded={this.state.mapLoaded}
           results={this.state.searchResults}
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
