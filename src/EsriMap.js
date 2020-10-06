@@ -21,6 +21,9 @@ class EsriMap extends Component {
   constructor(props) {
     super(props);
     this.mapDiv = createRef();
+    this.state = {
+      mapLoaded: false,
+    };
   }
 
   componentDidMount() {
@@ -62,9 +65,10 @@ class EsriMap extends Component {
           })
           .then((layer) => {
             this._view.map.add(layer);
-
             this._view.whenLayerView(layer).then((layerView) => {
               //console.log("we have the layer view.");
+              //for loading-spinner
+              this.setState({ mapLoaded: true });
 
               const mapMoveHandler = (event) => {
                 this._view.hitTest(event).then((response) => {
@@ -194,7 +198,9 @@ class EsriMap extends Component {
         className={`esri-map`}
         style={{ height: `${mapHeight}` }}
         ref={this.mapDiv}
-      />
+      >
+        <div className={`${!this.state.mapLoaded && "loading-spinner"}`}></div>
+      </div>
     );
   }
 }

@@ -181,6 +181,7 @@ class App extends React.Component {
           windowWidth={this.state.windowWidth}
         />
       </div>
+      // </div>
     );
   }
 }
