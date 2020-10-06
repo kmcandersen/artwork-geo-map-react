@@ -4,9 +4,9 @@ import IconButton from "@material-ui/core/IconButton";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TextField from "@material-ui/core/TextField";
-import "./ArtPanel.css";
+import "./SearchPanel.css";
 
-class ArtPanel extends Component {
+class SearchPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,13 +27,31 @@ class ArtPanel extends Component {
 
   render() {
     return (
-      <div className={`ArtPanel ${this.props.isModalOpen && "dimmed"}`}>
-        <div className="ArtPanel-header">
+      <div className={`SearchPanel ${this.props.isModalOpen && "dimmed"}`}>
+        <div className="SearchPanel-header">
           <div className="logo-wrapper">
             <div className="logo-text">
               ART<span className="gray-text">IMELINE</span>
             </div>
+            <div className="form-info">
+              <IconButton
+                aria-label={
+                  this.state.showSearch ? "Collapse Search" : "Expand Search"
+                }
+                title={
+                  this.state.showSearch ? "Collapse Search" : "Expand Search"
+                }
+                onClick={this.toggleSearch}
+              >
+                {this.state.showSearch ? (
+                  <ExpandLessIcon />
+                ) : (
+                  <ExpandMoreIcon />
+                )}
+              </IconButton>
+            </div>
           </div>
+          <hr style={{ borderBottom: "8px solid #b50938", margin: "0" }} />
           <div className="input-form">
             <form
               className="root"
@@ -41,24 +59,6 @@ class ArtPanel extends Component {
               autoComplete="off"
               onSubmit={(e) => this.onFormSubmit(e)}
             >
-              <div className="form-info">
-                <label htmlFor="standard-basic">Search</label>
-                <IconButton
-                  aria-label={
-                    this.state.showSearch ? "Collapse Search" : "Expand Search"
-                  }
-                  title={
-                    this.state.showSearch ? "Collapse Search" : "Expand Search"
-                  }
-                  onClick={this.toggleSearch}
-                >
-                  {this.state.showSearch ? (
-                    <ExpandLessIcon />
-                  ) : (
-                    <ExpandMoreIcon />
-                  )}
-                </IconButton>
-              </div>
               {this.state.showSearch && (
                 <div className="input-content">
                   <div className="input-fields">
@@ -119,4 +119,4 @@ class ArtPanel extends Component {
   }
 }
 
-export default ArtPanel;
+export default SearchPanel;

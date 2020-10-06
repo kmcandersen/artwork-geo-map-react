@@ -5,7 +5,7 @@
   transition: opacity 0.5s ease;
 } */
 
-.ArtPanel {
+.SearchPanel {
   width: 350px;
   z-index: 999;
   position: absolute;
@@ -19,20 +19,22 @@
   background-color: #fff;
 }
 
-/* .ArtPanel-header {
+/* .SearchPanel-header {
   padding: 16px;
 } */
 
 /* logo styles also apply to IntroModal */
 .logo-wrapper {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .logo-text {
   font-family: "Bebas Neue", cursive;
   color: #b50938;
   font-size: 4rem;
-  border-bottom: 8px solid #b50938;
   letter-spacing: 0.02em;
   text-align: left;
 }

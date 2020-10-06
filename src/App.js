@@ -5,7 +5,7 @@ import { query } from "./utils/query.js";
 import { places } from "./utils/places_list.js";
 import { compareValues } from "./utils/helpers.js";
 import { createFeatureArr } from "./utils/createFeatureArr.js";
-import ArtPanel from "./ArtPanel";
+import SearchPanel from "./SearchPanel";
 import EsriMap from "./EsriMap";
 //import IntroModal from "./IntroModal";
 import "./App.css";
@@ -174,7 +174,7 @@ class App extends React.Component {
           gridType={this.state.gridType}
           windowWidth={this.state.windowWidth}
         />
-        <ArtPanel
+        <SearchPanel
           onSearchSubmit={this.onSearchSubmit}
           isModalOpen={this.state.modalOpen}
         />

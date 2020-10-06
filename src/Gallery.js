@@ -30,11 +30,6 @@ class Gallery extends Component {
     });
   };
 
-  // componentDidMount() {
-  //   this.updateWindowWidth();
-  //   window.addEventListener("resize", this.updateWindowWidth);
-  // }
-
   componentDidUpdate() {
     let tiles = this.placeRef.current.childNodes;
 
@@ -53,12 +48,6 @@ class Gallery extends Component {
       }
     }
   }
-
-  // updateWindowWidth = () => {
-  //   this.setState({
-  //     width: window.innerWidth,
-  //   });
-  // };
 
   // getTileWidth = () => {
   //   this.setState({ tileWidth: this.tileRef.current.clientWidth });
