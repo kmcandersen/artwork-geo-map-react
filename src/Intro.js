@@ -16,17 +16,13 @@ class Intro extends Component {
             might not be familiar with (yet).
           </p>
         </div>
-        <div className="intro-dismiss">
-          <div>
-            <p className="intro-dismiss-text">Get Started</p>
+        <div>
+          <div className="intro-dismiss" onClick={this.props.hideIntro}>
+            <label className="intro-dismiss-text">Get Started</label>
+            <IconButton title="Go to search" className="startBtn">
+              <ArrowForwardIcon />
+            </IconButton>
           </div>
-          <IconButton
-            title="Go to search"
-            className="startBtn"
-            onClick={this.props.hideIntro}
-          >
-            <ArrowForwardIcon />
-          </IconButton>
         </div>
       </div>
     );
