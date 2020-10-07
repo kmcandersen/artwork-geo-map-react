@@ -45,3 +45,16 @@ export const compareValues = (key, order = "asc") => {
     return order === "desc" ? comparison * -1 : comparison;
   };
 };
+
+export const truncateString = (str, len = 105, append = "...") => {
+  if (str.length < len) {
+    return str;
+  }
+  let truncString = str.slice(0, len); //cut the string at the new length
+  truncString = truncString.replace(/\s+\S*$/, ""); //find the last punctuation mark or space before the substringed text
+  if (truncString[truncString.length - 1] === ",") {
+    truncString = truncString.slice(0, -1);
+  }
+  truncString = truncString + append;
+  return truncString;
+};
