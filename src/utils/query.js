@@ -27,13 +27,13 @@ export const query = (startYear, endYear) => {
                   is_public_domain: true,
                 },
               },
-              {
-                match: {
-                  // place_of_origin: "France",
-                  // classification_title: "graphite",
-                  artist_title: "Paul Gauguin",
-                },
-              },
+              // {
+              //   match: {
+              //     place_of_origin: "France",
+              //     classification_title: "graphite",
+              //     artist_title: "Paul Gauguin",
+              //   },
+              // },
               {
                 range: {
                   date_start: {
