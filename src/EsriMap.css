@@ -1,8 +1,6 @@
 .esri-map {
-  height: 100%;
-  width: 73vw;
-  /* padding: 0;
-  margin: 0; */
+  width: 100%;
+  background: #d0cfd4;
 }
 
 .esri-popup__main-container.esri-widget {
@@ -18,4 +16,28 @@
   width: 1em !important;
   padding-top: 2px;
   margin-right: 3px;
+}
+
+.loading-spinner {
+  margin: 0;
+  position: absolute;
+  top: calc(45vh / 2);
+  left: 50%;
+  z-index: 3;
+  margin-right: -50%;
+  display: "block";
+  pointer-events: none;
+  width: 4em;
+  height: 4em;
+  border: 0.4em solid transparent;
+  border-color: #eee;
+  border-top-color: #0079c1;
+  border-radius: 50%;
+  animation: loadingspin 1s linear infinite;
+}
+
+@keyframes loadingspin {
+  100% {
+    transform: rotate(360deg);
+  }
 }

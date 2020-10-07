@@ -29,8 +29,9 @@ export const query = (startYear, endYear) => {
               },
               // {
               //   match: {
-              //     place_of_origin: "China",
-              //     classification_title: "photo*",
+              //     place_of_origin: "France",
+              //     classification_title: "graphite",
+              //     artist_title: "Paul Gauguin",
               //   },
               // },
               {

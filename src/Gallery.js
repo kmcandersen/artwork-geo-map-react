@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import { ExternalLink } from "react-external-link";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -15,8 +15,20 @@ import "./Gallery.css";
 class Gallery extends Component {
   constructor(props) {
     super(props);
-    this.placeRef = React.createRef();
+    this.placeRef = createRef();
+    this.tileRef = createRef();
+    this.state = {
+      width: 0,
+      didLoad: false,
+      //tileWidth: 0,
+    };
   }
+
+  onLoad = () => {
+    this.setState({
+      didLoad: true,
+    });
+  };
 
   componentDidUpdate() {
     let tiles = this.placeRef.current.childNodes;
@@ -37,29 +49,62 @@ class Gallery extends Component {
     }
   }
 
+  // getTileWidth = () => {
+  //   this.setState({ tileWidth: this.tileRef.current.clientWidth });
+  // };
+
+  calcColWidth = (width) => {
+    if (width < 540) {
+      return 2;
+    } else if (width < 800) {
+      return 1;
+    } else if (width < 1020) {
+      return 0.666;
+    } else if (width < 1200) {
+      return 0.5;
+    } else {
+      return 0.4;
+    }
+  };
+
+  tallGrid = {
+    flexWrap: "wrap",
+    overflowY: "scroll",
+    height: "100%",
+    width: "100%",
+  };
+  shortGrid = {
+    flexWrap: "nowrap",
+    // overflowX: "scroll",
+    height: "100%",
+    width: "100%",
+  };
+
   render() {
+    const cols = this.calcColWidth(this.props.windowWidth);
+    const tileHeight = this.props.gridType === "tall" ? "250px" : "100%";
+    const gridStyle =
+      this.props.gridType === "tall" ? this.tallGrid : this.shortGrid;
+    const showImage = this.state.didLoad ? {} : { visibility: "hidden" };
+
     return (
-      <div
-        className={`Gallery ${
-          this.props.searchIsOpen ? "searchOpen" : "searchClosed"
-        }`}
-      >
-        <GridList
-          cellHeight={300}
-          spacing={2}
-          className="gridList"
-          ref={this.placeRef}
-        >
+      <div>
+        <GridList ref={this.placeRef} className="gridList" style={gridStyle}>
           {this.props.results.map((result) => (
             <GridListTile
               key={result.aic_id}
-              cols={2}
+              style={{ height: `${tileHeight}` }}
+              cols={cols}
               data-place={result.place_of_origin}
+              ref={this.tileRef}
+              //onLoad={this.getTileWidth}
             >
               <img
                 className="gridListImg"
-                src={`${result.thumbnailUrl}/square/350,/0/default.jpg`}
+                src={`${result.thumbnailUrl}/square/325,/0/default.jpg`}
                 alt={`${result.artist_title}. ${result.title}. ${result.date_start}. The Art Institute of Chicago.`}
+                style={showImage}
+                onLoad={this.onLoad}
               />
               <div
                 className={
@@ -83,7 +128,9 @@ class Gallery extends Component {
                   <p className="tile-title">{result.title}</p>
                   <p className="tile-details">
                     {result.classification_title}
-                    {result.style_title ? " | " + result.style_title : null}
+                    {result.style_title && this.state.tileWidth > 270
+                      ? " | " + result.style_title
+                      : null}
                   </p>
                   <p className="tile-details">{result.date_start}</p>
                 </div>
@@ -102,16 +149,16 @@ class Gallery extends Component {
                     )}
                   </IconButton>
                   {/* <IconButton
-                  title="Add/Remove Favorite"
-                    style={{ color: "white" }}
-                    className={
-                      this.props.detailItems.includes(result.aic_id)
-                        ? ""
-                        : "hidden"
-                    }
-                  >
-                    <FavoriteBorderIcon />
-                  </IconButton> */}
+                    title="Add/Remove Favorite"
+                      style={{ color: "white" }}
+                      className={
+                        this.props.detailItems.includes(result.aic_id)
+                          ? ""
+                          : "hidden"
+                      }
+                    >
+                      <FavoriteBorderIcon />
+                    </IconButton> */}
                   <IconButton
                     title="AIC Webpage"
                     className={
@@ -145,6 +192,7 @@ class Gallery extends Component {
                 </div>
               </div>
             </GridListTile>
+            //end .map
           ))}
         </GridList>
       </div>

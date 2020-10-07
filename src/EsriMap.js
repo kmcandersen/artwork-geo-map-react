@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, createRef } from "react";
 import { loadMap } from "./utils/map";
 import { loadHome } from "./utils/home";
 import { loadLayer } from "./utils/layer";
@@ -17,20 +17,17 @@ let highlight;
 let mapClickListener;
 let mapMoveListener;
 
-class EsriMap extends React.Component {
+class EsriMap extends Component {
   constructor(props) {
     super(props);
-    this.mapDiv = React.createRef();
+    this.mapDiv = createRef();
   }
 
   componentDidMount() {
-    const { onLoad } = this.props;
     // use the ref as a container
     const container = this.mapDiv.current;
-
     loadMap(container).then((view) => {
       this._view = view; // hold on to the view for later
-      onLoad && onLoad();
       loadHome(view);
       this.props.setSampleArtwork(sampleArtwork);
     });
@@ -46,9 +43,6 @@ class EsriMap extends React.Component {
       }
 
       if (this._view) {
-        //to delay no results msg in ArtPanel from loading, until it's known if there are actually no results (no flash)
-        this.props.setMapResultsLoad(true);
-
         //existing map points removed, whether next search has results or not
         let layer = "";
         layer = this._view.map.layers.getItemAt(0);
@@ -62,9 +56,10 @@ class EsriMap extends React.Component {
           })
           .then((layer) => {
             this._view.map.add(layer);
-
             this._view.whenLayerView(layer).then((layerView) => {
               //console.log("we have the layer view.");
+              //for loading-spinner & to delay no results msg in GalleryPanel from loading, until it's known if there are actually no results (no flash)
+              this.props.onMapLoad(true);
 
               const mapMoveHandler = (event) => {
                 this._view.hitTest(event).then((response) => {
@@ -86,7 +81,6 @@ class EsriMap extends React.Component {
               };
 
               const mapClickHandler = (event) => {
-                console.log("point click");
                 if (highlight) {
                   highlight.remove();
                 }
@@ -189,12 +183,15 @@ class EsriMap extends React.Component {
     }
   }
   render() {
-    //console.log("render");
+    const mapHeight = this.props.gridType === "tall" ? "45vh" : "75vh";
     return (
       <div
-        className={`esri-map ${this.props.isModalOpen && "dimmed"}`}
+        className={`esri-map`}
+        style={{ height: `${mapHeight}` }}
         ref={this.mapDiv}
-      />
+      >
+        <div className={`${!this.props.mapLoaded && "loading-spinner"}`}></div>
+      </div>
     );
   }
 }
