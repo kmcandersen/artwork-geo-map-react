@@ -15,7 +15,6 @@ import { sampleArtwork } from "./utils/sampleArtwork";
 //inside CDU, were getting overwritten each update. Elsewhere, weren't accessible
 let highlight;
 let mapClickListener;
-let mapMoveListener;
 
 class EsriMap extends Component {
   constructor(props) {
@@ -119,7 +118,8 @@ class EsriMap extends Component {
                 // can't remove mapClickListener inside this func, bc disables toggle
               };
 
-              mapMoveListener = this._view.on("pointer-move", mapMoveHandler);
+              //formerly let mapMoveListener
+              this._view.on("pointer-move", mapMoveHandler);
 
               mapClickListener = this._view.on(
                 "immediate-click",
