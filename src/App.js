@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
 
-import { query } from "./utils/query.js";
+import { queryClass } from "./utils/queryClass.js";
+import { queryNoClass } from "./utils/queryNoClass.js";
 import { places } from "./utils/places_list.js";
 import { compareValues } from "./utils/helpers.js";
 import { createFeatureArr } from "./utils/createFeatureArr.js";
@@ -22,6 +23,8 @@ class App extends React.Component {
     showAllDetails: false,
     windowWidth: 0,
     gridType: "",
+    //have class(es) been selected? need 2 queries bc empty class match field = error
+    queryNoClass: true,
   };
   // switchTheme = (e) => {
   //     console.log("clicked!");
@@ -56,13 +59,18 @@ class App extends React.Component {
     });
   };
 
-  onSearchSubmit = async (startYear, endYear) => {
+  //classification_title: "" or null > error. If no value passed in, must remove that match completely for query to run.
+  //query file used changes based on state in App (passed up from SearchPanel)
+
+  onSearchSubmit = async (startYear, endYear, classQuery) => {
     this.onMapLoad(false);
+
     if (startYear && endYear && startYear <= endYear) {
+      let query = this.state.queryNoClass ? queryNoClass : queryClass;
       await axios
         .post(
           "https://aggregator-data.artic.edu/api/v1/search",
-          query(startYear, endYear)
+          query(startYear, endYear, classQuery)
         )
         .then((res) => {
           let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
@@ -147,6 +155,10 @@ class App extends React.Component {
     return gridType;
   };
 
+  toggleQueryNoClass = (bool) => {
+    this.setState({ queryNoClass: bool });
+  };
+
   render() {
     return (
       <div className="App">
@@ -163,6 +175,7 @@ class App extends React.Component {
         <SearchPanel
           onSearchSubmit={this.onSearchSubmit}
           mapLoaded={this.state.mapLoaded}
+          toggleQueryNoClass={this.toggleQueryNoClass}
         />
         <GalleryPanel
           mapLoaded={this.state.mapLoaded}

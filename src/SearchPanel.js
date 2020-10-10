@@ -4,8 +4,12 @@ import IconButton from "@material-ui/core/IconButton";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TextField from "@material-ui/core/TextField";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 import Intro from "./Intro";
 import "./SearchPanel.css";
+import { sculpture } from "./utils/class_queries.js";
 
 class SearchPanel extends Component {
   constructor(props) {
@@ -15,13 +19,67 @@ class SearchPanel extends Component {
       startYear: 1890,
       endYear: 1900,
       showIntro: true,
+      classes: [],
+      classesUpdated: false,
     };
   }
 
-  onFormSubmit(e) {
+  //handler for change event on checkbox; adds/removes classes from state array
+  onCheckClass = (e) => {
+    let className = e.target.name;
+    this.setState({ classesUpdated: false });
+    let classes = this.state.classes || [];
+    if (this.state.classes.includes(className)) {
+      let newClasses = classes.filter((c) => c !== className);
+      this.setState({ classes: newClasses });
+    } else if (!this.state.classes.includes(className)) {
+      classes.push(className);
+    }
+    setTimeout(() => {
+      if (!this.state.classes.length) {
+        this.props.toggleQueryNoClass(true);
+      } else {
+        this.props.toggleQueryNoClass(false);
+      }
+      this.setState({ classesUpdated: true });
+    }, 1000);
+  };
+  //delay nec so toggleQueryNoClass not reached before state.classes was modified
+  //toggleQueryNoClass must be completed before submit, so that the correct query is used
+
+  //func to loop thru state.classes & concatenate terms of selected classes
+  //should not run if classes = []
+  createClassQuery = () => {
+    let classQuery = "";
+    let classes = this.state.classes;
+    for (let i = 0; i < classes.length; i++) {
+      if (classQuery.length) {
+        classQuery += " OR ";
+      }
+      //**this needs 2b dynamic--imported search strings */
+      classQuery += sculpture;
+    }
+    return classQuery;
+  };
+
+  onFormSubmit = (e) => {
     e.preventDefault();
-    this.props.onSearchSubmit(this.state.startYear, this.state.endYear);
-  }
+    //run func to get concatenated class query
+    //oSS will take class arg (add in App)
+    let classQuery = "";
+    if (this.state.classes.length) {
+      classQuery = this.createClassQuery();
+    }
+    //condition ensures this.props.queryNoClass (from App) is current, so correct query is used
+    //if Submit is clicked too quickly after checkbox, nothing happens (bc !classesUpdated)--must Submit again (when classesUpdated has changed to true). Could disable Submit button until classesUpdated, but then button flashes every time checkbox clicked.
+    if (this.state.classesUpdated) {
+      this.props.onSearchSubmit(
+        this.state.startYear,
+        this.state.endYear,
+        classQuery
+      );
+    }
+  };
 
   toggleSearch = () => {
     this.setState({ showSearch: !this.state.showSearch });
@@ -105,6 +163,28 @@ class SearchPanel extends Component {
                           }
                         />
                       </div>
+                    </div>
+                    <div>
+                      <FormGroup row>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={
+                                this.state.classes.length
+                                  ? this.state.classes.includes("sculpture")
+                                    ? true
+                                    : false
+                                  : false
+                              }
+                              onChange={this.onCheckClass}
+                              name="sculpture"
+                              color="primary"
+                              // disabled
+                            />
+                          }
+                          label="Sculpture"
+                        />
+                      </FormGroup>
                     </div>
                     <div className="submit-button">
                       <Button
