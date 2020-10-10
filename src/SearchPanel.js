@@ -9,7 +9,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Intro from "./Intro";
 import "./SearchPanel.css";
-import { sculpture } from "./utils/class_queries.js";
+import { classStrToQuery } from "./utils/class_queries.js";
 
 class SearchPanel extends Component {
   constructor(props) {
@@ -56,9 +56,9 @@ class SearchPanel extends Component {
       if (classQuery.length) {
         classQuery += " OR ";
       }
-      //**this needs 2b dynamic--imported search strings */
-      classQuery += sculpture;
+      classQuery += classStrToQuery(classes[i]);
     }
+    console.log("classQuery", classQuery);
     return classQuery;
   };
 
