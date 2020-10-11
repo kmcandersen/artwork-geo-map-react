@@ -76,7 +76,13 @@ class SearchPanel extends Component {
   };
 
   render() {
-    const classes = ["drawing", "photography", "sculpture", "textile"];
+    const classes = [
+      "drawing",
+      "painting",
+      "photography",
+      "sculpture",
+      "textile",
+    ];
     return (
       <div className="SearchPanel">
         <div className="SearchPanel-header">
