@@ -9,6 +9,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Intro from "./Intro";
 import "./SearchPanel.css";
+import { capitalize } from "./utils/helpers.js";
 import { classStrToQuery } from "./utils/class_queries.js";
 
 class SearchPanel extends Component {
@@ -20,7 +21,6 @@ class SearchPanel extends Component {
       endYear: 1900,
       showIntro: true,
       classes: [],
-      classesUpdated: false,
     };
   }
 
@@ -35,17 +35,7 @@ class SearchPanel extends Component {
     } else if (!this.state.classes.includes(className)) {
       classes.push(className);
     }
-    setTimeout(() => {
-      if (!this.state.classes.length) {
-        this.props.toggleQueryNoClass(true);
-      } else {
-        this.props.toggleQueryNoClass(false);
-      }
-      this.setState({ classesUpdated: true });
-    }, 1000);
   };
-  //delay nec so toggleQueryNoClass not reached before state.classes was modified
-  //toggleQueryNoClass must be completed before submit, so that the correct query is used
 
   //func to loop thru state.classes & concatenate terms of selected classes
   //should not run if classes = []
@@ -70,15 +60,11 @@ class SearchPanel extends Component {
     if (this.state.classes.length) {
       classQuery = this.createClassQuery();
     }
-    //condition ensures this.props.queryNoClass (from App) is current, so correct query is used
-    //if Submit is clicked too quickly after checkbox, nothing happens (bc !classesUpdated)--must Submit again (when classesUpdated has changed to true). Could disable Submit button until classesUpdated, but then button flashes every time checkbox clicked.
-    if (this.state.classesUpdated) {
-      this.props.onSearchSubmit(
-        this.state.startYear,
-        this.state.endYear,
-        classQuery
-      );
-    }
+    this.props.onSearchSubmit(
+      this.state.startYear,
+      this.state.endYear,
+      classQuery
+    );
   };
 
   toggleSearch = () => {
@@ -90,6 +76,7 @@ class SearchPanel extends Component {
   };
 
   render() {
+    const classes = ["photography", "sculpture", "textile"];
     return (
       <div className="SearchPanel">
         <div className="SearchPanel-header">
@@ -164,28 +151,31 @@ class SearchPanel extends Component {
                         />
                       </div>
                     </div>
-                    <div>
-                      <FormGroup row>
+
+                    <FormGroup className="FormGroup">
+                      {classes.map((c, i) => (
                         <FormControlLabel
                           control={
                             <Checkbox
                               checked={
                                 this.state.classes.length
-                                  ? this.state.classes.includes("sculpture")
+                                  ? this.state.classes.includes(c)
                                     ? true
                                     : false
                                   : false
                               }
                               onChange={this.onCheckClass}
-                              name="sculpture"
+                              name={c}
                               color="primary"
                               // disabled
                             />
                           }
-                          label="Sculpture"
+                          label={capitalize(c)}
+                          key={i}
                         />
-                      </FormGroup>
-                    </div>
+                      ))}
+                    </FormGroup>
+
                     <div className="submit-button">
                       <Button
                         type="submit"

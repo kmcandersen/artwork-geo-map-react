@@ -74,6 +74,10 @@ input[type="number"] {
   margin-left: 10px;
 }
 
+.FormGroup {
+  display: flex;
+}
+
 .submit-button {
   display: flex;
   justify-content: flex-end;
