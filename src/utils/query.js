@@ -93,7 +93,7 @@ export const query = (startYear, endYear, classQuery) => {
             // {
             //   match: {
             //     classification_title: {
-            //       query: "(sculpture) OR (stone) OR (marble) OR (bust/head) OR (statue) OR (terracotta)",
+            //       query: "lantern",
             //     },
             //   },
             // },

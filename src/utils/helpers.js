@@ -46,7 +46,7 @@ export const compareValues = (key, order = "asc") => {
   };
 };
 
-export const truncateString = (str, len = 105, append = "...") => {
+export const truncateString = (str, len = 90, append = "...") => {
   if (str.length < len) {
     return str;
   }
