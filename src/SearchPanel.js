@@ -157,30 +157,39 @@ class SearchPanel extends Component {
                       </div>
                     </div>
 
-                    <FormGroup className="FormGroup">
-                      {classes.map((c, i) => (
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={
-                                this.state.classes.length
-                                  ? this.state.classes.includes(c)
-                                    ? true
-                                    : false
-                                  : false
-                              }
-                              onChange={this.onCheckClass}
-                              name={c}
-                              color="primary"
-                              // disabled
-                            />
-                          }
-                          label={capitalize(c)}
-                          key={i}
-                        />
-                      ))}
-                    </FormGroup>
-
+                    <div className="class-option-wrapper">
+                      <div className="media-header">
+                        Specify Media (optional)
+                      </div>
+                      <div className="class-option-group">
+                        <FormGroup row>
+                          {classes.map((c, i) => (
+                            <div className="class-option">
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    checked={
+                                      this.state.classes.length
+                                        ? this.state.classes.includes(c)
+                                          ? true
+                                          : false
+                                        : false
+                                    }
+                                    onChange={this.onCheckClass}
+                                    name={c}
+                                    color="primary"
+                                    // disabled
+                                  />
+                                }
+                                label={capitalize(c)}
+                                key={i}
+                                style={{ fontSize: ".5rem" }}
+                              />
+                            </div>
+                          ))}
+                        </FormGroup>
+                      </div>
+                    </div>
                     <div className="submit-button">
                       <Button
                         type="submit"

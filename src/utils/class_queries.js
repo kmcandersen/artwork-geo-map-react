@@ -10,7 +10,7 @@ export const photography =
 export const sculpture =
   "(sculpture) OR (stone) OR (marble) OR (bust/head) OR (statue) OR (terracotta)";
 
-export const textile =
+export const textiles =
   "(textile) OR (weaving) OR (needlework) OR (costume) OR (lace) OR (cloth) OR (clothing) OR (garment) OR (dress) OR (fiber) OR (silk) OR (wool) OR (sampler) OR (embroidery)";
 
 export const classStrToQuery = (classStr) => {
@@ -24,7 +24,7 @@ export const classStrToQuery = (classStr) => {
     case "sculpture":
       return sculpture;
     case "textiles":
-      return textile;
+      return textiles;
     default:
       return "";
   }
