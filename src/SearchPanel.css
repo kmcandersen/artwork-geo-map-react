@@ -35,20 +35,19 @@
   padding: 22px 0 16px;
 }
 
-.form-info,
-.toggle-all-details {
+.form-info {
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
 
 .form-info,
-.input-fields,
-.input-footer {
+.input-fields {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* year input labels */
 label.MuiFormLabel-root {
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -79,11 +78,10 @@ input[type="number"] {
 }
 
 .class-option-wrapper {
-  /* //margin-top: 20px; */
   text-align: left;
 }
 
-/* same as "get started" in intro; letter-spacing matches year input labels */
+/* same as "get started" in intro, but letter-spacing matches year input labels */
 .media-header {
   text-transform: uppercase;
   font-size: 0.8rem;
@@ -99,15 +97,16 @@ input[type="number"] {
   width: 40%;
 }
 
+/* checkbox */
+svg.MuiSvgIcon-root {
+  font-size: 1.3rem;
+}
+
+/* checkbox labels */
 .MuiTypography-root.MuiFormControlLabel-label.MuiTypography-body1 {
   font-size: 0.9rem;
   letter-spacing: 0.02em;
   font-family: "Nunito", sans-serif;
-}
-
-/* checkbox */
-svg.MuiSvgIcon-root {
-  font-size: 1.3rem;
 }
 
 .submit-button {
