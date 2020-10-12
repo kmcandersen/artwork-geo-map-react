@@ -15,7 +15,7 @@ export const textile =
 
 export const classStrToQuery = (classStr) => {
   switch (classStr) {
-    case "drawing":
+    case "drawing & prints":
       return drawing;
     case "painting":
       return painting;
@@ -23,7 +23,7 @@ export const classStrToQuery = (classStr) => {
       return photography;
     case "sculpture":
       return sculpture;
-    case "textile":
+    case "textiles":
       return textile;
     default:
       return "";

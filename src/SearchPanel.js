@@ -76,11 +76,11 @@ class SearchPanel extends Component {
 
   render() {
     const classes = [
-      "drawing",
+      "drawing & prints",
       "painting",
       "photography",
       "sculpture",
-      "textile",
+      "textiles",
     ];
     return (
       <div className="SearchPanel">
