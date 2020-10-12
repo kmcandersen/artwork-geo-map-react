@@ -19,10 +19,9 @@ class App extends React.Component {
     searchMade: false,
     //held here bc needs to be accessed by onSearchSubmit
     showAllDetails: false,
+    detailItems: [],
     windowWidth: 0,
     gridType: "",
-    //have class(es) been selected? need 2 queries bc empty class match field = error
-    //queryNoClass: true,
   };
   // switchTheme = (e) => {
   //     console.log("clicked!");
@@ -59,6 +58,7 @@ class App extends React.Component {
 
   onSearchSubmit = async (startYear, endYear, classQuery) => {
     this.onMapLoad(false);
+    //**need to remove all ids from GalleryPanel state.detailItems. changing showAllDetails to false doesn't remove details */
 
     if (startYear && endYear && startYear <= endYear) {
       await axios
@@ -73,6 +73,7 @@ class App extends React.Component {
             searchResults: featureArr,
             searchMade: true,
             showAllDetails: false,
+            detailItems: [],
           });
           this.getGridInfo(featureArr.length);
         });
@@ -153,6 +154,37 @@ class App extends React.Component {
     this.setState({ queryNoClass: bool });
   };
 
+  toggleAllDetails = () => {
+    //if showAllDetails = false, = true & loop thru all results & put them in state.detailItem arr
+    //if showAllDetails = true, = false & remove all items from arr
+    if (!this.state.showAllDetails) {
+      let showIds = [];
+      this.state.searchResults.forEach((r) => {
+        showIds.push(r.aic_id);
+      });
+      this.setState({ detailItems: showIds });
+    }
+    if (this.state.showAllDetails) {
+      this.setState({ detailItems: [] });
+    }
+    this.toggleAllDetailsState();
+  };
+
+  toggleTileDetails = (id) => {
+    //if id in arr, remove it
+    //if id not in arr, add it
+    //presence of id checked in various Gallery className conditionals
+    if (this.state.detailItems.includes(id)) {
+      let showing = this.state.detailItems || [];
+      let newShowing = showing.filter((t) => t !== id);
+      this.setState({ detailItems: newShowing });
+    } else if (!this.state.detailItems.includes(id)) {
+      let showing = this.state.detailItems || [];
+      showing.push(id);
+      this.setState({ detailItems: showing });
+    }
+  };
+
   render() {
     return (
       <div className="App">
@@ -178,8 +210,11 @@ class App extends React.Component {
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
           toggleSelectedPlace={this.toggleSelectedPlace}
+          toggleTileDetails={this.toggleTileDetails}
+          detailItems={this.state.detailItems}
           showAllDetails={this.state.showAllDetails}
-          toggleAllDetailsState={this.toggleAllDetailsState}
+          toggleAllDetails={this.toggleAllDetails}
+          // toggleAllDetailsState={this.toggleAllDetailsState}
           searchMade={this.state.searchMade}
           gridType={this.state.gridType}
           windowWidth={this.state.windowWidth}

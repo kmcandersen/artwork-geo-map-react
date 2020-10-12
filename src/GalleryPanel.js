@@ -6,43 +6,12 @@ import Gallery from "./Gallery";
 import "./GalleryPanel.css";
 
 class GalleryPanel extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      detailItems: [],
-    };
-  }
-
-  toggleAllDetails = () => {
-    //if showAllDetails = false, = true & loop thru all results & put them in state.detailItem arr
-    //if showAllDetails = true, = false & remove all items from arr
-    if (!this.props.showAllDetails) {
-      let showIds = [];
-      this.props.results.forEach((r) => {
-        showIds.push(r.aic_id);
-      });
-      this.setState({ detailItems: showIds });
-    }
-    if (this.props.showAllDetails) {
-      this.setState({ detailItems: [] });
-    }
-    this.props.toggleAllDetailsState();
-  };
-
-  toggleTileDetails = (id) => {
-    //if id in arr, remove it
-    //if id not in arr, add it
-    //presence of id checked in various Gallery className conditionals
-    if (this.state.detailItems.includes(id)) {
-      let showing = this.state.detailItems || [];
-      let newShowing = showing.filter((t) => t !== id);
-      this.setState({ detailItems: newShowing });
-    } else if (!this.state.detailItems.includes(id)) {
-      let showing = this.state.detailItems || [];
-      showing.push(id);
-      this.setState({ detailItems: showing });
-    }
-  };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     detailItems: [],
+  //   };
+  // }
 
   render() {
     return (
@@ -67,7 +36,7 @@ class GalleryPanel extends Component {
               }
               className="infoAllBtn"
               style={{ padding: "10px" }}
-              onClick={this.toggleAllDetails}
+              onClick={this.props.toggleAllDetails}
             >
               {this.props.showAllDetails ? (
                 <InfoIcon className="infoIcon" />
@@ -84,8 +53,8 @@ class GalleryPanel extends Component {
           <Gallery
             results={this.props.results}
             showAllDetails={this.props.showAllDetails}
-            detailItems={this.state.detailItems}
-            toggleTileDetails={this.toggleTileDetails}
+            detailItems={this.props.detailItems}
+            toggleTileDetails={this.props.toggleTileDetails}
             selectPlace={this.props.selectPlace}
             selectedPlace={this.props.selectedPlace}
             removeSelectedPlace={this.props.removeSelectedPlace}

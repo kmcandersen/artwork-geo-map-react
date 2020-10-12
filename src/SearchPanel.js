@@ -48,7 +48,6 @@ class SearchPanel extends Component {
       }
       classQuery += classStrToQuery(classes[i]);
     }
-    console.log("classQuery", classQuery);
     return classQuery;
   };
 
