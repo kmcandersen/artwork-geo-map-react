@@ -17,6 +17,10 @@
   height: calc(100vh - 337px);
 } */
 
+.gridList-wrapper {
+  width: 100%;
+}
+
 img.gridListImg {
   z-index: 0;
 }

@@ -88,7 +88,7 @@ class Gallery extends Component {
     const showImage = this.state.didLoad ? {} : { visibility: "hidden" };
 
     return (
-      <div>
+      <div className="gridList-wrapper">
         <GridList ref={this.placeRef} className="gridList" style={gridStyle}>
           {this.props.results.map((result) => (
             <GridListTile
