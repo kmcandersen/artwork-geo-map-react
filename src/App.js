@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-
 import { query } from "./utils/query.js";
 import { places } from "./utils/places_list.js";
 import { compareValues } from "./utils/helpers.js";
@@ -20,6 +19,7 @@ class App extends React.Component {
     searchMade: false,
     //held here bc needs to be accessed by onSearchSubmit
     showAllDetails: false,
+    detailItems: [],
     windowWidth: 0,
     gridType: "",
   };
@@ -56,13 +56,15 @@ class App extends React.Component {
     });
   };
 
-  onSearchSubmit = async (startYear, endYear) => {
+  onSearchSubmit = async (startYear, endYear, classQuery) => {
     this.onMapLoad(false);
+    //**need to remove all ids from GalleryPanel state.detailItems. changing showAllDetails to false doesn't remove details */
+
     if (startYear && endYear && startYear <= endYear) {
       await axios
         .post(
           "https://aggregator-data.artic.edu/api/v1/search",
-          query(startYear, endYear)
+          query(startYear, endYear, classQuery)
         )
         .then((res) => {
           let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
@@ -71,6 +73,7 @@ class App extends React.Component {
             searchResults: featureArr,
             searchMade: true,
             showAllDetails: false,
+            detailItems: [],
           });
           this.getGridInfo(featureArr.length);
         });
@@ -118,7 +121,11 @@ class App extends React.Component {
     let gridType = "";
 
     if (width < 540) {
-      gridType = "tall";
+      if (resultsLength > 1) {
+        gridType = "tall";
+      } else {
+        gridType = "short";
+      }
     } else if (width < 800) {
       if (resultsLength > 2) {
         gridType = "tall";
@@ -147,6 +154,41 @@ class App extends React.Component {
     return gridType;
   };
 
+  toggleQueryNoClass = (bool) => {
+    this.setState({ queryNoClass: bool });
+  };
+
+  toggleAllDetails = () => {
+    //if showAllDetails = false, = true & loop thru all results & put them in state.detailItem arr
+    //if showAllDetails = true, = false & remove all items from arr
+    if (!this.state.showAllDetails) {
+      let showIds = [];
+      this.state.searchResults.forEach((r) => {
+        showIds.push(r.aic_id);
+      });
+      this.setState({ detailItems: showIds });
+    }
+    if (this.state.showAllDetails) {
+      this.setState({ detailItems: [] });
+    }
+    this.toggleAllDetailsState();
+  };
+
+  toggleTileDetails = (id) => {
+    //if id in arr, remove it
+    //if id not in arr, add it
+    //presence of id checked in various Gallery className conditionals
+    if (this.state.detailItems.includes(id)) {
+      let showing = this.state.detailItems || [];
+      let newShowing = showing.filter((t) => t !== id);
+      this.setState({ detailItems: newShowing });
+    } else if (!this.state.detailItems.includes(id)) {
+      let showing = this.state.detailItems || [];
+      showing.push(id);
+      this.setState({ detailItems: showing });
+    }
+  };
+
   render() {
     return (
       <div className="App">
@@ -163,6 +205,7 @@ class App extends React.Component {
         <SearchPanel
           onSearchSubmit={this.onSearchSubmit}
           mapLoaded={this.state.mapLoaded}
+          toggleQueryNoClass={this.toggleQueryNoClass}
         />
         <GalleryPanel
           mapLoaded={this.state.mapLoaded}
@@ -171,8 +214,11 @@ class App extends React.Component {
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
           toggleSelectedPlace={this.toggleSelectedPlace}
+          toggleTileDetails={this.toggleTileDetails}
+          detailItems={this.state.detailItems}
           showAllDetails={this.state.showAllDetails}
-          toggleAllDetailsState={this.toggleAllDetailsState}
+          toggleAllDetails={this.toggleAllDetails}
+          // toggleAllDetailsState={this.toggleAllDetailsState}
           searchMade={this.state.searchMade}
           gridType={this.state.gridType}
           windowWidth={this.state.windowWidth}

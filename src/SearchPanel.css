@@ -3,7 +3,7 @@
   z-index: 999;
   position: absolute;
   top: 0;
-  right: 15px;
+  right: 45px;
   font-family: "Nunito", sans-serif;
   border-radius: 0 0 10px 10px;
   padding: 20px 25px 10px;
@@ -35,23 +35,26 @@
   padding: 22px 0 16px;
 }
 
-.form-info,
-.toggle-all-details {
+.form-info {
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
 
 .form-info,
-.input-fields,
-.input-footer {
+.input-fields {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* .form-info {
-  margin-bottom: 5px;
-} */
+/* year input labels */
+label.MuiFormLabel-root {
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #666666;
+  font-size: 1.05rem;
+  font-family: "Nunito", sans-serif;
+}
 
 /* no arrows in input boxes */
 /* Chrome, Safari, Edge, Opera */
@@ -74,8 +77,45 @@ input[type="number"] {
   margin-left: 10px;
 }
 
+.class-option-wrapper {
+  text-align: left;
+}
+
+/* same as "get started" in intro, but letter-spacing matches year input labels */
+.media-header {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  margin: 30px 0 7px;
+}
+
+.class-option {
+  /* border: 1px solid red; */
+  width: 60%;
+}
+.class-option:nth-child(even) {
+  width: 40%;
+}
+
+/* checkbox */
+svg.MuiSvgIcon-root {
+  font-size: 1.3rem;
+}
+
+/* padding bw option rows */
+.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-1.MuiCheckbox-root {
+  padding: 5px;
+}
+
+/* checkbox labels */
+.MuiTypography-root.MuiFormControlLabel-label.MuiTypography-body1 {
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  font-family: "Nunito", sans-serif;
+}
+
 .submit-button {
   display: flex;
   justify-content: flex-end;
-  margin: 15px 10px 0;
+  margin: 0 10px;
 }

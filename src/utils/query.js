@@ -1,76 +1,139 @@
-export const query = (startYear, endYear) => {
-  return {
-    resources: "artworks",
-    fields: [
-      "id",
-      "title",
-      "artist_title",
-      "image_id",
-      "place_of_origin",
-      "date_start",
-      "date_display",
-      "thumbnail",
-      "classification_title",
-      "style_title",
-      "is_public_domain",
-      "api_link",
-    ],
-    boost: false,
-    limit: 25,
-    query: {
-      function_score: {
-        query: {
-          bool: {
-            filter: [
-              {
-                term: {
-                  is_public_domain: true,
+export const query = (startYear, endYear, classQuery) => {
+  if (classQuery) {
+    //queryClass
+    return {
+      resources: "artworks",
+      fields: [
+        "id",
+        "title",
+        "artist_title",
+        "image_id",
+        "place_of_origin",
+        "date_start",
+        "date_display",
+        "thumbnail",
+        "classification_title",
+        "style_title",
+        "is_public_domain",
+        "api_link",
+      ],
+      boost: false,
+      limit: 25,
+      query: {
+        bool: {
+          filter: [
+            {
+              match: {
+                classification_title: {
+                  query: classQuery,
                 },
               },
-              // {
-              //   match: {
-              //     place_of_origin: "France",
-              //     classification_title: "graphite",
-              //     artist_title: "Paul Gauguin",
-              //   },
-              // },
-              {
-                range: {
-                  date_start: {
-                    gte: startYear,
-                  },
+            },
+            {
+              term: {
+                is_public_domain: true,
+              },
+            },
+            {
+              range: {
+                date_start: {
+                  gte: startYear,
                 },
               },
-              {
-                range: {
-                  date_start: {
-                    lte: endYear,
-                  },
+            },
+            {
+              range: {
+                date_start: {
+                  lte: endYear,
                 },
               },
-              {
-                exists: {
-                  field: "image_id",
-                },
+            },
+            {
+              exists: {
+                field: "image_id",
               },
-              {
-                exists: {
-                  field: "thumbnail.width",
-                },
+            },
+            {
+              exists: {
+                field: "thumbnail.width",
               },
-              {
-                exists: {
-                  field: "thumbnail.height",
-                },
+            },
+            {
+              exists: {
+                field: "thumbnail.height",
               },
-            ],
-          },
-        },
-        boost_mode: "replace",
-        random_score: {
-          field: "id",
+            },
+          ],
         },
       },
-    },
-  };
+    };
+  } else {
+    //query noClass
+    return {
+      resources: "artworks",
+      fields: [
+        "id",
+        "title",
+        "artist_title",
+        "image_id",
+        "place_of_origin",
+        "date_start",
+        "date_display",
+        "thumbnail",
+        "classification_title",
+        "style_title",
+        "is_public_domain",
+        "api_link",
+      ],
+      boost: false,
+      limit: 25,
+      query: {
+        bool: {
+          filter: [
+            // {
+            //   match: {
+            //     classification_title: {
+            //       query: "Developing",
+            //     },
+            //   },
+            // },
+            {
+              term: {
+                is_public_domain: true,
+              },
+            },
+            {
+              range: {
+                date_start: {
+                  gte: startYear,
+                },
+              },
+            },
+            {
+              range: {
+                date_start: {
+                  lte: endYear,
+                },
+              },
+            },
+            {
+              exists: {
+                field: "image_id",
+              },
+            },
+            {
+              exists: {
+                field: "thumbnail.width",
+              },
+            },
+            {
+              exists: {
+                field: "thumbnail.height",
+              },
+            },
+          ],
+        },
+      },
+    };
+  }
 };

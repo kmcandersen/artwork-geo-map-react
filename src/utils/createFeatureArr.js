@@ -38,7 +38,8 @@ export const createFeatureArr = (arr, placesArr) => {
       feature.date_display = el.date_display;
       feature.thumbnailUrl = el.thumbnail.url;
       feature.classification_title =
-        el.classification_title.length && capitalize(el.classification_title);
+        el.classification_title.length &&
+        capitalize(truncateString(el.classification_title, 39));
       feature.style_title = el.style_title && capitalize(el.style_title);
       feature.api_link = el.api_link;
       feature.is_public_domain = el.is_public_domain.toString();
