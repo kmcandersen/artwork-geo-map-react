@@ -6,21 +6,18 @@ import Gallery from "./Gallery";
 import "./GalleryPanel.css";
 
 class GalleryPanel extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     detailItems: [],
-  //   };
-  // }
-
   render() {
+    const tallGrid = {
+      height: this.props.mainHeight * 0.55 + "px",
+    };
+    const shortGrid = {
+      height: this.props.mainHeight * 0.4 + "px",
+      display: "flex",
+    };
+    const gridHeight = this.props.gridType === "tall" ? tallGrid : shortGrid;
+
     return (
-      <div
-        //
-        className={`GalleryPanel ${
-          this.props.gridType === "tall" ? "tall-grid" : "short-grid"
-        }`}
-      >
+      <div className="GalleryPanel" style={gridHeight}>
         {this.props.results.length ? (
           <div className="toggle-all-details">
             <IconButton

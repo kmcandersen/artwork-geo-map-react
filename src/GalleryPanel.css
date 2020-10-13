@@ -3,15 +3,6 @@
   width: 100%;
 }
 
-.tall-grid {
-  height: 55vh;
-}
-
-.short-grid {
-  height: 25vh;
-  display: flex;
-}
-
 .hidden {
   visibility: hidden;
 }

@@ -21,6 +21,7 @@ class App extends React.Component {
     showAllDetails: false,
     detailItems: [],
     windowWidth: 0,
+    mainHeight: 0,
     gridType: "",
   };
   // switchTheme = (e) => {
@@ -49,9 +50,12 @@ class App extends React.Component {
 
   getGridInfo = (resultsLength) => {
     let windowWidth = window.innerWidth;
+    //windowHeight - header height
+    let mainHeight = window.innerHeight - 70;
     let gridType = this.setGridType(windowWidth, resultsLength);
     this.setState({
       windowWidth: windowWidth,
+      mainHeight: mainHeight,
       gridType: gridType,
     });
   };
@@ -201,6 +205,7 @@ class App extends React.Component {
           removeSelectedPlace={this.removeSelectedPlace}
           setSampleArtwork={this.setSampleArtwork}
           gridType={this.state.gridType}
+          mainHeight={this.state.mainHeight}
         />
         <GalleryPanel
           mapLoaded={this.state.mapLoaded}
@@ -213,10 +218,10 @@ class App extends React.Component {
           detailItems={this.state.detailItems}
           showAllDetails={this.state.showAllDetails}
           toggleAllDetails={this.toggleAllDetails}
-          // toggleAllDetailsState={this.toggleAllDetailsState}
           searchMade={this.state.searchMade}
           gridType={this.state.gridType}
           windowWidth={this.state.windowWidth}
+          mainHeight={this.state.mainHeight}
         />
       </div>
     );

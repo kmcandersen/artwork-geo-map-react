@@ -183,11 +183,15 @@ class EsriMap extends Component {
     }
   }
   render() {
-    const mapHeight = this.props.gridType === "tall" ? "45vh" : "75vh";
+    const tallGridHeight = this.props.mainHeight * 0.45;
+    const shortGridHeight = this.props.mainHeight * 0.6;
+    const gridHeight =
+      this.props.gridType === "tall" ? tallGridHeight : shortGridHeight;
+
     return (
       <div
-        className={`esri-map`}
-        style={{ height: `${mapHeight}` }}
+        className="esri-map"
+        style={{ height: `${gridHeight}px` }}
         ref={this.mapDiv}
       >
         <div className={`${!this.props.mapLoaded && "loading-spinner"}`}></div>

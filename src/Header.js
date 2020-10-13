@@ -47,12 +47,13 @@ class Header extends Component {
             </nav>
           </div>
         </header>
-        {openPanel === "about" && <Intro name="about" />}
+        {openPanel === "about" && <Intro name="about" key="about" />}
         {openPanel === "search" && (
           <SearchPanel
             onSearchSubmit={onSearchSubmit}
             mapLoaded={mapLoaded}
             name="search"
+            key="search"
           />
         )}
         {/* {openPanel === "login" && <Login name="log in" />} */}
