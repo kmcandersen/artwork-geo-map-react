@@ -69,8 +69,7 @@ input[type="number"] {
   width: 40%;
 }
 
-/* checkbox */
-svg.MuiSvgIcon-root {
+.checkbox svg {
   font-size: 1.3rem;
 }
 

@@ -32,6 +32,7 @@ class Header extends Component {
             <nav>
               {navItems.map((n, i) => (
                 <Button
+                  style={{ margin: "7px" }}
                   aria-controls={n}
                   aria-haspopup="true"
                   // variant="contained"

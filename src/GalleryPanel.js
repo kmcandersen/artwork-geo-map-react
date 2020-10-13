@@ -39,9 +39,9 @@ class GalleryPanel extends Component {
               onClick={this.props.toggleAllDetails}
             >
               {this.props.showAllDetails ? (
-                <InfoIcon className="infoIcon" />
+                <InfoIcon className="show-all-icon" />
               ) : (
-                <InfoOutlinedIcon className="infoIcon" />
+                <InfoOutlinedIcon className="show-all-icon" />
               )}
             </IconButton>
           </div>

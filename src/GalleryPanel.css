@@ -26,6 +26,10 @@
   color: #000000;
 }
 
+svg.show-all-icon {
+  font-size: 1.3em;
+}
+
 .noresults-msg-wrapper {
   display: flex;
   flex-direction: column;

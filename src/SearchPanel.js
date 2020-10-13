@@ -119,6 +119,7 @@ class SearchPanel extends Component {
                         <FormControlLabel
                           control={
                             <Checkbox
+                              className="checkbox"
                               checked={
                                 this.state.classes.length
                                   ? this.state.classes.includes(c)
