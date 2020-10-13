@@ -4,7 +4,6 @@ import { query } from "./utils/query.js";
 import { places } from "./utils/places_list.js";
 import { compareValues } from "./utils/helpers.js";
 import { createFeatureArr } from "./utils/createFeatureArr.js";
-import SearchPanel from "./SearchPanel";
 import EsriMap from "./EsriMap";
 import "./App.css";
 import GalleryPanel from "./GalleryPanel.js";
@@ -155,10 +154,6 @@ class App extends React.Component {
     return gridType;
   };
 
-  toggleQueryNoClass = (bool) => {
-    this.setState({ queryNoClass: bool });
-  };
-
   toggleAllDetails = () => {
     //if showAllDetails = false, = true & loop thru all results & put them in state.detailItem arr
     //if showAllDetails = true, = false & remove all items from arr
@@ -193,7 +188,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header
+          onSearchSubmit={this.onSearchSubmit}
+          mapLoaded={this.state.mapLoaded}
+        />
         <EsriMap
           onMapLoad={this.onMapLoad}
           mapLoaded={this.state.mapLoaded}
@@ -204,11 +202,6 @@ class App extends React.Component {
           setSampleArtwork={this.setSampleArtwork}
           gridType={this.state.gridType}
         />
-        {/* <SearchPanel
-          onSearchSubmit={this.onSearchSubmit}
-          mapLoaded={this.state.mapLoaded}
-          toggleQueryNoClass={this.toggleQueryNoClass}
-        /> */}
         <GalleryPanel
           mapLoaded={this.state.mapLoaded}
           results={this.state.searchResults}

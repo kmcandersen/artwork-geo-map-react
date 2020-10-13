@@ -18,27 +18,10 @@ class Header extends Component {
     }
   };
 
-  //   selectPanel = (this.state.openPanel) => {
-  //     switch(this.state.openPanel){
-  //         case "about":
-  //       return drawing;
-  //     case "painting":
-  //       return painting;
-  //     case "photography":
-  //       return photography;
-  //     case "sculpture":
-  //       return sculpture;
-  //     case "textiles":
-  //       return textiles;
-  //     default:
-  //       return "";
-  //   }
-  //     }
-  //   }
-
   render() {
     const navItems = ["about", "search", "log in"];
     const { openPanel } = this.state;
+    const { mapLoaded, onSearchSubmit } = this.props;
     return (
       <div className="Header-wrapper">
         <header>
@@ -64,7 +47,13 @@ class Header extends Component {
           </div>
         </header>
         {openPanel === "about" && <Intro name="about" />}
-        {openPanel === "search" && <SearchPanel name="search" />}
+        {openPanel === "search" && (
+          <SearchPanel
+            onSearchSubmit={onSearchSubmit}
+            mapLoaded={mapLoaded}
+            name="search"
+          />
+        )}
         {/* {openPanel === "login" && <Login name="log in" />} */}
       </div>
     );
