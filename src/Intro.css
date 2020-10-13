@@ -1,8 +1,24 @@
-.intro-content {
+.panel {
+  padding: 10px;
+  letter-spacing: 0.02em;
+  width: 350px;
+  z-index: 999;
+  position: absolute;
+  top: 70px;
+  right: 0;
+  font-family: "Nunito", sans-serif;
+  border-radius: 0 0 10px 10px;
+  padding: 10px 30px;
+  /* box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12); */
+  background-color: #fff;
+}
+
+/* .intro-content {
   font-family: "Nunito", sans-serif;
   padding: 10px;
   letter-spacing: 0.02em;
-}
+} */
 
 .intro-msg > p {
   font-size: 0.95rem;

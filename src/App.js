@@ -8,6 +8,7 @@ import SearchPanel from "./SearchPanel";
 import EsriMap from "./EsriMap";
 import "./App.css";
 import GalleryPanel from "./GalleryPanel.js";
+import Header from "./Header.js";
 
 class App extends React.Component {
   state = {
@@ -192,6 +193,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Header />
         <EsriMap
           onMapLoad={this.onMapLoad}
           mapLoaded={this.state.mapLoaded}
@@ -202,11 +204,11 @@ class App extends React.Component {
           setSampleArtwork={this.setSampleArtwork}
           gridType={this.state.gridType}
         />
-        <SearchPanel
+        {/* <SearchPanel
           onSearchSubmit={this.onSearchSubmit}
           mapLoaded={this.state.mapLoaded}
           toggleQueryNoClass={this.toggleQueryNoClass}
-        />
+        /> */}
         <GalleryPanel
           mapLoaded={this.state.mapLoaded}
           results={this.state.searchResults}
@@ -224,7 +226,6 @@ class App extends React.Component {
           windowWidth={this.state.windowWidth}
         />
       </div>
-      // </div>
     );
   }
 }

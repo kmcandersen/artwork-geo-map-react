@@ -6,7 +6,7 @@ import "./Intro.css";
 class Intro extends Component {
   render() {
     return (
-      <div className="intro-content">
+      <div className="panel">
         <div className="intro-msg">
           <p>
             Enter a year range to generate a selection of random artwork from
@@ -17,12 +17,12 @@ class Intro extends Component {
           </p>
         </div>
         <div>
-          <div className="intro-dismiss" onClick={this.props.hideIntro}>
+          {/* <div className="intro-dismiss" onClick={this.props.hideIntro}>
             <label className="intro-dismiss-text">Get Started</label>
             <IconButton title="Go to search" className="startBtn">
               <ArrowForwardIcon />
             </IconButton>
-          </div>
+          </div> */}
         </div>
       </div>
     );

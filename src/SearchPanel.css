@@ -1,43 +1,17 @@
 .SearchPanel {
   width: 350px;
+  padding: 10px;
+  letter-spacing: 0.02em;
   z-index: 999;
   position: absolute;
-  top: 0;
-  right: 45px;
+  top: 70px;
+  right: 0;
   font-family: "Nunito", sans-serif;
   border-radius: 0 0 10px 10px;
-  padding: 20px 25px 10px;
-  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-    0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+  padding: 20px 25px;
+  /* box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12); */
   background-color: #fff;
-}
-
-.logo-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.logo-text {
-  font-family: "Bebas Neue", cursive;
-  color: #b50938;
-  font-size: 4rem;
-  letter-spacing: 0.02em;
-  text-align: left;
-}
-
-.gray-text {
-  color: #b0b0b0;
-}
-
-.input-form {
-  padding: 22px 0 16px;
-}
-
-.form-info {
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
 }
 
 .form-info,
@@ -81,7 +55,6 @@ input[type="number"] {
   text-align: left;
 }
 
-/* same as "get started" in intro, but letter-spacing matches year input labels */
 .media-header {
   text-transform: uppercase;
   font-size: 0.8rem;
@@ -90,7 +63,6 @@ input[type="number"] {
 }
 
 .class-option {
-  /* border: 1px solid red; */
   width: 60%;
 }
 .class-option:nth-child(even) {
