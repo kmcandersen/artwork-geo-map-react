@@ -5,6 +5,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import "./SearchPanel.css";
+import "./global.css";
 import { capitalize } from "./utils/helpers.js";
 import { classStrToQuery } from "./utils/class_queries.js";
 
@@ -66,7 +67,9 @@ class SearchPanel extends Component {
       "textiles",
     ];
     return (
-      <div className="SearchPanel">
+      <div
+        className={`panel ${this.props.openPanel === "search" ? "" : "hidden"}`}
+      >
         <div>
           <form
             className="root"

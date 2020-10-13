@@ -4,6 +4,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import Gallery from "./Gallery";
 import "./GalleryPanel.css";
+import "./global.css";
 
 class GalleryPanel extends Component {
   render() {

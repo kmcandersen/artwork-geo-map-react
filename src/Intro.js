@@ -1,9 +1,10 @@
 import React from "react";
 import "./Intro.css";
+import "./global.css";
 
-const Intro = () => {
+const Intro = (props) => {
   return (
-    <div className="panel">
+    <div className={`panel ${props.openPanel === "about" ? "" : "hidden"}`}>
       <div className="intro-msg">
         <p>
           Enter a year range to generate a selection of random artwork from the{" "}
