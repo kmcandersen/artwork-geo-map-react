@@ -118,7 +118,7 @@ class SearchPanel extends Component {
                 <div className="class-option-group">
                   <FormGroup row>
                     {classes.map((c, i) => (
-                      <div className="class-option">
+                      <div className="class-option" key={i}>
                         <FormControlLabel
                           control={
                             <Checkbox
@@ -137,7 +137,6 @@ class SearchPanel extends Component {
                             />
                           }
                           label={capitalize(c)}
-                          key={i}
                           style={{ fontSize: ".5rem" }}
                         />
                       </div>

@@ -205,6 +205,7 @@ class App extends React.Component {
           removeSelectedPlace={this.removeSelectedPlace}
           setSampleArtwork={this.setSampleArtwork}
           gridType={this.state.gridType}
+          windowWidth={this.state.windowWidth}
           mainHeight={this.state.mainHeight}
         />
         <GalleryPanel

@@ -10,7 +10,6 @@ class Header extends Component {
   };
 
   handleClick = (event) => {
-    console.log(event.currentTarget.name);
     if (this.state.openPanel.includes(event.currentTarget.name)) {
       this.setState({ openPanel: [] });
     } else {
@@ -47,12 +46,11 @@ class Header extends Component {
             </nav>
           </div>
         </header>
-        <Intro name="about" key="about" openPanel={openPanel} />
+        <Intro name="about" openPanel={openPanel} />
         <SearchPanel
           onSearchSubmit={onSearchSubmit}
           mapLoaded={mapLoaded}
           name="search"
-          key="search"
           openPanel={openPanel}
         />
         {/* {openPanel === "login" && <Login name="log in" />} */}

@@ -54,6 +54,11 @@ class EsriMap extends Component {
             return (layer = loadLayer(graphicsArr));
           })
           .then((layer) => {
+            if (this.props.windowWidth < 1200) {
+              this._view.goTo({ zoom: 1 });
+            } else {
+              this._view.goTo({ zoom: 2 });
+            }
             this._view.map.add(layer);
             this._view.whenLayerView(layer).then((layerView) => {
               //console.log("we have the layer view.");
