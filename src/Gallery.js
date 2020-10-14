@@ -32,10 +32,10 @@ class Gallery extends Component {
 
   componentDidUpdate() {
     let tiles = this.placeRef.current.childNodes;
-
     for (let i = 0; i < tiles.length; i++) {
       if (
-        tiles[i].attributes["data-place"].value === this.props.selectedPlace
+        tiles[i].attributes["data-place"].value === this.props.selectedPlace &&
+        this.props.selectedOnMap
       ) {
         tiles[i].scrollIntoView(true);
         // tiles[i].scrollIntoView({

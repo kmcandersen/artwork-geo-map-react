@@ -55,6 +55,7 @@ class GalleryPanel extends Component {
             toggleTileDetails={this.props.toggleTileDetails}
             selectPlace={this.props.selectPlace}
             selectedPlace={this.props.selectedPlace}
+            selectedOnMap={this.props.selectedOnMap}
             removeSelectedPlace={this.props.removeSelectedPlace}
             toggleSelectedPlace={this.props.toggleSelectedPlace}
             gridType={this.props.gridType}

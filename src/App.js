@@ -14,6 +14,8 @@ class App extends React.Component {
     mapLoaded: false,
     searchResults: [],
     selectedPlace: "",
+    //used to ensure that a country's tiles only scrolled to when selectedPlace changed on map, not when tile icon clicked
+    selectedOnMap: 0,
     tilePointOn: false,
     //used with mapLoaded in GalleryPanel to ensure that No Results only shown when it's legit. Still nec, now that sampleArtwork loads first?
     searchMade: false,
@@ -92,8 +94,12 @@ class App extends React.Component {
     this.setState({ selectedPlace: place });
   };
 
+  selectOnMap = () => {
+    this.setState({ selectedOnMap: 1 });
+  };
+
   removeSelectedPlace = () => {
-    this.setState({ selectedPlace: "" });
+    this.setState({ selectedPlace: "", selectedOnMap: 0 });
   };
 
   //created for tile map point click
@@ -201,6 +207,7 @@ class App extends React.Component {
           mapLoaded={this.state.mapLoaded}
           results={this.state.searchResults}
           selectPlace={this.selectPlace}
+          selectOnMap={this.selectOnMap}
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
           setSampleArtwork={this.setSampleArtwork}
@@ -213,6 +220,7 @@ class App extends React.Component {
           results={this.state.searchResults}
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
+          selectedOnMap={this.state.selectedOnMap}
           removeSelectedPlace={this.removeSelectedPlace}
           toggleSelectedPlace={this.toggleSelectedPlace}
           toggleTileDetails={this.toggleTileDetails}

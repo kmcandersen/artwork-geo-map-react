@@ -109,6 +109,7 @@ class EsriMap extends Component {
                       this.props.removeSelectedPlace();
                     } else if (this.props.selectedPlace !== mapSelectedPlace) {
                       this.props.selectPlace(mapSelectedPlace);
+                      this.props.selectOnMap();
                       highlight = layerView.highlight(feature);
                     }
                   } else {
