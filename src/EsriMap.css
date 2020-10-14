@@ -12,6 +12,10 @@
   text-align: center;
 }
 
+.esri-popup__header-title:hover {
+  background-color: white !important;
+}
+
 .flag-icon {
   width: 1em !important;
   padding-top: 2px;
