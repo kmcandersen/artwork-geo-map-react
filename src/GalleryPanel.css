@@ -23,17 +23,16 @@ svg.show-all-icon {
   margin: 0 auto;
   justify-content: center;
   text-transform: uppercase;
+  text-align: center;
   /* margin-top: 5px;
   font-size: 0.8rem; */
 }
 
 .noresults-sugg {
+  margin-top: 0;
   text-transform: none;
+  font-style: oblique;
 }
-
-/* .noresults-msg:last-child {
-  text-transform: none;
-} */
 
 .input-footer {
   padding: 16px 0;

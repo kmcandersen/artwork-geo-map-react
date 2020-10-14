@@ -6,6 +6,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Gallery from "./Gallery";
 import "./GalleryPanel.css";
 import "./global.css";
+// import scream-square from './the-scream-square.jpg';
 
 class GalleryPanel extends Component {
   render() {
@@ -74,11 +75,18 @@ class GalleryPanel extends Component {
           this.props.mapLoaded && (
             <div className="noresults-msg-wrapper">
               <div>
-                <p>No results.</p>
-                <p className="noresults-sugg">
-                  Psst! Try changing or widening the year range.
-                </p>
+                <a href="https://www.artic.edu/artworks/17229/the-scream">
+                  <img
+                    src={require("./the-scream-square.jpg")}
+                    style={{ width: "75px" }}
+                    alt="Edvard Munch. The Scream. 1895. The Art Institute of Chicago."
+                  />
+                </a>
               </div>
+              <p>No results.</p>
+              <p className="noresults-sugg">
+                Psst! Try widening the year range or changing the media options.
+              </p>
             </div>
           )
         )}
