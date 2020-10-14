@@ -1,6 +1,7 @@
 .esri-map {
   width: 100%;
   background: #d0cfd4;
+  z-index: -1;
 }
 
 .esri-popup__main-container.esri-widget {

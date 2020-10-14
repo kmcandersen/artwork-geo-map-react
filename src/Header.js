@@ -23,29 +23,29 @@ class Header extends Component {
     const { mapLoaded, onSearchSubmit } = this.props;
     return (
       <div className="Header-wrapper">
-        <header>
-          <div className="header-style">
-            <div className="logo-wrapper">
-              ART<span className="gray-text">IMELINE</span>
-            </div>
-            <nav>
-              {navItems.map((n, i) => (
-                <Button
-                  style={{ margin: "7px" }}
-                  aria-controls={n}
-                  aria-haspopup="true"
-                  // variant="contained"
-                  onClick={this.handleClick}
-                  color="inherit"
-                  name={n}
-                  key={i}
-                >
-                  {n}
-                </Button>
-              ))}
-            </nav>
+        <header className="header-style">
+          <div className="logo-wrapper">
+            ART<span className="gray-text">IMELINE</span>
           </div>
+          <nav>
+            {navItems.map((n, i) => (
+              <Button
+                style={{ margin: "7px" }}
+                aria-controls={n}
+                aria-haspopup="true"
+                // variant="contained"
+                onClick={this.handleClick}
+                color="inherit"
+                name={n}
+                key={i}
+                className={this.state.openPanel === n ? "open" : ""}
+              >
+                {n}
+              </Button>
+            ))}
+          </nav>
         </header>
+
         <Intro name="about" openPanel={openPanel} />
         <SearchPanel
           onSearchSubmit={onSearchSubmit}
