@@ -10,6 +10,7 @@ import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import LinkIcon from "@material-ui/icons/Link";
 import InfoIcon from "@material-ui/icons/Info";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import Tooltip from "@material-ui/core/Tooltip";
 import "./Gallery.css";
 
 class Gallery extends Component {
@@ -135,19 +136,20 @@ class Gallery extends Component {
                   <p className="tile-details">{result.date_start}</p>
                 </div>
                 <div className="tile-icons">
-                  <IconButton
-                    title="Highlight Place"
-                    onClick={() =>
-                      this.props.toggleSelectedPlace(result.place_of_origin)
-                    }
-                  >
-                    {/* condition doesn't allow for toggle on/off of icon */}
-                    {result.place_of_origin === this.props.selectedPlace ? (
-                      <RoomIcon style={{ color: "yellow" }} />
-                    ) : (
-                      <RoomOutlinedIcon style={{ color: "white" }} />
-                    )}
-                  </IconButton>
+                  <Tooltip title="Show on map" placement="top" arrow>
+                    <IconButton
+                      onClick={() =>
+                        this.props.toggleSelectedPlace(result.place_of_origin)
+                      }
+                    >
+                      {/* condition doesn't allow for toggle on/off of icon */}
+                      {result.place_of_origin === this.props.selectedPlace ? (
+                        <RoomIcon style={{ color: "yellow" }} />
+                      ) : (
+                        <RoomOutlinedIcon style={{ color: "white" }} />
+                      )}
+                    </IconButton>
+                  </Tooltip>
                   {/* <IconButton
                     title="Add/Remove Favorite"
                       style={{ color: "white" }}
@@ -159,36 +161,38 @@ class Gallery extends Component {
                     >
                       <FavoriteBorderIcon />
                     </IconButton> */}
-                  <IconButton
-                    title="AIC Webpage"
-                    className={
-                      this.props.detailItems.includes(result.aic_id)
-                        ? ""
-                        : "hidden"
-                    }
-                  >
-                    <ExternalLink
-                      href={`https://www.artic.edu/artworks/${result.aic_id}`}
-                      style={{ color: "white" }}
+                  <Tooltip title="AIC webpage" placement="top" arrow>
+                    <IconButton
+                      className={
+                        this.props.detailItems.includes(result.aic_id)
+                          ? ""
+                          : "hidden"
+                      }
                     >
-                      <LinkIcon />
-                    </ExternalLink>
-                  </IconButton>
+                      <ExternalLink
+                        href={`https://www.artic.edu/artworks/${result.aic_id}`}
+                        style={{ color: "white" }}
+                      >
+                        <LinkIcon />
+                      </ExternalLink>
+                    </IconButton>
+                  </Tooltip>
 
-                  <IconButton
-                    aria-label="Show/Hide Details"
-                    title="Show/Hide Details"
-                    style={{ color: "white" }}
-                    onClick={() => {
-                      this.props.toggleTileDetails(result.aic_id);
-                    }}
-                  >
-                    {this.props.detailItems.includes(result.aic_id) ? (
-                      <InfoIcon />
-                    ) : (
-                      <InfoOutlinedIcon />
-                    )}
-                  </IconButton>
+                  <Tooltip title="Details" placement="top" arrow>
+                    <IconButton
+                      aria-label="Show/Hide Details"
+                      style={{ color: "white" }}
+                      onClick={() => {
+                        this.props.toggleTileDetails(result.aic_id);
+                      }}
+                    >
+                      {this.props.detailItems.includes(result.aic_id) ? (
+                        <InfoIcon />
+                      ) : (
+                        <InfoOutlinedIcon />
+                      )}
+                    </IconButton>
+                  </Tooltip>
                 </div>
               </div>
             </GridListTile>

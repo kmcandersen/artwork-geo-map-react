@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import Tooltip from "@material-ui/core/Tooltip";
 import Gallery from "./Gallery";
 import "./GalleryPanel.css";
 import "./global.css";
@@ -21,27 +22,34 @@ class GalleryPanel extends Component {
       <div className="GalleryPanel" style={gridHeight}>
         {this.props.results.length ? (
           <div className="toggle-all-details">
-            <IconButton
-              aria-label={
-                this.props.showAllDetails
-                  ? "Hide all details"
-                  : "Show all details"
-              }
-              title={
-                this.props.showAllDetails
-                  ? "Hide all details"
-                  : "Show all details"
-              }
-              className="infoAllBtn"
-              style={{ padding: "10px" }}
-              onClick={this.props.toggleAllDetails}
-            >
-              {this.props.showAllDetails ? (
-                <InfoIcon className="show-all-icon" />
-              ) : (
-                <InfoOutlinedIcon className="show-all-icon" />
-              )}
-            </IconButton>
+            {this.props.showAllDetails ? (
+              <Tooltip title="Hide all details" placement="top" arrow>
+                <IconButton
+                  aria-label="Hide all details"
+                  className="infoAllBtn"
+                  style={{ padding: "10px" }}
+                  onClick={this.props.toggleAllDetails}
+                >
+                  <InfoIcon className="show-all-icon" />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip
+                title="Show all details"
+                className="tooltip"
+                placement="top"
+                arrow
+              >
+                <IconButton
+                  aria-label="Show all details"
+                  className="infoAllBtn"
+                  style={{ padding: "10px" }}
+                  onClick={this.props.toggleAllDetails}
+                >
+                  <InfoOutlinedIcon className="show-all-icon" />
+                </IconButton>
+              </Tooltip>
+            )}
           </div>
         ) : (
           ""
