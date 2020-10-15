@@ -10,10 +10,13 @@ const Intro = (props) => {
           ARTIMELINE displays artwork from around the world created during a
           selected time period. Use this app to place familiar works and artists
           in their historical contexts, and see art and styles from around the
-          world that you might not be familiar with (yet). For example, you
-          might recognize the work of Impressionist painters in Europe and the
-          United States during the late 1800s, but ARTIMELINE can show you what
-          other artists were creating at the same time.
+          world that you might not be familiar with (yet).{" "}
+          <span className="example">
+            For example, you might recognize the work of Impressionist painters
+            in Europe and the United States during the late 1800s, and
+            ARTIMELINE can show you what other artists were creating at the same
+            time.
+          </span>
         </p>
         <p>
           Enter a year range in the Search panel to generate a selection of

@@ -8,3 +8,21 @@
 .intro-msg p:nth-child(2) {
   margin: 10px 0;
 }
+
+@media screen and (max-device-width: 700px) {
+  .intro-msg > p {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-device-width: 900px) {
+  .example {
+    display: none;
+  }
+}
+
+@media screen and (max-device-width: 350px) {
+  .example {
+    display: none;
+  }
+}

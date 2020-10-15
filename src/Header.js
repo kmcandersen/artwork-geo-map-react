@@ -18,7 +18,8 @@ class Header extends Component {
   };
 
   render() {
-    const navItems = ["about", "search", "log in"];
+    const navItems = ["about", "search"];
+    // const navItems = ["about", "search", "log in"];
     const { openPanel } = this.state;
     const { mapLoaded, onSearchSubmit } = this.props;
     return (
@@ -30,7 +31,7 @@ class Header extends Component {
           <nav>
             {navItems.map((n, i) => (
               <Button
-                style={{ margin: "7px" }}
+                // style={{ margin: "7px" }}
                 aria-controls={n}
                 aria-haspopup="true"
                 // variant="contained"
@@ -53,7 +54,7 @@ class Header extends Component {
           name="search"
           openPanel={openPanel}
         />
-        {/* {openPanel === "login" && <Login name="log in" />} */}
+        {/* <Login name="login" openPanel={openPanel} /> */}
       </div>
     );
   }

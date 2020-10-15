@@ -3,8 +3,9 @@
   letter-spacing: 0.02em;
   z-index: 2;
   position: absolute;
-  top: 90px;
-  right: 20px;
+  top: 85px;
+  /* align with right nav item */
+  right: 35px;
   font-family: "Nunito", sans-serif;
   border-radius: 10px;
   padding: 30px;
@@ -16,4 +17,17 @@
 
 .hidden {
   visibility: hidden;
+}
+
+@media only screen and (max-width: 500px) {
+  .panel {
+    right: calc(50vw - 175px);
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .panel {
+    width: 100%;
+    right: calc(50vw - 50%);
+  }
 }

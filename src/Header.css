@@ -28,10 +28,51 @@
 
 nav {
   position: relative;
-  right: 20px;
+  right: 30px;
+}
+
+nav .MuiButtonBase-root.MuiButton-root.MuiButton-text {
+  margin: 10px;
 }
 
 /* nav label highlighted when its panel is open */
 .MuiButtonBase-root.MuiButton-root.MuiButton-text.open {
   background-color: rgba(0, 0, 0, 0.09);
+}
+
+@media only screen and (max-width: 500px) {
+  .logo-wrapper {
+    font-size: 2.5rem;
+    left: 15px;
+  }
+  nav {
+    right: 10px;
+  }
+  nav .MuiButton-label {
+    font-size: 0.9rem;
+  }
+  nav .MuiButtonBase-root.MuiButton-root.MuiButton-text {
+    margin: 3px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .logo-wrapper {
+    font-size: 2.2rem;
+  }
+  nav .MuiButton-label {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .logo-wrapper {
+    font-size: 2rem;
+  }
+  nav .MuiButton-label {
+    font-size: 0.7rem;
+  }
+  nav .MuiButtonBase-root.MuiButton-root.MuiButton-text {
+    margin: 1px;
+  }
 }
