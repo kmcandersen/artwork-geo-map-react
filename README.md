@@ -2,8 +2,8 @@
 
 # ARTIMELINE
 
-This site lets users enter a year range and view the map location and details of a selection of random artwork from those years. Users can place familiar works and artists in their historical context, and be introduced to art and styles from around the world that they might not be familiar with.
+ARTIMELINE displays artwork from around the world created during a selected time period. Use this app to place familiar works and artists in their historical contexts, and see art and styles from around the world that you might not be familiar with (yet). For example, you might recognize the work of Impressionist painters in Europe and the United States during the late 1800s, and ARTIMELINE can show you what other artists were creating at the same time, in a variety of media.
 
-All artwork displayed is from the collection of the [Art Institute of Chicago](https://www.artic.edu/) and images are in the public domain. The site uses the [Art Institute's Public API](https://www.artic.edu/open-access/public-api), the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/), and React.
+Enter a year range in the Search panel to generate a selection of random artwork from the [Art Institute of Chicago's](https://www.artic.edu/) collection. Optionally, you can focus your search on specific media.
 
-Work on this project is ongoing, but a version is deployed at [artimeline.netlify.app](https://artimeline.netlify.app/).
+The site uses the [Art Institute's Public API](https://www.artic.edu/open-access/public-api), the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/), and React. Work on this project is ongoing, but a version is deployed at [artimeline.netlify.app](https://artimeline.netlify.app/).
