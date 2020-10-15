@@ -1,38 +1,28 @@
-.intro-content {
-  font-family: "Nunito", sans-serif;
-  padding: 10px;
-  letter-spacing: 0.02em;
-}
-
 .intro-msg > p {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.35rem;
   text-align: left;
+  margin: 0;
 }
 
-.intro-dismiss {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+.intro-msg p:nth-child(2) {
+  margin: 10px 0;
 }
 
-.intro-dismiss-text {
-  cursor: pointer;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  color: #3f51b5;
+@media screen and (max-device-width: 700px) {
+  .intro-msg > p {
+    font-size: 0.8rem;
+  }
 }
 
-.intro-dismiss-text:hover {
-  color: #0c1e82;
+@media screen and (orientation: landscape) and (max-device-width: 900px) {
+  .example {
+    display: none;
+  }
 }
 
-button.startBtn {
-  color: #3f51b5;
-  width: 35px;
-  height: 35px;
-}
-
-button.startBtn:hover {
-  color: #0c1e82;
+@media screen and (max-device-width: 350px) {
+  .example {
+    display: none;
+  }
 }

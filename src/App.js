@@ -4,16 +4,18 @@ import { query } from "./utils/query.js";
 import { places } from "./utils/places_list.js";
 import { compareValues } from "./utils/helpers.js";
 import { createFeatureArr } from "./utils/createFeatureArr.js";
-import SearchPanel from "./SearchPanel";
 import EsriMap from "./EsriMap";
 import "./App.css";
 import GalleryPanel from "./GalleryPanel.js";
+import Header from "./Header.js";
 
 class App extends React.Component {
   state = {
     mapLoaded: false,
     searchResults: [],
     selectedPlace: "",
+    //used to ensure that a country's tiles only scrolled to when selectedPlace changed on map, not when tile icon clicked
+    selectedOnMap: 0,
     tilePointOn: false,
     //used with mapLoaded in GalleryPanel to ensure that No Results only shown when it's legit. Still nec, now that sampleArtwork loads first?
     searchMade: false,
@@ -21,6 +23,7 @@ class App extends React.Component {
     showAllDetails: false,
     detailItems: [],
     windowWidth: 0,
+    mainHeight: 0,
     gridType: "",
   };
   // switchTheme = (e) => {
@@ -49,9 +52,12 @@ class App extends React.Component {
 
   getGridInfo = (resultsLength) => {
     let windowWidth = window.innerWidth;
+    //windowHeight - header height
+    let mainHeight = window.innerHeight - 70;
     let gridType = this.setGridType(windowWidth, resultsLength);
     this.setState({
       windowWidth: windowWidth,
+      mainHeight: mainHeight,
       gridType: gridType,
     });
   };
@@ -88,8 +94,12 @@ class App extends React.Component {
     this.setState({ selectedPlace: place });
   };
 
+  selectOnMap = () => {
+    this.setState({ selectedOnMap: 1 });
+  };
+
   removeSelectedPlace = () => {
-    this.setState({ selectedPlace: "" });
+    this.setState({ selectedPlace: "", selectedOnMap: 0 });
   };
 
   //created for tile map point click
@@ -154,10 +164,6 @@ class App extends React.Component {
     return gridType;
   };
 
-  toggleQueryNoClass = (bool) => {
-    this.setState({ queryNoClass: bool });
-  };
-
   toggleAllDetails = () => {
     //if showAllDetails = false, = true & loop thru all results & put them in state.detailItem arr
     //if showAllDetails = true, = false & remove all items from arr
@@ -192,39 +198,41 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Header
+          onSearchSubmit={this.onSearchSubmit}
+          mapLoaded={this.state.mapLoaded}
+        />
         <EsriMap
           onMapLoad={this.onMapLoad}
           mapLoaded={this.state.mapLoaded}
           results={this.state.searchResults}
           selectPlace={this.selectPlace}
+          selectOnMap={this.selectOnMap}
           selectedPlace={this.state.selectedPlace}
           removeSelectedPlace={this.removeSelectedPlace}
           setSampleArtwork={this.setSampleArtwork}
           gridType={this.state.gridType}
-        />
-        <SearchPanel
-          onSearchSubmit={this.onSearchSubmit}
-          mapLoaded={this.state.mapLoaded}
-          toggleQueryNoClass={this.toggleQueryNoClass}
+          windowWidth={this.state.windowWidth}
+          mainHeight={this.state.mainHeight}
         />
         <GalleryPanel
           mapLoaded={this.state.mapLoaded}
           results={this.state.searchResults}
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
+          selectedOnMap={this.state.selectedOnMap}
           removeSelectedPlace={this.removeSelectedPlace}
           toggleSelectedPlace={this.toggleSelectedPlace}
           toggleTileDetails={this.toggleTileDetails}
           detailItems={this.state.detailItems}
           showAllDetails={this.state.showAllDetails}
           toggleAllDetails={this.toggleAllDetails}
-          // toggleAllDetailsState={this.toggleAllDetailsState}
           searchMade={this.state.searchMade}
           gridType={this.state.gridType}
           windowWidth={this.state.windowWidth}
+          mainHeight={this.state.mainHeight}
         />
       </div>
-      // </div>
     );
   }
 }

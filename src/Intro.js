@@ -1,32 +1,38 @@
-import React, { Component } from "react";
-import IconButton from "@material-ui/core/IconButton";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import React from "react";
 import "./Intro.css";
+import "./global.css";
 
-class Intro extends Component {
-  render() {
-    return (
-      <div className="intro-content">
-        <div className="intro-msg">
-          <p>
-            Enter a year range to generate a selection of random artwork from
-            the <a href="https://www.artic.edu/">Art Institute of Chicago's</a>{" "}
-            collection. Place familiar works and artists in their historical
-            contexts, and see art and styles from around the world that you
-            might not be familiar with (yet).
-          </p>
-        </div>
-        <div>
-          <div className="intro-dismiss" onClick={this.props.hideIntro}>
-            <label className="intro-dismiss-text">Get Started</label>
-            <IconButton title="Go to search" className="startBtn">
-              <ArrowForwardIcon />
-            </IconButton>
-          </div>
-        </div>
+const Intro = (props) => {
+  return (
+    <div className={`panel ${props.openPanel === "about" ? "" : "hidden"}`}>
+      <div className="intro-msg">
+        <p>
+          ARTIMELINE displays artwork from around the world created during a
+          selected time period. Use this app to place familiar works and artists
+          in their historical contexts, and see art and styles from around the
+          world that you might not be familiar with (yet).{" "}
+          <span className="example">
+            For example, you might recognize the work of Impressionist painters
+            in Europe and the United States during the late 1800s, and
+            ARTIMELINE can show you what other artists were creating at the same
+            time.
+          </span>
+        </p>
+        <p>
+          Enter a year range in the Search panel to generate a selection of
+          random artwork from the 
+          <a href="https://www.artic.edu/">Art Institute of Chicago's</a>{" "}
+          collection. Optionally, you can focus your search on specific media.
+        </p>
+        <p>
+          Made by <a href="https://kristenandersen.online/">Kristen Andersen</a>{" "}
+          with information from the Art Institute of Chicago’s{" "}
+          <a href="https://www.artic.edu/open-access/public-api">Public API</a>.
+        </p>
       </div>
-    );
-  }
-}
+      <div></div>
+    </div>
+  );
+};
 
 export default Intro;

@@ -2,48 +2,55 @@ import React, { Component } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import Tooltip from "@material-ui/core/Tooltip";
 import Gallery from "./Gallery";
 import "./GalleryPanel.css";
+import "./global.css";
+// import scream-square from './the-scream-square.jpg';
 
 class GalleryPanel extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     detailItems: [],
-  //   };
-  // }
-
   render() {
+    const tallGrid = {
+      height: this.props.mainHeight * 0.55 + "px",
+    };
+    const shortGrid = {
+      height: this.props.mainHeight * 0.4 + "px",
+      display: "flex",
+    };
+    const gridHeight = this.props.gridType === "tall" ? tallGrid : shortGrid;
+
     return (
-      <div
-        //
-        className={`GalleryPanel ${
-          this.props.gridType === "tall" ? "tall-grid" : "short-grid"
-        }`}
-      >
+      <div className="GalleryPanel" style={gridHeight}>
         {this.props.results.length ? (
           <div className="toggle-all-details">
-            <IconButton
-              aria-label={
-                this.props.showAllDetails
-                  ? "Hide all details"
-                  : "Show all details"
-              }
-              title={
-                this.props.showAllDetails
-                  ? "Hide all details"
-                  : "Show all details"
-              }
-              className="infoAllBtn"
-              style={{ padding: "10px" }}
-              onClick={this.props.toggleAllDetails}
-            >
-              {this.props.showAllDetails ? (
-                <InfoIcon className="infoIcon" />
-              ) : (
-                <InfoOutlinedIcon className="infoIcon" />
-              )}
-            </IconButton>
+            {this.props.showAllDetails ? (
+              <Tooltip title="Hide all details" placement="top" arrow>
+                <IconButton
+                  aria-label="Hide all details"
+                  className="infoAllBtn"
+                  style={{ padding: "10px" }}
+                  onClick={this.props.toggleAllDetails}
+                >
+                  <InfoIcon className="show-all-icon" />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip
+                title="Show all details"
+                className="tooltip"
+                placement="top"
+                arrow
+              >
+                <IconButton
+                  aria-label="Show all details"
+                  className="infoAllBtn"
+                  style={{ padding: "10px" }}
+                  onClick={this.props.toggleAllDetails}
+                >
+                  <InfoOutlinedIcon className="show-all-icon" />
+                </IconButton>
+              </Tooltip>
+            )}
           </div>
         ) : (
           ""
@@ -57,6 +64,7 @@ class GalleryPanel extends Component {
             toggleTileDetails={this.props.toggleTileDetails}
             selectPlace={this.props.selectPlace}
             selectedPlace={this.props.selectedPlace}
+            selectedOnMap={this.props.selectedOnMap}
             removeSelectedPlace={this.props.removeSelectedPlace}
             toggleSelectedPlace={this.props.toggleSelectedPlace}
             gridType={this.props.gridType}
@@ -67,11 +75,18 @@ class GalleryPanel extends Component {
           this.props.mapLoaded && (
             <div className="noresults-msg-wrapper">
               <div>
-                <p>No results.</p>
-                <p className="noresults-sugg">
-                  Psst! Try changing or widening the year range.
-                </p>
+                <a href="https://www.artic.edu/artworks/17229/the-scream">
+                  <img
+                    src={require("./the-scream-square.jpg")}
+                    style={{ width: "75px" }}
+                    alt="Edvard Munch. The Scream. 1895. The Art Institute of Chicago."
+                  />
+                </a>
               </div>
+              <p>No results.</p>
+              <p className="noresults-sugg">
+                Psst! Try widening the year range or changing the media options.
+              </p>
             </div>
           )
         )}

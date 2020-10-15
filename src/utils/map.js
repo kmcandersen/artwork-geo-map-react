@@ -14,7 +14,7 @@ export function loadMap(container) {
       center: [13.0, 30.0],
       constraints: {
         minZoom: 5,
-        maxZoom: 2,
+        maxZoom: 1,
         rotationEnabled: false,
       },
       popup: {

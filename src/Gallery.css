@@ -62,10 +62,6 @@ img.gridListImg {
   justify-content: flex-end;
 }
 
-svg.MuiSvgIcon-root {
-  /* font-size: 1.3em; */
-}
-
 /* padding on inline style */
 button.infoAllBtn {
   color: #3f51b5;
@@ -75,8 +71,8 @@ button.infoAllBtn:hover {
   color: #303f9f;
 }
 
-svg.infoIcon {
-  font-size: 1.3em;
+.tile-icons svg {
+  font-size: 1.2em;
 }
 
 /* .tile-info, favorite & link icons when details hidden (.gridListTile-info-only active) */

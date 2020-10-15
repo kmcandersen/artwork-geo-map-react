@@ -15,6 +15,7 @@ body {
   background-color: #f5f5f5;
   color: #666666;
   width: 100vw;
+  /* height = no scroll: */
   /* height: 100vh; */
   overflow: hidden;
 }

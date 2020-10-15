@@ -1,0 +1,78 @@
+/* header.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.MuiPaper-elevation4 { */
+.header-style {
+  background-color: white;
+  color: #666666;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  width: 100%;
+  height: 70px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.logo-wrapper {
+  font-family: "Bebas Neue", cursive;
+  color: #b50938;
+  font-size: 4rem;
+  letter-spacing: 0.02em;
+  position: relative;
+  left: 20px;
+  top: 5px;
+}
+
+.gray-text {
+  color: #b0b0b0;
+}
+
+nav {
+  position: relative;
+  right: 30px;
+}
+
+nav .MuiButtonBase-root.MuiButton-root.MuiButton-text {
+  margin: 10px;
+}
+
+/* nav label highlighted when its panel is open */
+.MuiButtonBase-root.MuiButton-root.MuiButton-text.open {
+  background-color: rgba(0, 0, 0, 0.09);
+}
+
+@media only screen and (max-width: 500px) {
+  .logo-wrapper {
+    font-size: 2.5rem;
+    left: 15px;
+  }
+  nav {
+    right: 10px;
+  }
+  nav .MuiButton-label {
+    font-size: 0.9rem;
+  }
+  nav .MuiButtonBase-root.MuiButton-root.MuiButton-text {
+    margin: 3px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .logo-wrapper {
+    font-size: 2.2rem;
+  }
+  nav .MuiButton-label {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .logo-wrapper {
+    font-size: 2rem;
+  }
+  nav .MuiButton-label {
+    font-size: 0.7rem;
+  }
+  nav .MuiButtonBase-root.MuiButton-root.MuiButton-text {
+    margin: 1px;
+  }
+}
