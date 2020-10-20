@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import Tooltip from "@material-ui/core/Tooltip";
 import "./SearchPanel.css";
 import "./global.css";
 import { capitalize } from "./utils/helpers.js";
@@ -18,16 +19,14 @@ class SearchPanel extends Component {
   };
 
   componentDidMount() {
-    const currYear = new Date().getFullYear();
     ValidatorForm.addValidationRule("yearInRangeStart", () => {
-      return (this.state.startYear >= -8000 && this.state.startYear <= currYear);
+      return (this.state.startYear >= -2000 && this.state.startYear <= 1950);
     });
     ValidatorForm.addValidationRule("yearInRangeEnd", () => {
-      return (this.state.endYear >= -8000 && this.state.endYear <= currYear);
+      return (this.state.endYear >= -2000 && this.state.endYear <= 1950);
     });
     ValidatorForm.addValidationRule("endYearGreater", () => {
-      let { startYear, endYear } = this.state;
-      return ((Number(endYear) - Number(startYear)) >= 0);
+      return (Number(this.state.endYear) - Number(this.state.startYear)) >= 0;
     });
   }
 
@@ -127,6 +126,9 @@ class SearchPanel extends Component {
                     errorMessages={["Invalid year", "Invalid end year"]}
                   />
                 </div>
+                <Tooltip title="Years -2000 to 1950" placement="top" arrow>
+                  <HelpOutlineIcon style={{ zIndex: 5, position: "absolute", right: "27px" }} />
+                </Tooltip>
               </div>
 
               <div className="class-option-wrapper">
