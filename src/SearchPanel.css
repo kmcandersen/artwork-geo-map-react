@@ -32,7 +32,12 @@ input[type="number"] {
 }
 
 .right-input {
-  margin-left: 10px;
+  margin-left: 10px; 
+}
+
+/* to keep inputs aligned with an error msg */
+.left-input, .right-input {
+  height: 65px;
 }
 
 .class-option-wrapper {
