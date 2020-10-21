@@ -6,12 +6,12 @@ import SearchPanel from "./SearchPanel";
 
 class Header extends Component {
   state = {
-    openPanel: [],
+    openPanel: "about",
   };
 
   handleClick = (event) => {
     if (this.state.openPanel.includes(event.currentTarget.name)) {
-      this.setState({ openPanel: [] });
+      this.setState({ openPanel: "" });
     } else {
       this.setState({ openPanel: event.currentTarget.name });
     }
