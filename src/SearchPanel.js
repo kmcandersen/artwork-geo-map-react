@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import Tooltip from "@material-ui/core/Tooltip";
 import "./SearchPanel.css";
 import "./global.css";
 import { capitalize } from "./utils/helpers.js";
 import { classStrToQuery } from "./utils/class_queries.js";
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 class SearchPanel extends Component {
   state = {
@@ -16,10 +18,21 @@ class SearchPanel extends Component {
     classes: [],
   };
 
+  componentDidMount() {
+    ValidatorForm.addValidationRule("yearInRangeStart", () => {
+      return (this.state.startYear >= -2000 && this.state.startYear <= 1950);
+    });
+    ValidatorForm.addValidationRule("yearInRangeEnd", () => {
+      return (this.state.endYear >= -2000 && this.state.endYear <= 1950);
+    });
+    ValidatorForm.addValidationRule("endYearGreater", () => {
+      return (Number(this.state.endYear) - Number(this.state.startYear)) >= 0;
+    });
+  }
+
   //handler for change event on checkbox; adds/removes classes from state array
   onCheckClass = (e) => {
     let className = e.target.name;
-    this.setState({ classesUpdated: false });
     let classes = this.state.classes || [];
     if (this.state.classes.includes(className)) {
       let newClasses = classes.filter((c) => c !== className);
@@ -56,6 +69,7 @@ class SearchPanel extends Component {
       this.state.endYear,
       classQuery
     );
+    return;
   };
 
   render() {
@@ -66,51 +80,55 @@ class SearchPanel extends Component {
       "sculpture",
       "textiles",
     ];
+
     return (
       <div
         className={`panel ${this.props.openPanel === "search" ? "" : "hidden"}`}
       >
         <div>
-          <form
+          <ValidatorForm
             className="root"
-            noValidate
             autoComplete="off"
+            instantValidate={false}
             onSubmit={(e) => this.onFormSubmit(e)}
           >
             <div>
               <div className="input-fields">
                 <div className="left-input">
-                  <TextField
+                  <TextValidator
                     id="standard-basic"
                     type="number"
                     name="startYear"
-                    min="-8000"
-                    max="2020"
                     label="start year"
                     value={this.state.startYear}
                     onChange={(e) =>
                       this.setState({
-                        startYear: parseInt(e.target.value),
+                        startYear: e.target.value,
                       })
                     }
+                    validators={["yearInRangeStart"]}
+                    errorMessages={["Invalid year"]}
                   />
                 </div>
                 <div className="right-input">
-                  <TextField
+                  <TextValidator
                     id="standard-basic"
                     type="number"
                     name="endYear"
-                    min="-8000"
-                    max="2020"
                     label="end year"
                     value={this.state.endYear}
                     onChange={(e) =>
                       this.setState({
-                        endYear: parseInt(e.target.value),
+                        endYear: e.target.value,
                       })
                     }
+                    validators={["yearInRangeEnd", "endYearGreater"]}
+                    errorMessages={["Invalid year", "Invalid end year"]}
                   />
                 </div>
+                <Tooltip title="Years -2000 to 1950" placement="top" arrow>
+                  <HelpOutlineIcon style={{ zIndex: 5, position: "absolute", right: "27px" }} />
+                </Tooltip>
               </div>
 
               <div className="class-option-wrapper">
@@ -133,7 +151,7 @@ class SearchPanel extends Component {
                               onChange={this.onCheckClass}
                               name={c}
                               color="primary"
-                              // disabled
+                            // disabled
                             />
                           }
                           label={capitalize(c)}
@@ -151,18 +169,18 @@ class SearchPanel extends Component {
                   color="primary"
                   // data-theme="dark"
                   disabled={
-                    !this.props.mapLoaded ||
-                    this.state.endYear === "" ||
-                    this.state.endYear < this.state.startYear
-                      ? true
-                      : false
+                    !this.props.mapLoaded
+                    //   || this.state.endYear === "" ||
+                    //   this.state.endYear < this.state.startYear
+                    //     ? true
+                    //     : false
                   }
                 >
                   Submit
                 </Button>
               </div>
             </div>
-          </form>
+          </ValidatorForm>
           {/* end input-form */}
         </div>
       </div>

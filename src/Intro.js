@@ -14,19 +14,18 @@ const Intro = (props) => {
           <span className="example">
             For example, you might recognize the work of Impressionist painters
             in Europe and the United States during the late 1800s, and
-            ARTIMELINE can show you what other artists were creating at the same
-            time.
+            ARTIMELINE can show you what other artists were creating at the same time.
           </span>
         </p>
         <p>
           Enter a year range in the Search panel to generate a selection of
-          random artwork from the 
+          random artwork from the
           <a href="https://www.artic.edu/">Art Institute of Chicago's</a>{" "}
           collection. Optionally, you can focus your search on specific media.
         </p>
         <p>
           Made by <a href="https://kristenandersen.online/">Kristen Andersen</a>{" "}
-          with information from the Art Institute of Chicago’s{" "}
+          with data provided by the Art Institute of Chicago’s{" "}
           <a href="https://www.artic.edu/open-access/public-api">Public API</a>.
         </p>
       </div>
