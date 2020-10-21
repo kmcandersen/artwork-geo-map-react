@@ -33,6 +33,8 @@ class SearchPanel extends Component {
   //handler for change event on checkbox; adds/removes classes from state array
   onCheckClass = (e) => {
     let className = e.target.name;
+    // Causes a needed delay?:
+    this.setState({ classesUpdated: false });
     let classes = this.state.classes || [];
     if (this.state.classes.includes(className)) {
       let newClasses = classes.filter((c) => c !== className);
