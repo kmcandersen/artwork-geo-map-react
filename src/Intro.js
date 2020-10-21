@@ -19,7 +19,7 @@ const Intro = (props) => {
         </p>
         <p>
           Enter a year range in the Search panel to generate a selection of
-          random artwork from the
+          random artwork from the{" "}
           <a href="https://www.artic.edu/">Art Institute of Chicago's</a>{" "}
           collection. Optionally, you can focus your search on specific media.
         </p>
