@@ -1,6 +1,22 @@
 export const sampleArtwork = [
   {
     ObjectID: 1,
+    aic_id: 59846,
+    title: "Woman's Head with Roses",
+    artist_title: "Koloman (Kolo) Moser",
+    place_of_origin: "Austria",
+    date_start: 1899,
+    date_display: "1899",
+    thumbnailUrl: "https://www.artic.edu/iiif/2/b985fa1c-cac3-a979-9ffe-28ffb8e921c2",
+    classification_title: "Stencil",
+    style_title: null,
+    api_link: "https://api.artic.edu/api/v1/artworks/59846",
+    is_public_domain: "true",
+    latitude: 47.585810005,
+    longitude: 14.1370769480001
+  },
+  {
+    ObjectID: 2,
     aic_id: 49409,
     title: "Portrait of Félicien Rops",
     artist_title: "Adrien Lambert Jean de Witte",
@@ -17,7 +33,7 @@ export const sampleArtwork = [
     longitude: 4.66107042700003,
   },
   {
-    ObjectID: 2,
+    ObjectID: 3,
     aic_id: 656,
     title: "Lion (One of a Pair, South Pedestal)",
     artist_title: "Edward Kemeys",
@@ -34,7 +50,7 @@ export const sampleArtwork = [
     longitude: -87.623177,
   },
   {
-    ObjectID: 3,
+    ObjectID: 4,
     aic_id: 217685,
     title:
       "Landscape and Figure, from an album of Landscapes and Calligraphy for Liu Songfu",
@@ -50,23 +66,6 @@ export const sampleArtwork = [
     is_public_domain: "true",
     latitude: 35.86166,
     longitude: 104.1953964,
-  },
-  {
-    ObjectID: 4,
-    aic_id: 16907,
-    title: "La Samaritaine",
-    artist_title: "Alphonse Marie Mucha",
-    place_of_origin: "Czech Republic",
-    date_start: 1897,
-    date_display: "1897",
-    thumbnailUrl:
-      "https://www.artic.edu/iiif/2/aa775469-fb0d-6c1f-72ba-938ca54f44f3",
-    classification_title: "Poster",
-    style_title: null,
-    api_link: "https://api.artic.edu/api/v1/artworks/16907",
-    is_public_domain: null,
-    latitude: 49.73885405,
-    longitude: 15.33177012,
   },
   {
     ObjectID: 5,
@@ -190,20 +189,19 @@ export const sampleArtwork = [
   },
   {
     ObjectID: 12,
-    aic_id: 49863,
-    title: "La Nuit",
-    artist_title: "Théophile-Alexandre Pierre Steinlen",
+    aic_id: 25832,
+    title: "Jean Renoir Sewing",
+    artist_title: "Pierre-Auguste Renoir",
     place_of_origin: "France",
-    date_start: 1895,
-    date_display: "published November 17, 1895",
-    thumbnailUrl:
-      "https://www.artic.edu/iiif/2/26ea12d7-3d84-83f3-22da-fcedc44d4159",
-    classification_title: "Photorelief",
-    style_title: null,
-    api_link: "https://api.artic.edu/api/v1/artworks/49863",
+    date_start: 1899,
+    date_display: "1899/1900",
+    thumbnailUrl: "https://www.artic.edu/iiif/2/a9675660-f0c7-ab02-b459-eb365e62dd8b",
+    classification_title: "Oil On Canvas",
+    style_title: "Impressionism",
+    api_link: "https://api.artic.edu/api/v1/artworks/25832",
     is_public_domain: "true",
     latitude: 46.227638,
-    longitude: 2.213749,
+    longitude: 2.213749
   },
   {
     ObjectID: 13,
