@@ -67,24 +67,30 @@ class App extends React.Component {
     //**need to remove all ids from GalleryPanel state.detailItems. changing showAllDetails to false doesn't remove details */
 
     if (startYear && endYear && startYear <= endYear) {
-      await axios
-        .post(
-          "https://aggregator-data.artic.edu/api/v1/search",
-          query(startYear, endYear, classQuery)
-        )
-        .then((res) => {
-          let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
-          let featureArr = createFeatureArr(resOrdered, places);
-          this.setState({
-            searchResults: featureArr,
-            searchMade: true,
-            showAllDetails: false,
-            detailItems: [],
-          });
-          this.getGridInfo(featureArr.length);
+      let headers = new Headers({
+        "User-Agent": "Artimeline (github.com/kmcandersen/artwork-geo-map-react)"
+      });
+      try {
+        const res = await axios
+          .post(
+            "https://aggregator-data.artic.edu/api/v1/search",
+            query(startYear, endYear, classQuery),
+            headers
+          )
+        let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
+        let featureArr = createFeatureArr(resOrdered, places);
+        this.setState({
+          searchResults: featureArr,
+          searchMade: true,
+          showAllDetails: false,
+          detailItems: [],
         });
-    }
-  };
+        this.getGridInfo(featureArr.length);
+      } catch (e) {
+        console.log(e)
+      }
+    };
+  }
 
   onMapLoad = (boolean) => {
     this.setState({ mapLoaded: boolean });
