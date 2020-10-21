@@ -35,61 +35,48 @@ class GalleryPanel extends Component {
                 </IconButton>
               </Tooltip>
             ) : (
-              <Tooltip
-                title="Show all details"
-                className="tooltip"
-                placement="top"
-                arrow
-              >
-                <IconButton
-                  aria-label="Show all details"
-                  className="infoAllBtn"
-                  style={{ padding: "10px" }}
-                  onClick={this.props.toggleAllDetails}
+                <Tooltip
+                  title="Show all details"
+                  className="tooltip"
+                  placement="top"
+                  arrow
                 >
-                  <InfoOutlinedIcon className="show-all-icon" />
-                </IconButton>
-              </Tooltip>
-            )}
+                  <IconButton
+                    aria-label="Show all details"
+                    className="infoAllBtn"
+                    style={{ padding: "10px" }}
+                    onClick={this.props.toggleAllDetails}
+                  >
+                    <InfoOutlinedIcon className="show-all-icon" />
+                  </IconButton>
+                </Tooltip>
+              )}
           </div>
         ) : (
-          ""
-        )}
+            ""
+          )}
 
         {this.props.results.length ? (
-          <Gallery
-            results={this.props.results}
-            showAllDetails={this.props.showAllDetails}
-            detailItems={this.props.detailItems}
-            toggleTileDetails={this.props.toggleTileDetails}
-            selectPlace={this.props.selectPlace}
-            selectedPlace={this.props.selectedPlace}
-            selectedOnMap={this.props.selectedOnMap}
-            removeSelectedPlace={this.props.removeSelectedPlace}
-            toggleSelectedPlace={this.props.toggleSelectedPlace}
-            gridType={this.props.gridType}
-            windowWidth={this.props.windowWidth}
-          />
+          <Gallery {...this.props} />
         ) : (
-          this.props.searchMade &&
-          this.props.mapLoaded && (
-            <div className="noresults-msg-wrapper">
-              <div>
-                <a href="https://www.artic.edu/artworks/17229/the-scream">
-                  <img
-                    src={require("./the-scream-square.jpg")}
-                    style={{ width: "75px" }}
-                    alt="Edvard Munch. The Scream. 1895. The Art Institute of Chicago."
-                  />
-                </a>
-              </div>
-              <p>No results.</p>
-              <p className="noresults-sugg">
-                Psst! Try widening the year range or changing the media options.
+            this.props.mapLoaded && (
+              <div className="noresults-msg-wrapper">
+                <div>
+                  <a href="https://www.artic.edu/artworks/17229/the-scream">
+                    <img
+                      src={require("./the-scream-square.jpg")}
+                      style={{ width: "75px" }}
+                      alt="Edvard Munch. The Scream. 1895. The Art Institute of Chicago."
+                    />
+                  </a>
+                </div>
+                <p>No results.</p>
+                <p className="noresults-sugg">
+                  Psst! Try widening the year range or changing the media options.
               </p>
-            </div>
-          )
-        )}
+              </div>
+            )
+          )}
       </div>
     );
   }
