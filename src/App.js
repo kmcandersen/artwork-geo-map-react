@@ -62,8 +62,6 @@ class App extends React.Component {
 
   onSearchSubmit = async (startYear, endYear, classQuery) => {
     this.onMapLoad(false);
-    //**need to remove all ids from GalleryPanel state.detailItems. changing showAllDetails to false doesn't remove details */
-
     if (startYear && endYear && startYear <= endYear) {
       let headers = new Headers({
         "User-Agent": "Artimeline (github.com/kmcandersen/artwork-geo-map-react)"
@@ -77,6 +75,7 @@ class App extends React.Component {
           )
         let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
         let featureArr = createFeatureArr(resOrdered, places);
+        //**need to remove all ids from GalleryPanel state.detailItems. changing showAllDetails to false doesn't remove details */
         this.setState({
           results: featureArr,
           showAllDetails: false,
