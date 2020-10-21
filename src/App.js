@@ -12,13 +12,11 @@ import Header from "./Header.js";
 class App extends React.Component {
   state = {
     mapLoaded: false,
-    searchResults: [],
+    results: [],
     selectedPlace: "",
     //used to ensure that a country's tiles only scrolled to when selectedPlace changed on map, not when tile icon clicked
     selectedOnMap: 0,
     tilePointOn: false,
-    //used with mapLoaded in GalleryPanel to ensure that No Results only shown when it's legit. Still nec, now that sampleArtwork loads first?
-    searchMade: false,
     //held here bc needs to be accessed by onSearchSubmit
     showAllDetails: false,
     detailItems: [],
@@ -38,7 +36,7 @@ class App extends React.Component {
   //       .then((res) => {
   //         let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
   //         let featureArr = createFeatureArr(resOrdered, places);
-  //         this.setState({ searchResults: featureArr });
+  //         this.setState({ results: featureArr });
   //       });
   // };
 
@@ -46,7 +44,7 @@ class App extends React.Component {
     //25 = sampleArtwork.length
     this.getGridInfo(25);
     window.addEventListener("resize", () => {
-      this.getGridInfo(this.state.searchResults.length);
+      this.getGridInfo(this.state.results.length);
     });
   };
 
@@ -64,8 +62,6 @@ class App extends React.Component {
 
   onSearchSubmit = async (startYear, endYear, classQuery) => {
     this.onMapLoad(false);
-    //**need to remove all ids from GalleryPanel state.detailItems. changing showAllDetails to false doesn't remove details */
-
     if (startYear && endYear && startYear <= endYear) {
       let headers = new Headers({
         "User-Agent": "Artimeline (github.com/kmcandersen/artwork-geo-map-react)"
@@ -79,9 +75,9 @@ class App extends React.Component {
           )
         let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
         let featureArr = createFeatureArr(resOrdered, places);
+        //**need to remove all ids from GalleryPanel state.detailItems. changing showAllDetails to false doesn't remove details */
         this.setState({
-          searchResults: featureArr,
-          searchMade: true,
+          results: featureArr,
           showAllDetails: false,
           detailItems: [],
         });
@@ -128,9 +124,9 @@ class App extends React.Component {
     this.setState({ showAllDetails: !this.state.showAllDetails });
   };
 
-  //to change searchResults from [] to sampleArtwork arr during EsriMap CDM, triggering CDU
+  //to change results from [] to sampleArtwork arr during EsriMap CDM, triggering CDU
   setSampleArtwork = (arr) => {
-    this.setState({ searchResults: arr });
+    this.setState({ results: arr });
   };
 
   setGridType = (width, resultsLength) => {
@@ -175,7 +171,7 @@ class App extends React.Component {
     //if showAllDetails = true, = false & remove all items from arr
     if (!this.state.showAllDetails) {
       let showIds = [];
-      this.state.searchResults.forEach((r) => {
+      this.state.results.forEach((r) => {
         showIds.push(r.aic_id);
       });
       this.setState({ detailItems: showIds });
@@ -211,7 +207,7 @@ class App extends React.Component {
         <EsriMap
           onMapLoad={this.onMapLoad}
           mapLoaded={this.state.mapLoaded}
-          results={this.state.searchResults}
+          results={this.state.results}
           selectPlace={this.selectPlace}
           selectOnMap={this.selectOnMap}
           selectedPlace={this.state.selectedPlace}
@@ -223,7 +219,7 @@ class App extends React.Component {
         />
         <GalleryPanel
           mapLoaded={this.state.mapLoaded}
-          results={this.state.searchResults}
+          results={this.state.results}
           selectPlace={this.selectPlace}
           selectedPlace={this.state.selectedPlace}
           selectedOnMap={this.state.selectedOnMap}
@@ -233,7 +229,6 @@ class App extends React.Component {
           detailItems={this.state.detailItems}
           showAllDetails={this.state.showAllDetails}
           toggleAllDetails={this.toggleAllDetails}
-          searchMade={this.state.searchMade}
           gridType={this.state.gridType}
           windowWidth={this.state.windowWidth}
           mainHeight={this.state.mainHeight}
