@@ -13,17 +13,13 @@
 }
 
 .logo-wrapper {
-  font-family: "Bebas Neue", cursive;
-  color: #b50938;
-  font-size: 4rem;
-  letter-spacing: 0.02em;
-  position: relative;
-  left: 20px;
-  top: 5px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
 }
 
-.gray-text {
-  color: #b0b0b0;
+.logo-wrapper > img {
+  width: 200px;
 }
 
 nav {
@@ -42,8 +38,10 @@ nav .MuiButtonBase-root.MuiButton-root.MuiButton-text {
 
 @media only screen and (max-width: 500px) {
   .logo-wrapper {
-    font-size: 2.5rem;
     left: 15px;
+  }
+  .logo-wrapper > img {
+    width: 150px;
   }
   nav {
     right: 10px;
@@ -57,8 +55,8 @@ nav .MuiButtonBase-root.MuiButton-root.MuiButton-text {
 }
 
 @media only screen and (max-width: 350px) {
-  .logo-wrapper {
-    font-size: 2.2rem;
+  .logo-wrapper > img {
+    width: 120px;
   }
   nav .MuiButton-label {
     font-size: 0.8rem;
@@ -66,9 +64,6 @@ nav .MuiButtonBase-root.MuiButton-root.MuiButton-text {
 }
 
 @media only screen and (max-width: 300px) {
-  .logo-wrapper {
-    font-size: 2rem;
-  }
   nav .MuiButton-label {
     font-size: 0.7rem;
   }

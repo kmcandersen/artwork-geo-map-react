@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import "./Header.css";
 import Intro from "./Intro";
 import SearchPanel from "./SearchPanel";
+import logo from './ARTIMELINE-logo.png';
 
 class Header extends Component {
   state = {
@@ -26,7 +27,7 @@ class Header extends Component {
       <div className="Header-wrapper">
         <header className="header-style">
           <div className="logo-wrapper">
-            ART<span className="gray-text">IMELINE</span>
+          <img src={logo} alt="ARTIMELINE logo" />
           </div>
           <nav>
             {navItems.map((n, i) => (
