@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import "./Header.css";
 import Intro from "./Intro";
 import SearchPanel from "./SearchPanel";
-import logo from './ARTIMELINE-logo.png';
+import { ReactComponent as Logo } from './ARTIMELINE-logo.svg';
 
 class Header extends Component {
   state = {
@@ -20,19 +20,17 @@ class Header extends Component {
 
   render() {
     const navItems = ["about", "search"];
-    // const navItems = ["about", "search", "log in"];
     const { openPanel } = this.state;
     const { mapLoaded, onSearchSubmit } = this.props;
     return (
       <div className="Header-wrapper">
         <header className="header-style">
           <div className="logo-wrapper">
-          <img src={logo} alt="ARTIMELINE logo" />
+            <Logo />
           </div>
           <nav>
             {navItems.map((n, i) => (
               <Button
-                // style={{ margin: "7px" }}
                 aria-controls={n}
                 aria-haspopup="true"
                 // variant="contained"
@@ -55,7 +53,6 @@ class Header extends Component {
           name="search"
           openPanel={openPanel}
         />
-        {/* <Login name="login" openPanel={openPanel} /> */}
       </div>
     );
   }
