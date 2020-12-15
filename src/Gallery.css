@@ -75,7 +75,7 @@ button.infoAllBtn:hover {
   font-size: 1.2em;
 }
 
-/* .tile-info, favorite & link icons when details hidden (.gridListTile-info-only active) */
+/* .tile-info & link icons when details hidden (.gridListTile-info-only active) */
 .hidden {
   visibility: hidden;
 }

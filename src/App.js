@@ -24,10 +24,6 @@ class App extends React.Component {
     mainHeight: 0,
     gridType: "",
   };
-  // switchTheme = (e) => {
-  //     console.log("clicked!");
-  //     this.setState({ theme: e.target.dataset.theme });
-  // };
 
   // componentDidMount() {
   // getArtwork = (query) => {
@@ -75,7 +71,6 @@ class App extends React.Component {
           )
         let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
         let featureArr = createFeatureArr(resOrdered, places);
-        //**need to remove all ids from GalleryPanel state.detailItems. changing showAllDetails to false doesn't remove details */
         this.setState({
           results: featureArr,
           showAllDetails: false,

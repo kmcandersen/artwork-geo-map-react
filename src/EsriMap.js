@@ -8,10 +8,6 @@ import { places } from "./utils/places_list.js";
 import "./EsriMap.css";
 import { sampleArtwork } from "./utils/sampleArtwork";
 
-// function themeToBasemap(theme) {
-//   return theme === "light" ? "gray" : "dark-gray";
-// }
-
 //inside CDU, were getting overwritten each update. Elsewhere, weren't accessible
 let highlight;
 let mapClickListener;
@@ -61,7 +57,6 @@ class EsriMap extends Component {
             }
             this._view.map.add(layer);
             this._view.whenLayerView(layer).then((layerView) => {
-              //console.log("we have the layer view.");
               //for loading-spinner & to delay no results msg in GalleryPanel from loading, until it's known if there are actually no results (no flash)
               this.props.onMapLoad(true);
 

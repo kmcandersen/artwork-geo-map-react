@@ -6,7 +6,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Gallery from "./Gallery";
 import "./GalleryPanel.css";
 import "./global.css";
-// import scream-square from './the-scream-square.jpg';
 
 class GalleryPanel extends Component {
   render() {

@@ -5,8 +5,6 @@ import GridListTile from "@material-ui/core/GridListTile";
 import IconButton from "@material-ui/core/IconButton";
 import RoomIcon from "@material-ui/icons/Room";
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
-// import FavoriteIcon from "@material-ui/icons/Favorite";
-// import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import LinkIcon from "@material-ui/icons/Link";
 import InfoIcon from "@material-ui/icons/Info";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
@@ -21,7 +19,6 @@ class Gallery extends Component {
     this.state = {
       width: 0,
       didLoad: false,
-      //tileWidth: 0,
     };
   }
 
@@ -49,10 +46,6 @@ class Gallery extends Component {
       }
     }
   }
-
-  // getTileWidth = () => {
-  //   this.setState({ tileWidth: this.tileRef.current.clientWidth });
-  // };
 
   calcColWidth = (width) => {
     if (width < 540) {
@@ -98,7 +91,6 @@ class Gallery extends Component {
               cols={cols}
               data-place={result.place_of_origin}
               ref={this.tileRef}
-              //onLoad={this.getTileWidth}
             >
               <img
                 className="gridListImg"
@@ -146,21 +138,10 @@ class Gallery extends Component {
                       {result.place_of_origin === this.props.selectedPlace ? (
                         <RoomIcon style={{ color: "yellow" }} />
                       ) : (
-                        <RoomOutlinedIcon style={{ color: "white" }} />
-                      )}
+                          <RoomOutlinedIcon style={{ color: "white" }} />
+                        )}
                     </IconButton>
                   </Tooltip>
-                  {/* <IconButton
-                    title="Add/Remove Favorite"
-                      style={{ color: "white" }}
-                      className={
-                        this.props.detailItems.includes(result.aic_id)
-                          ? ""
-                          : "hidden"
-                      }
-                    >
-                      <FavoriteBorderIcon />
-                    </IconButton> */}
                   <Tooltip title="AIC webpage" placement="top" arrow>
                     <IconButton
                       className={
@@ -189,8 +170,8 @@ class Gallery extends Component {
                       {this.props.detailItems.includes(result.aic_id) ? (
                         <InfoIcon />
                       ) : (
-                        <InfoOutlinedIcon />
-                      )}
+                          <InfoOutlinedIcon />
+                        )}
                     </IconButton>
                   </Tooltip>
                 </div>
