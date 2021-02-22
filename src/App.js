@@ -69,7 +69,6 @@ class App extends React.Component {
           query(startYear, endYear, classQuery),
           headers
         );
-        console.log(res);
         let resOrdered = res.data.data.sort(compareValues('place_of_origin'));
         let featureArr = createFeatureArr(resOrdered, places);
 
