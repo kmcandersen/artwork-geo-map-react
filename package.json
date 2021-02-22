@@ -8,14 +8,14 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "esri-loader": "^2.15.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-external-link": "^1.1.1",
     "react-material-ui-form-validator": "^2.1.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "4.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
