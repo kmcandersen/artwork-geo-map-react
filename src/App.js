@@ -1,19 +1,19 @@
-import React from "react";
-import axios from "axios";
-import { query } from "./utils/query.js";
-import { places } from "./utils/places_list.js";
-import { compareValues } from "./utils/helpers.js";
-import { createFeatureArr } from "./utils/createFeatureArr.js";
-import EsriMap from "./EsriMap";
-import "./App.css";
-import GalleryPanel from "./GalleryPanel.js";
-import Header from "./Header.js";
+import React from 'react';
+import axios from 'axios';
+import { query } from './utils/query.js';
+import { places } from './utils/places_list.js';
+import { compareValues } from './utils/helpers.js';
+import { createFeatureArr } from './utils/createFeatureArr.js';
+import EsriMap from './EsriMap';
+import './App.css';
+import GalleryPanel from './GalleryPanel.js';
+import Header from './Header.js';
 
 class App extends React.Component {
   state = {
     mapLoaded: false,
     results: [],
-    selectedPlace: "",
+    selectedPlace: '',
     //used to ensure that a country's tiles only scrolled to when selectedPlace changed on map, not when tile icon clicked
     selectedOnMap: 0,
     tilePointOn: false,
@@ -22,7 +22,7 @@ class App extends React.Component {
     detailItems: [],
     windowWidth: 0,
     mainHeight: 0,
-    gridType: "",
+    gridType: '',
   };
 
   // componentDidMount() {
@@ -39,7 +39,7 @@ class App extends React.Component {
   componentDidMount = () => {
     //25 = sampleArtwork.length
     this.getGridInfo(25);
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       this.getGridInfo(this.state.results.length);
     });
   };
@@ -60,17 +60,19 @@ class App extends React.Component {
     this.onMapLoad(false);
     if (startYear && endYear && startYear <= endYear) {
       let headers = new Headers({
-        "User-Agent": "Artimeline (github.com/kmcandersen/artwork-geo-map-react)"
+        'User-Agent':
+          'Artimeline (github.com/kmcandersen/artwork-geo-map-react)',
       });
       try {
-        const res = await axios
-          .post(
-            "https://aggregator-data.artic.edu/api/v1/search",
-            query(startYear, endYear, classQuery),
-            headers
-          )
-        let resOrdered = res.data.data.sort(compareValues("place_of_origin"));
+        const res = await axios.post(
+          'https://aggregator-data.artic.edu/api/v1/search',
+          query(startYear, endYear, classQuery),
+          headers
+        );
+        console.log(res);
+        let resOrdered = res.data.data.sort(compareValues('place_of_origin'));
         let featureArr = createFeatureArr(resOrdered, places);
+
         this.setState({
           results: featureArr,
           showAllDetails: false,
@@ -78,10 +80,10 @@ class App extends React.Component {
         });
         this.getGridInfo(featureArr.length);
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
-    };
-  }
+    }
+  };
 
   onMapLoad = (boolean) => {
     this.setState({ mapLoaded: boolean });
@@ -96,7 +98,7 @@ class App extends React.Component {
   };
 
   removeSelectedPlace = () => {
-    this.setState({ selectedPlace: "", selectedOnMap: 0 });
+    this.setState({ selectedPlace: '', selectedOnMap: 0 });
   };
 
   //created for tile map point click
@@ -125,37 +127,37 @@ class App extends React.Component {
   };
 
   setGridType = (width, resultsLength) => {
-    let gridType = "";
+    let gridType = '';
 
     if (width < 540) {
       if (resultsLength > 1) {
-        gridType = "tall";
+        gridType = 'tall';
       } else {
-        gridType = "short";
+        gridType = 'short';
       }
     } else if (width < 800) {
       if (resultsLength > 2) {
-        gridType = "tall";
+        gridType = 'tall';
       } else {
-        gridType = "short";
+        gridType = 'short';
       }
     } else if (width < 1020) {
       if (resultsLength > 3) {
-        gridType = "tall";
+        gridType = 'tall';
       } else {
-        gridType = "short";
+        gridType = 'short';
       }
     } else if (width < 1200) {
       if (resultsLength > 4) {
-        gridType = "tall";
+        gridType = 'tall';
       } else {
-        gridType = "short";
+        gridType = 'short';
       }
     } else if (width >= 1200) {
       if (resultsLength > 5) {
-        gridType = "tall";
+        gridType = 'tall';
       } else {
-        gridType = "short";
+        gridType = 'short';
       }
     }
     return gridType;
@@ -194,7 +196,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className='App'>
         <Header
           onSearchSubmit={this.onSearchSubmit}
           mapLoaded={this.state.mapLoaded}
