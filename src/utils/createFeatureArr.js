@@ -1,28 +1,34 @@
-import { getCoords, capitalize, truncateString } from "./helpers.js";
+import { getCoords, capitalize, truncateString } from './helpers.js';
 
 export const createFeatureArr = (arr, placesArr) => {
   let features = [];
   let idCount = 0;
+  const imgUrlEndpoint = 'https://www.artic.edu/iiif/2/';
 
   for (let i = 0; i < arr.length; i++) {
     let el = arr[i];
 
     //exclude API results with no image or location
-    if (el.thumbnail && el.place_of_origin) {
+    if (
+      el.thumbnail &&
+      el.place_of_origin &&
+      el.id !== 23078 &&
+      el.id !== 237014
+    ) {
       idCount++;
 
       let feature = {
         ObjectID: 0,
         aic_id: 0,
-        title: "",
-        artist_title: "",
-        place_of_origin: "",
+        title: '',
+        artist_title: '',
+        place_of_origin: '',
         date_start: 0,
         date_display: 0,
-        thumbnailUrl: "",
-        classification_title: "",
-        style_title: "",
-        api_link: "",
+        thumbnailUrl: '',
+        classification_title: '',
+        style_title: '',
+        api_link: '',
         is_public_domain: null,
         coords: [],
         latitude: 0,
@@ -32,11 +38,11 @@ export const createFeatureArr = (arr, placesArr) => {
       feature.ObjectID = idCount;
       feature.aic_id = el.id;
       feature.title = truncateString(el.title);
-      feature.artist_title = el.artist_title || "Unknown Artist";
+      feature.artist_title = el.artist_title || 'Unknown Artist';
       feature.place_of_origin = el.place_of_origin;
       feature.date_start = el.date_start;
       feature.date_display = el.date_display;
-      feature.thumbnailUrl = el.thumbnail.url;
+      feature.thumbnailUrl = imgUrlEndpoint + el.image_id;
       feature.classification_title =
         el.classification_title.length &&
         capitalize(truncateString(el.classification_title, 39));
