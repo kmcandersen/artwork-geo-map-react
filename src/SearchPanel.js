@@ -169,13 +169,8 @@ class SearchPanel extends Component {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  // data-theme="dark"
                   disabled={
                     !this.props.mapLoaded
-                    //   || this.state.endYear === "" ||
-                    //   this.state.endYear < this.state.startYear
-                    //     ? true
-                    //     : false
                   }
                 >
                   Submit
